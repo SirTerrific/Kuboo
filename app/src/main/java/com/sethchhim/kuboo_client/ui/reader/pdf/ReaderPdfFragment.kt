@@ -34,7 +34,7 @@ open class ReaderPdfFragment : DaggerFragment() {
         arguments?.apply {
             isLocal = getBoolean(ARG_LOCAL)
             position = getInt(ARG_POSITION)
-            book = getParcelable(ARG_BOOK)
+            book = getParcelable<Book>(ARG_BOOK) ?: Book()
         }
     }
 

@@ -17,7 +17,7 @@ open class ParserBase {
     var filePath = ""
     var chapterInfo = ChapterInfo()
 
-    fun isImage(filename: String) = filename.toLowerCase().matches(".*\\.(jpg|jpeg|bmp|gif|png|webp)$".toRegex())
+    fun isImage(filename: String) = filename.lowercase().matches(".*\\.(jpg|jpeg|bmp|gif|png|webp)$".toRegex())
 
     fun isComicInfo(filename: String) = filename.equals("comicinfo.xml", ignoreCase = true)
 

@@ -206,13 +206,13 @@ class ReaderPageImageView : AppCompatImageView {
             return true
         }
 
-        override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+        override fun onScroll(e1: MotionEvent?, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
             mMatrix.postTranslate(-distanceX, -distanceY)
             imageMatrix = mMatrix
             return true
         }
 
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
 //            captureSwipe(e1, e2, velocityX, velocityY)
             fling(velocityX, velocityY)
             return true
@@ -576,7 +576,7 @@ class ReaderPageImageView : AppCompatImageView {
 
             // Save the newly set scale type after animation completes
             mValueAnimator.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
+                override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
                     super.onAnimationEnd(animation, isReverse)
                 }
             })

@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.browser.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -48,9 +50,6 @@ import com.sethchhim.kuboo_client.util.DiffUtilHelper
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.model.Book
 import com.varunest.sparkbutton.SparkEventListener
-import kotlinx.android.synthetic.main.browser_item_content_folder.view.*
-import kotlinx.android.synthetic.main.browser_item_content_media.view.*
-import kotlinx.android.synthetic.main.browser_item_content_media_force_list.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -109,17 +108,17 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                 holder.itemView.browser_item_content_folder_imageView2.visible()
                 holder.itemView.browser_item_content_folder_imageView3.invisible()
                 holder.itemView.browser_item_content_folder_materialBadgeTextView.gone()
-                if (!holder.itemView.browser_item_content_folder_sparkButton.isChecked) holder.itemView.browser_item_content_folder_sparkButton.isChecked = false
+                if (!holder.itemView.browser_item_content_folder_sparkButton!!.isChecked) holder.itemView.browser_item_content_folder_sparkButton!!.isChecked = false
             }
             Browser.MEDIA -> {
-                Glide.with(browserFragment).clear(holder.itemView.browser_item_content_media_imageView)
-                holder.itemView.browser_item_content_media_imageView.colorFilterNull()
+                Glide.with(browserFragment).clear(holder.itemView.browser_item_content_media_imageView!!)
+                holder.itemView.browser_item_content_media_imageView!!.colorFilterNull()
             }
             Browser.MEDIA_FORCE_LIST -> {
-                Glide.with(browserFragment).clear(holder.itemView.browser_item_content_media_force_list_imageView3)
+                Glide.with(browserFragment).clear(holder.itemView.browser_item_content_media_force_list_imageView3!!)
                 holder.itemView.browser_item_content_media_force_list_imageView1.visible()
                 holder.itemView.browser_item_content_media_force_list_imageView2.visible()
-                holder.itemView.browser_item_content_media_force_list_imageView3.invisible()
+                holder.itemView.browser_item_content_media_force_list_imageView3!!.invisible()
                 holder.itemView.browser_item_content_media_force_list_constraintLayout?.setColorState(isSelected = false)
             }
         }
@@ -159,8 +158,8 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
             book?.let {
                 when (itemViewType) {
                     FOLDER -> populateContent(it)
-                    MEDIA -> startPreview(it, itemView.browser_item_content_media_imageView)
-                    MEDIA_FORCE_LIST -> startPreview(it, itemView.browser_item_content_media_force_list_imageView3)
+                    MEDIA -> startPreview(it, itemView.browser_item_content_media_imageView!!)
+                    MEDIA_FORCE_LIST -> startPreview(it, itemView.browser_item_content_media_force_list_imageView3!!)
                 }
             }
         }
@@ -249,7 +248,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                 }
             }
 
-            itemView.browser_item_content_folder_sparkButton.apply {
+            itemView.browser_item_content_folder_sparkButton!!.apply {
                 if (Settings.FAVORITE) {
                     isChecked = when (isFavorite) {
                         true -> true
@@ -316,12 +315,12 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                     .load(stringUrl)
                     .apply(requestOptions)
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             Timber.e("Thumbnail failed to load! ${book.server}${book.linkThumbnail}")
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             holder.itemView.browser_item_content_folder_imageView1.invisible()
                             holder.itemView.browser_item_content_folder_imageView2.invisible()
                             holder.itemView.browser_item_content_folder_imageView3.fadeVisible()
@@ -369,12 +368,12 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                         .load(stringUrl)
                         .apply(requestOptions)
                         .listener(object : RequestListener<Drawable> {
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                                 Timber.e("Thumbnail failed to load! ${book.server}${book.linkThumbnail}")
                                 return false
                             }
 
-                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                                 return false
                             }
                         })
@@ -405,7 +404,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                 delay(Settings.RECYCLER_VIEW_DELAY)
                 try {
                     if (holder.bookId == book.id) {
-                        itemView.browser_item_content_media_force_list_imageView3.loadFolderThumbnail(holder, book)
+                        itemView.browser_item_content_media_force_list_imageView3!!.loadFolderThumbnail(holder, book)
                     }
                 } catch (e: Exception) {
                     //views could be destroyed during delay, do nothing
@@ -423,15 +422,15 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                     .load(book.getPreviewUrl())
                     .apply(requestOptions)
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             Timber.e("Thumbnail failed to load! ${book.server}${book.linkThumbnail}")
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: com.bumptech.glide.request.target.Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             holder.itemView.browser_item_content_media_force_list_imageView1.invisible()
                             holder.itemView.browser_item_content_media_force_list_imageView2.invisible()
-                            holder.itemView.browser_item_content_media_force_list_imageView3.fadeVisible()
+                            holder.itemView.browser_item_content_media_force_list_imageView3!!.fadeVisible()
                             return false
                         }
                     })
@@ -445,8 +444,8 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                 .forEachIndexed { _, viewHolder ->
                     when (viewHolder.itemViewType) {
                         Browser.FOLDER -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_folder_imageView3)
-                        Browser.MEDIA -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_media_imageView)
-                        Browser.MEDIA_FORCE_LIST -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_media_force_list_imageView3)
+                        Browser.MEDIA -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_media_imageView!!)
+                        Browser.MEDIA_FORCE_LIST -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_media_force_list_imageView3!!)
                     }
                 }
     } catch (e: Exception) {

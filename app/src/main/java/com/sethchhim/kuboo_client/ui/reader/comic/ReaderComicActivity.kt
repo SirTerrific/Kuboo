@@ -56,7 +56,7 @@ open class ReaderComicActivity : ReaderComicActivityImpl7_Hardware() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration?) {
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
         if (isInPictureInPictureMode) {
             hideSnackBarEnd()

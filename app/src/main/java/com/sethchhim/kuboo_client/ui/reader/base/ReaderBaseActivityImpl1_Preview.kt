@@ -44,13 +44,13 @@ open class ReaderBaseActivityImpl1_Preview : ReaderBaseActivityImpl0_View() {
                             .dontTransform()
                             .dontAnimate())
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             Timber.e("message[${e?.message}] url[$transitionUrl]")
                             onLoadPreviewFail()
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             this@loadPreviewImage.viewTreeObserver.addOnPreDrawListener(
                                     object : ViewTreeObserver.OnPreDrawListener {
                                         override fun onPreDraw(): Boolean {

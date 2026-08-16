@@ -8,7 +8,7 @@ import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import com.sethchhim.kuboo_remote.util.Settings.MAX_PAGE_WIDTH_DEFAULT
 import com.sethchhim.kuboo_remote.util.resolveLink
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import timber.log.Timber
 import java.io.File
 import java.net.URL

@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.home.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
@@ -37,7 +39,6 @@ import com.sethchhim.kuboo_client.util.DiffUtilHelper
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
-import kotlinx.android.synthetic.main.browser_item_recent.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -150,11 +151,11 @@ class RecentAdapter(private val homeFragmentImpl1Content: HomeFragmentImpl1_Cont
                             .transform(RoundedCorners(Settings.ROUNDED_CORNERS_VALUE))
                             .error(Settings.ERROR_DRAWABLE))
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             setStateValid()
                             return false
                         }

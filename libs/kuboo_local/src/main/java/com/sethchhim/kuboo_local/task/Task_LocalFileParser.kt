@@ -27,12 +27,12 @@ class Task_LocalFileParser(filePath: String) {
         }
     }
 
-    private fun isZip(filename: String) = filename.toLowerCase().matches(".*\\.(zip|cbz)$".toRegex())
+    private fun isZip(filename: String) = filename.lowercase().matches(".*\\.(zip|cbz)$".toRegex())
 
-    private fun isRar(filename: String) = filename.toLowerCase().matches(".*\\.(rar|cbr)$".toRegex())
+    private fun isRar(filename: String) = filename.lowercase().matches(".*\\.(rar|cbr)$".toRegex())
 
-    private fun isTarball(filename: String) = filename.toLowerCase().matches(".*\\.(cbt)$".toRegex())
+    private fun isTarball(filename: String) = filename.lowercase().matches(".*\\.(cbt)$".toRegex())
 
-    private fun isSevenZ(filename: String) = filename.toLowerCase().matches(".*\\.(cb7|7z)$".toRegex())
+    private fun isSevenZ(filename: String) = filename.lowercase().matches(".*\\.(cb7|7z)$".toRegex())
 
 }

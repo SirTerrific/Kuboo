@@ -90,7 +90,7 @@ open class EpubReaderViewImpl1_Content @JvmOverloads constructor(context: Contex
             try {
                 downloadResource(epub_temp_extraction_location)
             } catch (e: Exception) {
-                Log.e("Exception", e.message)
+                Log.e("Exception", e.message.orEmpty())
             }
 
             val dir1 = File(epub_temp_extraction_location + File.separator + "OEBPS")
@@ -304,7 +304,7 @@ open class EpubReaderViewImpl1_Content @JvmOverloads constructor(context: Contex
             }
         } catch (e: IOException) {
             e.printStackTrace()
-            Log.e("error", e.message)
+            Log.e("error", e.message.orEmpty())
         }
     }
 
@@ -502,9 +502,9 @@ open class EpubReaderViewImpl1_Content @JvmOverloads constructor(context: Contex
         loadJavascript(js)
     }
 
-    protected fun String.applyCssStyle(): String? {
-        val addBodyStart = !this.toLowerCase().contains("<body>")
-        val addBodyEnd = !this.toLowerCase().contains("</body")
+    protected fun String.applyCssStyle(): String {
+        val addBodyStart = !this.lowercase().contains("<body>")
+        val addBodyEnd = !this.lowercase().contains("</body")
         val cssStyle = "<style type=\"text/css\">" +
                 "@font-face {font-family: CustomFont;" + "src: url(\"" + Settings.FONT_PATH + "\")}" +
                 "body {" +

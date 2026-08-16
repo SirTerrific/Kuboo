@@ -20,8 +20,8 @@ class IntentService : IntentService("KUBOO_NOTIFICATION") {
     @Inject lateinit var notificationService: NotificationService
     @Inject lateinit var systemUtil: SystemUtil
 
-    override fun onHandleIntent(intent: Intent) {
-        when (intent.action) {
+    override fun onHandleIntent(intent: Intent?) {
+        when (intent?.action) {
             CANCEL_ACTION -> handleCancel()
             PAUSE_ACTION -> handlePause()
             RESUME_ACTION -> handleResume()

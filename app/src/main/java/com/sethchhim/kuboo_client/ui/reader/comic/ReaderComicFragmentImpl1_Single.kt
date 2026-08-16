@@ -89,12 +89,12 @@ class ReaderComicFragmentImpl1_Single : ReaderComicFragment() {
     }
 
     private fun getRequestListener() = object : RequestListener<Bitmap> {
-        override fun onResourceReady(resource: Bitmap, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+        override fun onResourceReady(resource: Bitmap, model: Any, target: Target<Bitmap>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
             onLoadImageSuccess(resource)
             return false
         }
 
-        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
+        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>, isFirstResource: Boolean): Boolean {
             onLoadImageFail(e?.localizedMessage)
             return false
         }

@@ -23,7 +23,7 @@ class DiffUtilDownloads(val adapter: BaseQuickAdapter<*, *>) {
 
     internal fun updateDownloadList(oldData: List<Download>, newData: List<Download>) {
         this.oldData = oldData
-        eventActor.offer(newData)
+        eventActor.trySend(newData)
     }
 
     private suspend fun internalUpdate(newData: List<Download>) {

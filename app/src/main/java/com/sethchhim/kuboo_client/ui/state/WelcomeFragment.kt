@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.state
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.util.TypedValue
@@ -14,7 +16,6 @@ import com.sethchhim.kuboo_client.data.ViewModel
 import com.sethchhim.kuboo_client.ui.main.MainActivity
 import com.sethchhim.kuboo_client.util.SystemUtil
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.home_layout_welcome.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject

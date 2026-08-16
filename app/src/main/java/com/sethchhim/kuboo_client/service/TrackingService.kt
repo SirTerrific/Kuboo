@@ -1,7 +1,6 @@
 package com.sethchhim.kuboo_client.service
 
 import androidx.work.*
-import androidx.work.PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS
 import com.sethchhim.kuboo_client.BaseApplication
 import com.sethchhim.kuboo_client.BuildConfig
 import com.sethchhim.kuboo_client.Constants.KEY_LOGIN_NICKNAME
@@ -48,7 +47,7 @@ class TrackingService {
                 .build()
         val trackingWork = when (BuildConfig.DEBUG) {
             true -> PeriodicWorkRequest
-                    .Builder(TrackingWorker::class.java, MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS)
+                    .Builder(TrackingWorker::class.java, PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS)
                     .setConstraints(constraints)
                     .setInputData(inputData)
                     .build()

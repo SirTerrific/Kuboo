@@ -76,7 +76,7 @@ open class ReaderBaseActivity : ReaderBaseActivityImpl7_Hardware() {
         if (Settings.PIP_MODE) startPictureInPictureMode()
     }
 
-    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration?) {
+    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
         if (isInPictureInPictureMode) {
             isInPipMode = true

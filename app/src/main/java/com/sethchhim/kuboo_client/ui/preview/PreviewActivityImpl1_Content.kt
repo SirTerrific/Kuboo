@@ -32,13 +32,13 @@ open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
                 .load(glideUrlLow)
                 .apply(requestOptions)
                 .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                         Timber.e("Failed to load low res image: $stringUrlLow")
                         onLoadLowResFinished()
                         return false
                     }
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                         Timber.i("Low res image found: $stringUrlLow")
                         onLoadLowResFinished()
                         return false
@@ -62,12 +62,12 @@ open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
                             .disallowHardwareConfig()
                             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             Timber.e("Preload failed: $stringUrl")
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             Timber.i("Preload success: $stringUrl")
                             return false
                         }
@@ -99,12 +99,12 @@ open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
                 .apply(requestOptions)
                 .thumbnail(requestLowRes)
                 .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                         Timber.i("Failed to load high res image: $stringUrlHigh")
                         return false
                     }
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                    override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                         Timber.i("High res image found, initiating swap $stringUrlHigh")
                         return false
                     }

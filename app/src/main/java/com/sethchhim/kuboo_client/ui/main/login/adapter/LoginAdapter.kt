@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.login.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -17,7 +19,6 @@ import com.sethchhim.kuboo_client.ui.main.MainActivityImpl0_View
 import com.sethchhim.kuboo_remote.model.Login
 import com.varunest.sparkbutton.SparkButton
 import com.varunest.sparkbutton.SparkEventListener
-import kotlinx.android.synthetic.main.login_item.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay

@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.browser.handler
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.net.Uri
 import android.view.View
 import android.widget.Button
@@ -11,8 +13,6 @@ import com.sethchhim.kuboo_client.Extensions.invisible
 import com.sethchhim.kuboo_client.ui.main.browser.BrowserBaseFragmentImpl2_Content
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Pagination
-import kotlinx.android.synthetic.main.browser_layout_content.view.*
-import kotlinx.android.synthetic.main.browser_layout_pagination.view.*
 
 class PaginationHandler(private val browserFragment: BrowserBaseFragmentImpl2_Content, val view: View) {
 

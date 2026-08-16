@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.browser.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.content.Context
 import androidx.databinding.DataBindingUtil
 import android.graphics.Typeface
@@ -21,7 +23,6 @@ import com.sethchhim.kuboo_client.databinding.BrowserItemPathBinding
 import com.sethchhim.kuboo_client.ui.main.browser.BrowserBaseFragmentImpl2_Content
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.model.Book
-import kotlinx.android.synthetic.main.browser_item_path.view.*
 import com.sethchhim.kuboo_client.layoutInflater
 import javax.inject.Inject
 

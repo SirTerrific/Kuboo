@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.log.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.content.Context
 import androidx.databinding.DataBindingUtil
 import android.view.View

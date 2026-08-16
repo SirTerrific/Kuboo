@@ -24,14 +24,14 @@ class DiffUtilHelper(val adapter: BaseQuickAdapter<*, *>) {
 
     internal fun updateBookList(oldData: List<Book>, newData: List<Book>) {
         this.oldData = oldData
-        eventActor.offer(newData)
+        eventActor.trySend(newData)
     }
 
     internal fun updateBrowserList(oldData: List<Browser>, newData: List<Book>) {
         val oldDataToBookList = mutableListOf<Book>()
         oldData.forEach { oldDataToBookList.add(it.book) }
         this.oldData = oldDataToBookList
-        eventActor.offer(newData)
+        eventActor.trySend(newData)
     }
 
     private suspend fun internalUpdate(newData: List<Book>) {

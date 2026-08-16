@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.base
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.ActivityInfo
@@ -20,7 +22,6 @@ import com.sethchhim.kuboo_client.service.TrackingService
 import com.sethchhim.kuboo_client.util.*
 import com.sethchhim.kuboo_remote.model.Book
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.main_layout_base.*
 import javax.inject.Inject
 
 @SuppressLint("Registered")

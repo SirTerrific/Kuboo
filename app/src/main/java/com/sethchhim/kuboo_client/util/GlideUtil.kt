@@ -54,13 +54,13 @@ class GlideUtil {
                     .priority(Priority.LOW)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
             .listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                     Timber.e("message[${e.toString()}] url[$stringUrl]")
                     onPreloadCallback?.onFailure()
                     return false
                 }
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                     onPreloadCallback?.onSuccess()
                     return false
                 }

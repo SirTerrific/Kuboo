@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.downloads.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -45,7 +47,6 @@ import com.sethchhim.kuboo_remote.model.Book
 import com.tonyodev.fetch2.Download
 import com.tonyodev.fetch2.Error
 import com.tonyodev.fetch2.Status
-import kotlinx.android.synthetic.main.browser_item_download.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -201,7 +202,7 @@ class DownloadListAdapter(val downloadsFragment: DownloadsFragmentImpl1_Content)
                             .transform(RoundedCorners(Settings.ROUNDED_CORNERS_VALUE))
                             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC))
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             holder.itemView.browser_item_download_imageView1.fadeVisible()
                             holder.itemView.browser_item_download_imageView2.fadeVisible()
                             holder.itemView.browser_item_download_imageView3.gone()
@@ -209,7 +210,7 @@ class DownloadListAdapter(val downloadsFragment: DownloadsFragmentImpl1_Content)
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             holder.itemView.browser_item_download_imageView1.fadeGone()
                             holder.itemView.browser_item_download_imageView2.fadeGone()
                             holder.itemView.browser_item_download_imageView3.gone()

@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.home.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +32,6 @@ import com.sethchhim.kuboo_client.util.DiffUtilHelper
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
-import kotlinx.android.synthetic.main.browser_item_latest.view.*
 import com.sethchhim.kuboo_client.toast
 import timber.log.Timber
 import javax.inject.Inject
@@ -76,12 +77,12 @@ class LatestAdapter(private val homeFragmentImpl1Content: HomeFragmentImpl1_Cont
                             .format(DecodeFormat.PREFER_RGB_565)
                             .error(Settings.ERROR_DRAWABLE))
                     .listener(object : RequestListener<Drawable> {
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                             setStateInvalid(helper, item)
                             return false
                         }
 
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean): Boolean {
                             setStateValid(helper, item)
                             return false
                         }

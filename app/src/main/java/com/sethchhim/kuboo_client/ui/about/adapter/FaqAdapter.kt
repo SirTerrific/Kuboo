@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.about.adapter
 
+import com.sethchhim.kuboo_client.synthetic.*
+
 import android.content.Context
 import android.util.TypedValue
 import android.view.ViewGroup
@@ -9,7 +11,6 @@ import com.sethchhim.kuboo_client.BaseApplication
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.data.model.Faq
 import com.sethchhim.kuboo_client.util.SystemUtil
-import kotlinx.android.synthetic.main.about_item_faq.view.*
 import javax.inject.Inject
 
 class FaqAdapter(context: Context) : BaseQuickAdapter<Faq, BaseViewHolder>(R.layout.about_item_faq, listOf(

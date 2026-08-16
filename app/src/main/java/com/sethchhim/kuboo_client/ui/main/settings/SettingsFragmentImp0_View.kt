@@ -51,23 +51,23 @@ open class SettingsFragmentImp0_View : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.settings)
-        aboutVersionPreference = findPreference("settings_about_version")
-        browserFavoritePreference = findPreference("settings_browser_favorite") as SwitchPreferenceCompat
-        browserMarkFinishedPreference = findPreference("settings_browser_mark_finished") as SwitchPreferenceCompat
-        downloadFinishedNotification = findPreference("settings_download_show_finished_notification") as SwitchPreferenceCompat
-        downloadSavePath = findPreference("settings_download_save_path")
-        downloadTrackingLimit = findPreference("settings_download_tracking_limit")
-        downloadTrackingInterval = findPreference("settings_download_tracking_interval")
-        downloadTrackingHideFinished = findPreference("settings_download_tracking_hide_finished") as SwitchPreferenceCompat
-        homeLayoutPreference = findPreference("settings_home_layout")
-        serverLoginPreference = findPreference("settings_server_login")
-        systemOrientationPreference = findPreference("settings_system_orientation")
-        systemThemePreference = findPreference("settings_system_theme")
-        systemKeepScreenOn = findPreference("settings_keep_screen_on") as SwitchPreferenceCompat
-        systemVolumePageTurnPreference = findPreference("settings_volume_page_turn") as SwitchPreferenceCompat
-        systemDisableCellularPreference = findPreference("settings_disable_cellular") as SwitchPreferenceCompat
-        systemStartTab = findPreference("settings_start_tab")
-        advancedPreference = findPreference("settings_advanced")
+        aboutVersionPreference = findPreference<Preference>("settings_about_version")!!
+        browserFavoritePreference = findPreference<SwitchPreferenceCompat>("settings_browser_favorite")!!
+        browserMarkFinishedPreference = findPreference<SwitchPreferenceCompat>("settings_browser_mark_finished")!!
+        downloadFinishedNotification = findPreference<SwitchPreferenceCompat>("settings_download_show_finished_notification")!!
+        downloadSavePath = findPreference<Preference>("settings_download_save_path")!!
+        downloadTrackingLimit = findPreference<Preference>("settings_download_tracking_limit")!!
+        downloadTrackingInterval = findPreference<Preference>("settings_download_tracking_interval")!!
+        downloadTrackingHideFinished = findPreference<SwitchPreferenceCompat>("settings_download_tracking_hide_finished")!!
+        homeLayoutPreference = findPreference<Preference>("settings_home_layout")!!
+        serverLoginPreference = findPreference<Preference>("settings_server_login")!!
+        systemOrientationPreference = findPreference<Preference>("settings_system_orientation")!!
+        systemThemePreference = findPreference<Preference>("settings_system_theme")!!
+        systemKeepScreenOn = findPreference<SwitchPreferenceCompat>("settings_keep_screen_on")!!
+        systemVolumePageTurnPreference = findPreference<SwitchPreferenceCompat>("settings_volume_page_turn")!!
+        systemDisableCellularPreference = findPreference<SwitchPreferenceCompat>("settings_disable_cellular")!!
+        systemStartTab = findPreference<Preference>("settings_start_tab")!!
+        advancedPreference = findPreference<Preference>("settings_advanced")!!
     }
 
     override fun onAttach(context: Context) {

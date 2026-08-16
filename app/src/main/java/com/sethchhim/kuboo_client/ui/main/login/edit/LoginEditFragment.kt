@@ -56,6 +56,7 @@ open class LoginEditFragment : DaggerFragment() {
                 when (p0?.isValid()) {
                     true -> setStateServerValid()
                     false -> setStateServerInvalid()
+                    else -> setStateServerInvalid()
                 }
             }
         })
@@ -99,7 +100,7 @@ open class LoginEditFragment : DaggerFragment() {
     }
 
     private fun onAddServerButtonClicked() {
-        when (editTextServerAddress.text?.isEmpty()) {
+        when (editTextServerAddress.text.isNullOrEmpty()) {
             true -> toast(getString(R.string.login_ip_address_must_not_be_empty))
             false -> {
                 login?.let { viewModel.removeLogin(it) }

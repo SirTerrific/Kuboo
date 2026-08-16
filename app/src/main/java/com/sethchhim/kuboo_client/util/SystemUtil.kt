@@ -164,7 +164,7 @@ class SystemUtil(private val context: Context) {
 
     internal fun copyToClipboard(string: String) {
         (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).apply {
-            primaryClip = ClipData.newPlainText("", string)
+            setPrimaryClip(ClipData.newPlainText("", string))
         }
         context.toast(context.getString(R.string.main_text_copied_to_clipboard))
     }

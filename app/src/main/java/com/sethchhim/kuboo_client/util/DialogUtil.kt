@@ -195,10 +195,10 @@ class DialogUtil(val context: Context) {
 
     private fun getSnackBar(view: View, string: String, delay: Int, isAlert: Boolean) = Snackbar.make(view, string, delay).apply {
         val snackView = getView()
-        val snackBarActionTextId = R.id.snackbar_action
+        val snackBarActionTextId = com.google.android.material.R.id.snackbar_action
         val textViewAction: TextView = snackView.findViewById(snackBarActionTextId)!!
         textViewAction.textSize = 12F
-        val snackBarTextId = R.id.snackbar_text
+        val snackBarTextId = com.google.android.material.R.id.snackbar_text
         textViewAction.setTypeface(textViewAction.typeface, Typeface.BOLD)
         val textView: TextView = snackView.findViewById(snackBarTextId)!!
         textView.textSize = 12F

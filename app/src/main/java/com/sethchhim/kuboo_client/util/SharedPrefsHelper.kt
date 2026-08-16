@@ -94,7 +94,7 @@ class SharedPrefsHelper(val context: Context) {
         DOWNLOAD_TRACKING_LIMIT = sharedPreferences.getInt(KEY_DOWNLOAD_TRACKING_LIMIT, DEFAULT_DOWNLOAD_TRACKING_LIMIT)
         DOWNLOAD_TRACKING_INTERVAL = sharedPreferences.getInt(KEY_DOWNLOAD_TRACKING_INTERVAL, DEFAULT_DOWNLOAD_TRACKING_INTERVAL)
         DOWNLOAD_TRACKING_HIDE_FINISHED = sharedPreferences.getBoolean(KEY_DOWNLOAD_TRACKING_HIDE_FINISHED, DEFAULT_DOWNLOAD_TRACKING_HIDE_FINISHED)
-        DOWNLOAD_SAVE_PATH = sharedPreferences.getString(KEY_DOWNLOAD_SAVE_PATH, context.getExternalFilesDir(null).path)
+        DOWNLOAD_SAVE_PATH = sharedPreferences.getString(KEY_DOWNLOAD_SAVE_PATH, context.getExternalFilesDir(null)?.path.orEmpty()).orEmpty()
         DOWNLOAD_FINISHED_NOTIFICATION = sharedPreferences.getBoolean(KEY_DOWNLOAD_FINISHED_NOTIFICATION, DEFAULT_DOWNLOAD_FINISHED_NOTIFICATION)
         DUAL_PANE = sharedPreferences.getBoolean(KEY_DUAL_PANE, false)
         EPUB_TEXT_ZOOM = sharedPreferences.getInt(KEY_EPUB_TEXT_ZOOM, DEFAULT_EPUB_TEXT_ZOOM)

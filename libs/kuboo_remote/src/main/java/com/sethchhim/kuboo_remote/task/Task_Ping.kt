@@ -25,7 +25,7 @@ class Task_Ping(val kubooRemote: KubooRemote, val login: Login, val stringUrl: S
             } catch (e: Exception) {
                 val message = e.message
                 Timber.e("message[$message] url[$stringUrl]")
-                if (message?.toLowerCase() == "socket closed") {
+                if (message?.lowercase() == "socket closed") {
                     //call was cancelled, do nothing
                 } else {
                     kubooRemote.mainThread.execute { liveData.value = null }

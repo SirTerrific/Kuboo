@@ -9,8 +9,8 @@ import android.view.WindowManager
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.ui.base.custom.LoadingStage
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
+import com.sethchhim.kuboo_client.longToast
+import com.sethchhim.kuboo_client.toast
 
 @SuppressLint("Registered")
 open class BaseActivityImpl1_Dialog : BaseActivityImpl0_View() {

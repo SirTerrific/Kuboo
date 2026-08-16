@@ -38,7 +38,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.io.File
 
 @SuppressLint("Registered")
@@ -213,11 +212,11 @@ open class BaseActivityImpl2_Read : BaseActivityImpl1_Dialog() {
             textView.movementMethod = ScrollingMovementMethod()
             textView.text = savedBook.content
 
-            getButton(DialogInterface.BUTTON_POSITIVE).onClick {
+            getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
                 val bookmarkReadData = ReadData(book = savedBook, bookmarksEnabled = readData.bookmarksEnabled, sharedElement = imageView, source = Source.BOOKMARK)
                 onClickBookmarkResume(bookmarkReadData)
             }
-            getButton(DialogInterface.BUTTON_NEUTRAL).onClick {
+            getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
                 onClickBookmarkDecline(readData)
             }
 

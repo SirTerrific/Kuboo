@@ -19,13 +19,14 @@ import com.sethchhim.kuboo_client.Extensions.toGlideUrl
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.ui.preview.custom.CropTransformation
 import com.sethchhim.kuboo_remote.model.Login
+import com.sethchhim.kuboo_remote.util.resolveLink
 import timber.log.Timber
 
 @SuppressLint("Registered")
 open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
 
     private fun getLowResRequest(login: Login, requestOptions: RequestOptions): RequestBuilder<Drawable> {
-        val stringUrlLow = login.server + currentBook.linkThumbnail
+        val stringUrlLow = login.server.resolveLink(currentBook.linkThumbnail)
         val glideUrlLow = stringUrlLow.toGlideUrl(login)
         return Glide.with(this)
                 .load(glideUrlLow)
@@ -53,7 +54,7 @@ open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
 
     protected fun preloadCurrentPage() {
         if (currentBook.isComic()) {
-            val stringUrl = viewModel.getActiveServer() + currentBook.getPse(Settings.MAX_PAGE_WIDTH, currentBook.currentPage)
+            val stringUrl = viewModel.getActiveServer().resolveLink(currentBook.getPse(Settings.MAX_PAGE_WIDTH, currentBook.currentPage))
             Glide.with(this)
                     .load(stringUrl)
                     .apply(RequestOptions()

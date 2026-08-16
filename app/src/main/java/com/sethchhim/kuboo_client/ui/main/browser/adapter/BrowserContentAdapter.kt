@@ -55,9 +55,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.backgroundResource
-import org.jetbrains.anko.collections.forEachWithIndex
+import com.sethchhim.kuboo_client.backgroundColor
+import com.sethchhim.kuboo_client.backgroundResource
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -337,7 +336,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                     true -> viewModel.getItemCountByBook(book).observe(browserFragment, Observer { result ->
                         result?.let {
                             if (holder.bookId == book.id) {
-                                holder.itemView.browser_item_content_folder_materialBadgeTextView.setBadgeCount(result.toInt())
+                                holder.itemView.browser_item_content_folder_materialBadgeTextView.setBadgeCount(result.toIntOrNull() ?: 0)
                                 holder.itemView.browser_item_content_folder_materialBadgeTextView.fadeVisible()
                                 holder.itemView.browser_item_content_folder_imageView4.fadeInvisible()
                             }
@@ -443,7 +442,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
     internal fun resetAllGlide() = try {
         (0 until browserContentRecyclerView.childCount)
                 .mapNotNull { browserContentRecyclerView.getChildViewHolder(browserContentRecyclerView.getChildAt(it)) as BrowserContentAdapter.BrowserHolder }
-                .forEachWithIndex { _, viewHolder ->
+                .forEachIndexed { _, viewHolder ->
                     when (viewHolder.itemViewType) {
                         Browser.FOLDER -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_folder_imageView3)
                         Browser.MEDIA -> Glide.with(browserFragment).clear(viewHolder.itemView.browser_item_content_media_imageView)
@@ -519,7 +518,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
     internal fun resetAllColorState() = try {
         (0 until browserContentRecyclerView.childCount)
                 .mapNotNull { browserContentRecyclerView.getChildViewHolder(browserContentRecyclerView.getChildAt(it)) as BrowserContentAdapter.BrowserHolder }
-                .forEachWithIndex { _, viewHolder ->
+                .forEachIndexed { _, viewHolder ->
                     if (viewHolder.itemViewType == Browser.MEDIA) {
                         viewHolder.itemView.browser_item_content_media_imageView?.let {
                             val data = (browserContentRecyclerView.adapter as BrowserContentAdapter).data

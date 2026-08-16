@@ -19,8 +19,8 @@ import com.sethchhim.kuboo_client.BuildConfig
 import com.sethchhim.kuboo_client.Extensions.toReadable
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
-import org.jetbrains.anko.defaultSharedPreferences
-import org.jetbrains.anko.toast
+import com.sethchhim.kuboo_client.defaultSharedPreferences
+import com.sethchhim.kuboo_client.toast
 import timber.log.Timber
 import java.io.File
 

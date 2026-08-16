@@ -31,7 +31,7 @@ import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
 import kotlinx.android.synthetic.main.browser_item_latest.view.*
-import org.jetbrains.anko.toast
+import com.sethchhim.kuboo_client.toast
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -22,7 +22,7 @@ import com.sethchhim.kuboo_client.ui.main.browser.BrowserBaseFragmentImpl2_Conte
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.model.Book
 import kotlinx.android.synthetic.main.browser_item_path.view.*
-import org.jetbrains.anko.layoutInflater
+import com.sethchhim.kuboo_client.layoutInflater
 import javax.inject.Inject
 
 class BrowserPathAdapter(private val browserFragment: BrowserBaseFragmentImpl2_Content, val viewModel: ViewModel) : BaseQuickAdapter<Book, BrowserPathAdapter.PathHolder>(R.layout.browser_item_path, viewModel.getPathList()) {

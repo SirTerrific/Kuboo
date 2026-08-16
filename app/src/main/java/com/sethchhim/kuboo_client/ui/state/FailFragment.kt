@@ -14,7 +14,7 @@ import com.sethchhim.kuboo_client.ui.main.MainActivity
 import com.sethchhim.kuboo_client.util.DialogUtil
 import com.sethchhim.kuboo_remote.model.Response
 import dagger.android.support.DaggerFragment
-import org.jetbrains.anko.support.v4.toast
+import com.sethchhim.kuboo_client.toast
 import javax.inject.Inject
 
 class FailFragment : DaggerFragment() {

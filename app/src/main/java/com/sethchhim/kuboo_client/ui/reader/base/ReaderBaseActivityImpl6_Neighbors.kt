@@ -6,6 +6,7 @@ import com.sethchhim.kuboo_client.Extensions.observeOnce
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Neighbors
+import com.sethchhim.kuboo_remote.util.resolveLink
 import timber.log.Timber
 
 @SuppressLint("Registered")
@@ -23,7 +24,7 @@ open class ReaderBaseActivityImpl6_Neighbors : ReaderBaseActivityImpl5_Bookmark(
     }
 
     private fun populateNeighborsRemote() {
-        val stringUrl = viewModel.getActiveServer() + currentBook.linkXmlPath
+        val stringUrl = viewModel.getActiveServer().resolveLink(currentBook.linkXmlPath)
         viewModel.getNeighborsRemote(currentBook, stringUrl).observe(this, Observer { result ->
             when (result != null) {
                 true -> onPopulateNeighborsRemoteSuccess(result)
@@ -33,7 +34,7 @@ open class ReaderBaseActivityImpl6_Neighbors : ReaderBaseActivityImpl5_Bookmark(
     }
 
     private fun populateNeighborsRemoteAtNextPage() {
-        val stringUrl = viewModel.getActiveServer() + currentBook.linkNext
+        val stringUrl = viewModel.getActiveServer().resolveLink(currentBook.linkNext)
         viewModel.getNeighborsNextPageRemote(currentBook, stringUrl).observe(this, Observer { result ->
             when (result != null) {
                 true -> handlePopulateNeighborResult(result)
@@ -77,7 +78,7 @@ open class ReaderBaseActivityImpl6_Neighbors : ReaderBaseActivityImpl5_Bookmark(
             preload(this@ReaderBaseActivityImpl6_Neighbors, nextBook.getPreviewUrl(Settings.THUMBNAIL_SIZE_RECENT))
 
             //preload next first image
-            preload(this@ReaderBaseActivityImpl6_Neighbors, nextBook.server + nextBook.getPse(Settings.MAX_PAGE_WIDTH, 0))
+            preload(this@ReaderBaseActivityImpl6_Neighbors, nextBook.server.resolveLink(nextBook.getPse(Settings.MAX_PAGE_WIDTH, 0)))
         }
     }
 

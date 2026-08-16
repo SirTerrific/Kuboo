@@ -16,7 +16,7 @@ import com.sethchhim.kuboo_client.*
 import com.sethchhim.kuboo_client.Settings.UBOOQUITY_VERSION
 import com.sethchhim.kuboo_client.data.model.License
 import com.sethchhim.kuboo_client.util.SystemUtil
-import org.jetbrains.anko.layoutInflater
+import com.sethchhim.kuboo_client.layoutInflater
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 

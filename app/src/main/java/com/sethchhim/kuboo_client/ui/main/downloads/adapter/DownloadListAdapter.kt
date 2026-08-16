@@ -50,7 +50,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.layoutInflater
+import com.sethchhim.kuboo_client.layoutInflater
 import timber.log.Timber
 import javax.inject.Inject
 

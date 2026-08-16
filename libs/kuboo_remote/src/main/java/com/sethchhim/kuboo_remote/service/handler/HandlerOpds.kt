@@ -44,32 +44,36 @@ class HandlerOpds(private val login: Login, private val saxList: MutableList<Boo
             if (attributes.isValueValid("rel")) {
                 when {
                     attributes.getValue("rel").equals("http://opds-spec.org/acquisition", ignoreCase = true) -> {
-                        entity.LinkAcquisition = attributes.get("href")
+                        entity.LinkAcquisition = attributes.getValue("href")
                         linkAcquisition = true
                     }
                     attributes.getValue("rel").equals("subsection", ignoreCase = true) -> {
-                        entity.LinkSubsection = attributes.get("href")
+                        entity.LinkSubsection = attributes.getValue("href")
                         linkSubsection = true
                     }
                     attributes.getValue("rel").equals("http://opds-spec.org/image/thumbnail", ignoreCase = true) -> {
-                        entity.LinkThumbnail = attributes.get("href")
+                        entity.LinkThumbnail = attributes.getValue("href")
                         linkThumbnail = true
                     }
                     attributes.getValue("rel").equals("self", ignoreCase = true) -> {
-                        entity.LinkXmlPath = attributes.getLinkNavigation("href")
+                        entity.LinkXmlPath = attributes.getValue("href")
                         linkXMLPath = true
                     }
                     attributes.getValue("rel").equals("previous", ignoreCase = true) -> {
-                        entity.LinkPrevious = attributes.getLinkNavigation("href")
+                        entity.LinkPrevious = attributes.getValue("href")
                         linkPrevious = true
                     }
                     attributes.getValue("rel").equals("next", ignoreCase = true) -> {
-                        entity.LinkNext = attributes.getLinkNavigation("href")
+                        entity.LinkNext = attributes.getValue("href")
                         linkNext = true
                     }
                     attributes.getValue("rel").equals("http://vaemendis.net/opds-pse/stream", ignoreCase = true) -> {
-                        entity.LinkPse = attributes.getLinkPse()
-                        entity.LinkPse = StringEscapeUtils.escapeXml10(entity.LinkPse)
+                        entity.LinkPse = StringEscapeUtils.escapeXml10(attributes.getValue("href"))
+                        linkPse = true
+                        if (attributes.isValueValid("pse:count")) {
+                            entity.TotalPages = attributes.getValue("pse:count")
+                            totalPages = true
+                        }
                     }
                 }
             }
@@ -94,17 +98,14 @@ class HandlerOpds(private val login: Login, private val saxList: MutableList<Boo
             }
             title -> {
                 entity.Title = String(ch, start, length)
-                entity.Title = stripHtml(entity.Title)
                 title = false
             }
             author -> {
                 entity.Author = String(ch, start, length)
-                entity.Author = stripHtml(entity.Author)
                 author = false
             }
             content -> {
                 entity.Content = String(ch, start, length)
-                entity.Content = stripHtml(entity.Content)
                 content = false
             }
             linkAcquisition -> linkAcquisition = false
@@ -138,9 +139,11 @@ class HandlerOpds(private val login: Login, private val saxList: MutableList<Boo
             } catch (e: NumberFormatException) {
                 0
             }
-            title = Title.unescape()
-            author = Author.unescape()
-            content = Content.unescape()
+            // strip HTML only after unescaping: Ubooquity 3 puts escaped markup ("&lt;br/&gt;")
+            // in these fields, so stripping before unescaping would leave literal tags behind.
+            title = stripHtml(Title.unescape())
+            author = stripHtml(Author.unescape())
+            content = stripHtml(Content.unescape())
             content = getFormattedContent()
             linkAcquisition = LinkAcquisition.unescape()
             linkSubsection = LinkSubsection.unescape()
@@ -162,82 +165,6 @@ class HandlerOpds(private val login: Login, private val saxList: MutableList<Boo
     }
 
     private fun Attributes.isValueValid(value: String) = getValue(value) != null && getValue(value).isNotEmpty()
-
-    private fun Attributes.get(value: String): String {
-        var string = getValue(value)
-        when {
-            string.contains("/opds-books/") -> {
-                val bits = string.split("/opds-books/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-            string.contains("/opds-comics/") -> {
-                val bits = string.split("/opds-comics/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-            string.contains("/opds/") -> {
-                val bits = string.split("/opds/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-        }
-        return string
-    }
-
-    private fun Attributes.getLinkNavigation(value: String): String {
-        var string = getValue(value)
-        when {
-            string.contains("/opds-books/") -> string = try {
-                val bits = string.split("/opds-books/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                bits[bits.size - 1]
-            } catch (e: ArrayIndexOutOfBoundsException) {
-                string.replace("/opds-books/", "")
-            }
-            string.contains("/opds-comics/") -> string = try {
-                val bits = string.split("/opds-comics/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                bits[bits.size - 1]
-            } catch (e: ArrayIndexOutOfBoundsException) {
-                string.replace("/opds-comics/", "")
-            }
-            string.contains("/opds/") -> string = try {
-                val bits = string.split("/opds/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                bits[bits.size - 1]
-            } catch (e: ArrayIndexOutOfBoundsException) {
-                string.replace("/opds/", "")
-            }
-        }
-        return string
-    }
-
-    private fun Attributes.getLinkPse(): String {
-        var string = getValue("href")
-        when {
-            string.contains("/opds-books/") -> {
-                val bits1 = string.split("/opds-books/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits1[bits1.size - 1]
-                linkPse = true
-                val stringTotalPages = getValue("pse:count")
-                val bits2 = stringTotalPages.split("/opds-books/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                entity.TotalPages = bits2[bits2.size - 1]
-                totalPages = true
-            }
-            string.contains("/opds-comics/") -> {
-                val bits1 = string.split("/opds-comics/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits1[bits1.size - 1]
-                linkPse = true
-                val stringTotalPages = getValue("pse:count")
-                val bits2 = stringTotalPages.split("/opds-comics/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                entity.TotalPages = bits2[bits2.size - 1]
-                totalPages = true
-            }
-            //kuboo server linkpse
-            string.contains("/cache/images/?bookId=") -> {
-                linkPse = true
-                val stringTotalPages = getValue("pse:count")
-                entity.TotalPages = stringTotalPages
-                totalPages = true
-            }
-        }
-        return string
-    }
 
     private fun stripHtml(html: String) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         fromHtml(html, Html.FROM_HTML_MODE_LEGACY).toString().replace("\n".toRegex(), "").trim { it <= ' ' }

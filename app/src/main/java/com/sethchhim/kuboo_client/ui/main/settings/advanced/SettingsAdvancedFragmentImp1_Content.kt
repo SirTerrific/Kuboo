@@ -6,7 +6,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 open class SettingsAdvancedFragmentImp1_Content : SettingsAdvancedFragmentImp0_View() {
 
@@ -31,7 +30,7 @@ open class SettingsAdvancedFragmentImp1_Content : SettingsAdvancedFragmentImp0_V
                 val textView = findViewById<TextView>(R.id.dialog_layout_settings_recently_viewed_height_offset_textView0)!!
                 val buttonDecrease = findViewById<TextView>(R.id.dialog_layout_settings_recently_viewed_height_offset_button0)!!
                 val buttonIncrease = findViewById<TextView>(R.id.dialog_layout_settings_recently_viewed_height_offset_button1)!!
-                getButton(Dialog.BUTTON_POSITIVE).onClick {
+                getButton(Dialog.BUTTON_POSITIVE).setOnClickListener {
                     Settings.RECENTLY_VIEWED_HEIGHT_OFFSET = Settings.DEFAULT_RECENTLY_VIEWED_HEIGHT_OFFSET
                     sharedPrefsHelper.saveRecentlyViewedHeightOffset()
                     textView.text = getRecentlyViewedHeightOffsetSummary()
@@ -78,7 +77,7 @@ open class SettingsAdvancedFragmentImp1_Content : SettingsAdvancedFragmentImp0_V
                 val textView = findViewById<TextView>(R.id.dialog_layout_settings_reader_scroll_offset_textView0)!!
                 val buttonDecrease = findViewById<TextView>(R.id.dialog_layout_settings_reader_scroll_offset_button0)!!
                 val buttonIncrease = findViewById<TextView>(R.id.dialog_layout_settings_reader_scroll_offset_button1)!!
-                getButton(Dialog.BUTTON_POSITIVE).onClick {
+                getButton(Dialog.BUTTON_POSITIVE).setOnClickListener {
                     Settings.READER_SCROLL_OFFSET = Settings.DEFAULT_READER_SCROLL_OFFSET
                     sharedPrefsHelper.saveReaderScrollOffset()
                     textView.text = getReaderScrollOffsetSummary()
@@ -138,20 +137,20 @@ open class SettingsAdvancedFragmentImp1_Content : SettingsAdvancedFragmentImp0_V
                         textView.text = "Max Width: ${Settings.MAX_PAGE_WIDTH}"
                     }
                 })
-                getButton(Dialog.BUTTON_POSITIVE).onClick {
+                getButton(Dialog.BUTTON_POSITIVE).setOnClickListener {
                     Settings.MAX_PAGE_WIDTH = Settings.DEFAULT_MAX_PAGE_WIDTH
                     sharedPrefsHelper.saveMaxPageWidth()
                     seekBar.progress = Settings.MAX_PAGE_WIDTH
                     textView.text = "Max Width: ${Settings.MAX_PAGE_WIDTH}"
                 }
-                button0.onClick {
+                button0.setOnClickListener {
                     if (Settings.MAX_PAGE_WIDTH > 0) {
                         Settings.MAX_PAGE_WIDTH -= 1
                         sharedPrefsHelper.saveMaxPageWidth()
                         textView.text = "Max Width: ${Settings.MAX_PAGE_WIDTH}"
                     }
                 }
-                button1.onClick {
+                button1.setOnClickListener {
                     if (Settings.MAX_PAGE_WIDTH < maxValue) {
                         Settings.MAX_PAGE_WIDTH += 1
                         sharedPrefsHelper.saveMaxPageWidth()

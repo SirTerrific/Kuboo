@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Login
 import com.sethchhim.kuboo_remote.util.Settings.isDebugOkHttp
+import com.sethchhim.kuboo_remote.util.resolveLink
 import okhttp3.FormBody
 import okhttp3.Response
 import org.apache.commons.codec.binary.Hex
@@ -80,8 +81,7 @@ class Task_Authenticate(val kubooRemote: KubooRemote, login: Login) {
         return call.execute()
     }
 
-    private fun getLoginPage(login: Login): String =
-            login.server.replace("/opds-comics/", "").replace("/opds-books/", "")
+    private fun getLoginPage(login: Login): String = login.server.resolveLink("/")
 
     private fun String.encode(value: String): String = String(Hex.encodeHex(HmacUtils(HmacAlgorithms.HMAC_SHA_256, this).hmac(value)))
 

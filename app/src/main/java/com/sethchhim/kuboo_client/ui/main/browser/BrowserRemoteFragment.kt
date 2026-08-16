@@ -5,7 +5,7 @@ import android.view.View
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.ui.main.browser.adapter.BrowserContentAdapter
 import com.sethchhim.kuboo_remote.model.Book
-import org.jetbrains.anko.support.v4.toast
+import com.sethchhim.kuboo_client.toast
 
 class BrowserRemoteFragment : BrowserBaseFragment() {
 

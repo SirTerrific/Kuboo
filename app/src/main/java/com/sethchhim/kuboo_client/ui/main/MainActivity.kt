@@ -22,7 +22,7 @@ import com.sethchhim.kuboo_client.ui.main.login.browser.LoginBrowserFragment
 import com.sethchhim.kuboo_client.ui.main.login.edit.LoginEditFragment
 import com.sethchhim.kuboo_client.ui.main.settings.SettingsFragment
 import com.sethchhim.kuboo_client.ui.main.settings.advanced.SettingsAdvancedFragment
-import org.jetbrains.anko.backgroundColor
+import com.sethchhim.kuboo_client.backgroundColor
 
 open class MainActivity : MainActivityImpl2_Selection(), BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
 

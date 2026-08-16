@@ -16,6 +16,7 @@ import com.sethchhim.kuboo_client.Extensions.removeAllObservers
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.ui.base.custom.OnPreloadCallback
 import com.sethchhim.kuboo_remote.model.Book
+import com.sethchhim.kuboo_remote.util.resolveLink
 import timber.log.Timber
 
 class GlideUtil {
@@ -41,7 +42,7 @@ class GlideUtil {
                 onPreloadCallback = preloadCallback)
 
         preload(context = lifecycleOwner as Context,
-                stringUrl = book.server + book.getPse(Settings.MAX_PAGE_WIDTH, book.currentPage),
+                stringUrl = book.server.resolveLink(book.getPse(Settings.MAX_PAGE_WIDTH, book.currentPage)),
                 onPreloadCallback = preloadCallback)
 
         return preloadLiveData

@@ -6,6 +6,7 @@ import android.view.View
 import com.sethchhim.kuboo_client.Constants.ARG_BOOK
 import com.sethchhim.kuboo_client.ui.main.browser.adapter.BrowserContentAdapter
 import com.sethchhim.kuboo_remote.model.Book
+import com.sethchhim.kuboo_remote.util.resolveLink
 
 class BrowserSeriesFragment : BrowserBaseFragment() {
 
@@ -32,7 +33,7 @@ class BrowserSeriesFragment : BrowserBaseFragment() {
         setStateLoading()
         resetRecyclerView()
         paginationHandler.reset()
-        val stringUrl = viewModel.getActiveServer() + seriesBook.linkXmlPath
+        val stringUrl = viewModel.getActiveServer().resolveLink(seriesBook.linkXmlPath)
         viewModel.getListByUrl(stringUrl).observe(this, Observer { result ->
             val book = Book().apply { linkSubsection = seriesBook.linkXmlPath }
             handleMediaResult(book, result)

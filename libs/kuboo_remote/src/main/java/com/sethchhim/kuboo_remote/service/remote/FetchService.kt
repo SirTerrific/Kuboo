@@ -9,6 +9,7 @@ import com.sethchhim.kuboo_remote.client.OkHttpClient
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Login
 import com.sethchhim.kuboo_remote.util.Authentication
+import com.sethchhim.kuboo_remote.util.resolveLink
 import com.tonyodev.fetch2.*
 import com.tonyodev.fetch2core.Func
 import com.tonyodev.fetch2okhttp.OkHttpDownloader
@@ -67,7 +68,7 @@ class FetchService(val context: Context, okHttpClient: OkHttpClient, val mainThr
     }
 
     private fun createRequest(login: Login, book: Book, savePath: String): Request {
-        val stringUrl = book.server + book.linkAcquisition
+        val stringUrl = book.server.resolveLink(book.linkAcquisition)
         val stringFileName = URL(stringUrl).guessFileName()
         val stringSavePath = "$savePath${File.separator}$stringFileName"
         return Request(stringUrl, stringSavePath).apply {

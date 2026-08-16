@@ -9,6 +9,10 @@ import timber.log.Timber
 
 class HandlerItemCount(private val itemCountList: MutableList<String>) : DefaultHandler() {
 
+    private companion object {
+        val ITEM_COUNT_REGEX = Regex("""(\d+)\s+items""", RegexOption.IGNORE_CASE)
+    }
+
     private val mEntity = OpdsEntity()
     private var itemCount = false
 
@@ -28,16 +32,10 @@ class HandlerItemCount(private val itemCountList: MutableList<String>) : Default
 
         if (qName.equals("TITLE", ignoreCase = true)) {
             if (itemCount) {
-                var result = mEntity.ItemCount
-                if (result.contains("Comics - ")) {
-                    val startIndex = 9
-                    val endIndex = result.indexOf(" items")
-                    result = result.substring(startIndex, endIndex)
-                } else if (result.contains("Books - ")) {
-                    val startIndex = 8
-                    val endIndex = result.indexOf(" items")
-                    result = result.substring(startIndex, endIndex)
-                }
+                // Ubooquity 2 titled feeds "Comics - N items"; version 3 uses titles such as
+                // "Latest comics" with no count at all. Emit "0" when no number is present so
+                // callers never have to parse arbitrary text.
+                val result = ITEM_COUNT_REGEX.find(mEntity.ItemCount)?.groupValues?.get(1) ?: "0"
                 itemCountList.add(result)
                 throw SAXException()
             }

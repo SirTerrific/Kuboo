@@ -15,6 +15,7 @@ import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Login
+import com.sethchhim.kuboo_remote.util.resolveLink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -78,7 +79,7 @@ class TrackingService {
         if (isBookServerMatchActiveServer) {
             Timber.d("Tracking of book start: title[${book.title}] isBookServerMatchActiveServer[$isBookServerMatchActiveServer]")
             val startTime = System.currentTimeMillis()
-            viewModel.getSeriesNeighborsRemote(login, book, book.server + book.linkXmlPath, Settings.DOWNLOAD_TRACKING_LIMIT).observeForever {
+            viewModel.getSeriesNeighborsRemote(login, book, book.server.resolveLink(book.linkXmlPath), Settings.DOWNLOAD_TRACKING_LIMIT).observeForever {
                 it?.let { result ->
                     val mutableResult = result.apply { forEach { it.isFavorite = true } }.toMutableList()
                     handleResult(login, mutableResult, book, startTime)

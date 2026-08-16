@@ -6,7 +6,6 @@ import com.sethchhim.kuboo_remote.model.OpdsEntity
 import com.sethchhim.kuboo_remote.model.Pagination
 import com.sethchhim.kuboo_remote.util.Settings.isDebugPaginationHandler
 import org.apache.commons.text.StringEscapeUtils
-import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.helpers.DefaultHandler
 import timber.log.Timber
@@ -25,15 +24,15 @@ class HandlerPagination(private val pagination: Pagination) : DefaultHandler() {
             if (attributes.getValue("rel") != null && !attributes.getValue("rel").isEmpty()) {
                 when {
                     attributes.getValue("rel").equals("previous", ignoreCase = true) -> {
-                        entity.LinkPrevious = attributes.get("href")
+                        entity.LinkPrevious = attributes.getValue("href")
                         linkPrevious = true
                     }
                     attributes.getValue("rel").equals("self", ignoreCase = true) -> {
-                        entity.LinkSelf = attributes.get("href")
+                        entity.LinkSelf = attributes.getValue("href")
                         linkSelf = true
                     }
                     attributes.getValue("rel").equals("next", ignoreCase = true) -> {
-                        entity.LinkNext = attributes.get("href")
+                        entity.LinkNext = attributes.getValue("href")
                         linkNext = true
                     }
                 }
@@ -66,25 +65,6 @@ class HandlerPagination(private val pagination: Pagination) : DefaultHandler() {
         if (linkPrevious) if (isDebugPaginationHandler) Timber.d("Found link previous: ${entity.LinkPrevious}")
         if (linkSelf) if (isDebugPaginationHandler) Timber.d("Found link self: ${entity.LinkSelf}")
         if (linkNext) if (isDebugPaginationHandler) Timber.d("Found link next: ${entity.LinkNext}")
-    }
-
-    private fun Attributes.get(value: String): String {
-        var string = getValue(value)
-        when {
-            string.contains("/opds-books/") -> {
-                val bits = string.split("/opds-books/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-            string.contains("/opds-comics/") -> {
-                val bits = string.split("/opds-comics/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-            string.contains("/opds/") -> {
-                val bits = string.split("/opds/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                string = bits[bits.size - 1]
-            }
-        }
-        return string
     }
 
     private fun stripHtml(html: String) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

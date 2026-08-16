@@ -12,7 +12,7 @@ import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.data.model.Log
 import com.sethchhim.kuboo_client.databinding.LogItemBaseBinding
 import com.sethchhim.kuboo_client.util.SystemUtil
-import org.jetbrains.anko.layoutInflater
+import com.sethchhim.kuboo_client.layoutInflater
 import javax.inject.Inject
 
 class LogAdapter(list: List<Log>) : BaseQuickAdapter<Log, LogAdapter.LogHolder>(R.layout.log_item_base, list) {

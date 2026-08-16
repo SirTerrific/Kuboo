@@ -78,7 +78,7 @@ import com.sethchhim.kuboo_client.Settings.SHARED_ELEMENT_TRANSITION
 import com.sethchhim.kuboo_client.Settings.START_TAB
 import com.sethchhim.kuboo_client.Settings.VOLUME_PAGE_TURN
 import com.sethchhim.kuboo_remote.model.Login
-import org.jetbrains.anko.defaultSharedPreferences
+import com.sethchhim.kuboo_client.defaultSharedPreferences
 import timber.log.Timber
 
 @SuppressLint("ApplySharedPref")

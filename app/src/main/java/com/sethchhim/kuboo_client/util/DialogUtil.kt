@@ -15,8 +15,7 @@ import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.Settings.APP_THEME
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Response
-import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.layoutInflater
+import com.sethchhim.kuboo_client.layoutInflater
 import java.io.File
 
 class DialogUtil(val context: Context) {
@@ -82,7 +81,7 @@ class DialogUtil(val context: Context) {
         setTitle(context.getString(R.string.dialog_download))
 
         var stringMessage = ""
-        downloadList.forEachWithIndex { index, book -> stringMessage = "$stringMessage \n${index + 1}. ${book.title}" }
+        downloadList.forEachIndexed { index, book -> stringMessage = "$stringMessage \n${index + 1}. ${book.title}" }
         setMessage(stringMessage)
     }.create()
 

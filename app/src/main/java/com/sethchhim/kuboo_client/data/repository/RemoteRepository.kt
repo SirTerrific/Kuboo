@@ -1,10 +1,12 @@
 package com.sethchhim.kuboo_client.data.repository
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.sethchhim.kuboo_client.Constants.URL_PATH_LATEST
 import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.*
+import com.sethchhim.kuboo_remote.util.resolveLink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -20,7 +22,7 @@ class RemoteRepository(private val kubooRemote: KubooRemote, private val systemU
     }
 
     internal fun getListByBook(login: Login, book: Book) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getListByUrl(login, login.server + book.linkSubsection)
+        true -> kubooRemote.getListByUrl(login, login.server.resolveLink(book.linkSubsection))
         false -> MutableLiveData<List<Book>>().apply { this.delayedFail() }
     }
 
@@ -48,23 +50,43 @@ class RemoteRepository(private val kubooRemote: KubooRemote, private val systemU
         latestList.addAll(list)
     }
 
+    /**
+     * The "latest" feed has no fixed path across Ubooquity versions: version 2 serves it at
+     * "<server>?latest=true", version 3 at "/opds/comics?latest=true" — and version 3 answers
+     * any unknown OPDS path with its root navigation feed instead of an error, so a wrong
+     * guess fails silently. Discover the link from the root feed, fall back to the legacy path.
+     */
     internal fun getLatestList(login: Login) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getListByUrl(login, login.server + URL_PATH_LATEST)
+        true -> MediatorLiveData<List<Book>>().apply {
+            val rootSource = kubooRemote.getListByUrl(login, login.server)
+            addSource(rootSource) { rootList ->
+                removeSource(rootSource)
+                val latestLink = rootList
+                        ?.map { it.linkSubsection }
+                        ?.firstOrNull { it.contains("latest=true", ignoreCase = true) }
+                        ?: URL_PATH_LATEST
+                val latestSource = kubooRemote.getListByUrl(login, login.server.resolveLink(latestLink))
+                addSource(latestSource) { latestList ->
+                    removeSource(latestSource)
+                    value = latestList
+                }
+            }
+        }
         false -> MutableLiveData<List<Book>>().apply { this.delayedFail() }
     }
 
     internal fun getPaginationByBook(login: Login, book: Book) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getPaginationByBook(login, login.server + book.linkSubsection)
+        true -> kubooRemote.getPaginationByBook(login, login.server.resolveLink(book.linkSubsection))
         false -> MutableLiveData<Pagination>().apply { this.delayedFail() }
     }
 
     internal fun getFirstByBook(login: Login, book: Book) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getFirstByBook(login, book, login.server + book.linkSubsection)
+        true -> kubooRemote.getFirstByBook(login, book, login.server.resolveLink(book.linkSubsection))
         false -> MutableLiveData<Book>().apply { this.delayedFail() }
     }
 
     internal fun getItemCountByBook(login: Login, book: Book) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getItemCountByBook(login, login.server + book.linkSubsection)
+        true -> kubooRemote.getItemCountByBook(login, login.server.resolveLink(book.linkSubsection))
         false -> MutableLiveData<String>().apply { this.delayedFail() }
     }
 
@@ -89,7 +111,7 @@ class RemoteRepository(private val kubooRemote: KubooRemote, private val systemU
     }
 
     internal fun getRemoteFile(login: Login, stringUrl: String, saveDir: File) = when (systemUtil.isNetworkAllowed()) {
-        true -> kubooRemote.getFile(login, login.server + stringUrl, saveDir)
+        true -> kubooRemote.getFile(login, login.server.resolveLink(stringUrl), saveDir)
         false -> MutableLiveData<File>().apply { this.delayedFail() }
     }
 

@@ -12,6 +12,7 @@ import com.sethchhim.kuboo_client.util.SystemUtil
 import com.sethchhim.kuboo_local.KubooLocal
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
+import com.sethchhim.kuboo_remote.util.resolveLink
 import timber.log.Timber
 
 class ReaderRepository(private val systemUtil: SystemUtil, private val kubooLocal: KubooLocal, private val kubooRemote: KubooRemote) {
@@ -88,7 +89,7 @@ class ReaderRepository(private val systemUtil: SystemUtil, private val kubooLoca
         val bookList = mutableListOf<PageUrl>()
         book.apply {
             for (index in 0 until totalPages) {
-                val stringUrl = server + getPse(Settings.MAX_PAGE_WIDTH, index)
+                val stringUrl = server.resolveLink(getPse(Settings.MAX_PAGE_WIDTH, index))
                 bookList.add(PageUrl(index, stringUrl, ""))
             }
         }

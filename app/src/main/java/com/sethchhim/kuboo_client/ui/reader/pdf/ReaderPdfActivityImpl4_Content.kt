@@ -20,8 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.collections.forEachWithIndex
-import org.jetbrains.anko.toast
+import com.sethchhim.kuboo_client.toast
 import timber.log.Timber
 import java.io.File
 import java.util.*
@@ -205,7 +204,7 @@ open class ReaderPdfActivityImpl4_Content : ReaderPdfActivityImpl3_Menu() {
 
     private fun printOutline() {
         when (flatOutline != null) {
-            true -> flatOutline?.forEachWithIndex { i, item ->
+            true -> flatOutline?.forEachIndexed { i, item ->
                 Timber.d("$i  ${item.title} currentPage[${item.currentPage}] total[${item.totalPages}]")
             }
             false -> Timber.e("Outline is null")

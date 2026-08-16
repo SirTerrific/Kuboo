@@ -9,7 +9,6 @@ import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Neighbors
 import com.tonyodev.fetch2.Download
 import com.tonyodev.fetch2.Status
-import org.jetbrains.anko.collections.forEachWithIndex
 import timber.log.Timber
 
 
@@ -32,10 +31,10 @@ class Task_DownloadNeighbors(val book: Book) : Task_LocalBase() {
 
         val list = downloadList.filter { it.getXmlId() == book.getXmlId() }
 
-        list.forEachWithIndex { i, b ->
+        list.forEachIndexed { i, b ->
             if (b.isMatch(book)) {
                 position = i
-                return@forEachWithIndex
+                return@forEachIndexed
             }
         }
 

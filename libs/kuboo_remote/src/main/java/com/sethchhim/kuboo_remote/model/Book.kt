@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import com.sethchhim.kuboo_remote.util.Settings.MAX_PAGE_WIDTH_DEFAULT
+import com.sethchhim.kuboo_remote.util.resolveLink
 import kotlinx.android.parcel.Parcelize
 import timber.log.Timber
 import java.io.File
@@ -139,8 +140,9 @@ data class Book(
     fun isBannedFromTransition() = !isComic() && !isEpub()
 
     fun isBannedFromRecent(): Boolean {
-        return this.linkXmlPath.equals("all", ignoreCase = true) or
-                this.linkXmlPath.equals("?latest=true", ignoreCase = true) or
+        val lastSegment = this.linkXmlPath.substringBefore("?").trim('/').substringAfterLast("/")
+        return lastSegment.equals("all", ignoreCase = true) or
+                this.linkXmlPath.contains("latest=true", ignoreCase = true) or
                 this.linkXmlPath.contains("?search=true&searchstring=", ignoreCase = true) or
                 this.linkXmlPath.contains("all?search=true&displayFiles=true&index=", ignoreCase = true)
     }
@@ -153,19 +155,9 @@ data class Book(
     }
 
     fun getXmlId(): Int {
-        try {
-            if (this.linkXmlPath.contains("/?displayFiles=true")) {
-                val index = this.linkXmlPath.lastIndexOf("/?displayFiles=true")
-                return Integer.parseInt(this.linkXmlPath.substring(0, index))
-            } else {
-                val index = this.linkXmlPath.lastIndexOf("/")
-                Timber.d("AAA linkXmlPath ${Integer.parseInt(this.linkXmlPath.substring(0, index))}")
-                return Integer.parseInt(this.linkXmlPath.substring(0, index))
-            }
-        } catch (e: Exception) {
-            //do nothing
-        }
-        return 0
+        val withoutQuery = this.linkXmlPath.substringBefore("?")
+        val segments = withoutQuery.trim('/').split("/")
+        return segments.lastOrNull { it.isNotEmpty() }?.toIntOrNull() ?: 0
     }
 
     fun getXmlIdString() = try {
@@ -257,13 +249,13 @@ data class Book(
 
     fun isMatchPreview(book: Book) = getPreviewUrl() == book.getPreviewUrl()
 
-    fun getAcquisitionUrl() = server + linkAcquisition
+    fun getAcquisitionUrl() = server.resolveLink(linkAcquisition)
 
-    fun getPreviewUrl() = server + linkThumbnail
+    fun getPreviewUrl() = server.resolveLink(linkThumbnail)
 
-    fun getPreviewUrl(maxWidth: Int) = server + getPseCover(maxWidth)
+    fun getPreviewUrl(maxWidth: Int) = server.resolveLink(getPseCover(maxWidth))
 
-    fun getPreviewUrl(login: Login, maxWidth: Int) = login.server + getPseCover(maxWidth)
+    fun getPreviewUrl(login: Login, maxWidth: Int) = login.server.resolveLink(getPseCover(maxWidth))
 
     fun getPreviewUrlMatchingWidthTo(previewUrl: String?): String? {
         if (previewUrl == null) {

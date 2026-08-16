@@ -6,7 +6,6 @@ import com.sethchhim.kuboo_client.Constants.KEY_SINGLE
 import com.sethchhim.kuboo_client.data.model.PageUrl
 import com.sethchhim.kuboo_client.data.model.Progress
 import com.sethchhim.kuboo_remote.KubooRemote
-import org.jetbrains.anko.collections.forEachWithIndex
 
 class Task_ReaderSingleToDualRemote(lifecycleOwner: LifecycleOwner, kubooRemote: KubooRemote, list: List<PageUrl>) : Task_ReaderSingleToDual() {
 
@@ -15,7 +14,7 @@ class Task_ReaderSingleToDualRemote(lifecycleOwner: LifecycleOwner, kubooRemote:
 
     init {
         kubooRemote.cancelAllByTag("Task_RemoteIsImageWide")
-        list.forEachWithIndex { index, pageUrl ->
+        list.forEachIndexed { index, pageUrl ->
             val startIndex = 0
             val lastIndex = pageUrl.page0.lastIndexOf("=") + 1
             val stringUrl = pageUrl.page0.substring(startIndex, lastIndex).plus("10")

@@ -42,7 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.toast
+import com.sethchhim.kuboo_client.toast
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -113,12 +113,12 @@ class RecentAdapter(private val homeFragmentImpl1Content: HomeFragmentImpl1_Cont
 
 //        internal fun setStateInvalid() {
 //            itemView.browser_item_recent_progressBar.gone()
-//            itemView.browser_item_recent_textView.onClick { deleteBookAt(adapterPosition) }
+//            itemView.browser_item_recent_textView.setOnClickListener { deleteBookAt(adapterPosition) }
 //            itemView.browser_item_recent_textView.text = mainActivity.getString(R.string.main_remove)
 //            itemView.browser_item_recent_textView.fadeVisible()
 //            itemView.browser_item_recent_imageView.visible()
 //
-//            itemView.browser_item_recent_imageView.onClick { showRemoveDialog(adapterPosition) }
+//            itemView.browser_item_recent_imageView.setOnClickListener { showRemoveDialog(adapterPosition) }
 //            itemView.browser_item_recent_imageView.onLongClick { showRemoveDialog(adapterPosition) }
 //        }
 

@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# epublib's StreamWriterDelegate implements the StAX API (javax.xml.stream),
+# which ships with Java SE but not Android. The class is unreachable here,
+# so the missing references are harmless.
+-dontwarn javax.xml.stream.**
+-dontwarn nl.siegmann.epublib.utilities.StreamWriterDelegate

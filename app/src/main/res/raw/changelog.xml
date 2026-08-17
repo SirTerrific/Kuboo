@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.21">
+        <changelogtext>write downloads straight to storage instead of holding the whole file in memory</changelogtext>
+        <changelogtext>wait longer for a slow server before giving up</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.20">
         <changelogtext>save reading position on an Ubooquity 3 server again</changelogtext>
     </changelogversion>

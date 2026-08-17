@@ -7,6 +7,7 @@ import android.webkit.URLUtil
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Login
 import com.sethchhim.kuboo_remote.util.Settings.isDebugOkHttp
+import okhttp3.ResponseBody
 import timber.log.Timber
 import java.io.File
 import java.net.URL
@@ -25,13 +26,12 @@ class Task_RemoteDownloadFile(val kubooRemote: KubooRemote, val login: Login, va
                 val responseBody = response.body()
                 if (responseBody != null) {
                     val contentLength = responseBody.contentLength()
-                    val byteArray = responseBody.bytes()
                     val fileName = URL(stringUrl).guessFileName()
                     val saveFilePath = "$saveDir${File.separator}$fileName"
                     val file = File(saveFilePath)
                     when (file.exists()) {
-                        true -> onFileExists(file, saveFilePath, byteArray, contentLength, startTime)
-                        false -> onFileDoesNotExist(file, saveFilePath, byteArray, contentLength, startTime)
+                        true -> onFileExists(file, saveFilePath, responseBody, contentLength, startTime)
+                        false -> onFileDoesNotExist(file, saveFilePath, responseBody, contentLength, startTime)
                     }
                     response.close()
                 } else {
@@ -47,7 +47,7 @@ class Task_RemoteDownloadFile(val kubooRemote: KubooRemote, val login: Login, va
         }
     }
 
-    private fun onFileExists(file: File, saveFilePath: String, byteArray: ByteArray, contentLength: Long, startTime: Long) {
+    private fun onFileExists(file: File, saveFilePath: String, responseBody: ResponseBody, contentLength: Long, startTime: Long) {
         if (file.length() == contentLength) {
             val stopTime = System.currentTimeMillis()
             val elapsedTime = stopTime - startTime
@@ -57,12 +57,19 @@ class Task_RemoteDownloadFile(val kubooRemote: KubooRemote, val login: Login, va
             if (isDebugOkHttp) Timber.i("File already exists but is incomplete. Deleting partial download and starting over. fileLength[${file.length()}] totalSize[$contentLength] [$saveFilePath] [$stringUrl] ")
             file.delete()
             file.createNewFile()
-            onFileDoesNotExist(file, saveFilePath, byteArray, contentLength, startTime)
+            onFileDoesNotExist(file, saveFilePath, responseBody, contentLength, startTime)
         }
     }
 
-    private fun onFileDoesNotExist(file: File, saveFilePath: String, byteArray: ByteArray, contentLength: Long, startTime: Long) {
-        file.writeBytes(byteArray)
+    /**
+     * The body is copied straight to disk. Reading it into a ByteArray first held the whole
+     * comic in memory and then a second copy while writing it, which runs a device out of
+     * heap on a large file: the OutOfMemoryError below swallowed it, the app reported that
+     * assets could not be loaded, and the abandoned response left the server logging
+     * "EofException: Broken pipe" mid-transfer.
+     */
+    private fun onFileDoesNotExist(file: File, saveFilePath: String, responseBody: ResponseBody, contentLength: Long, startTime: Long) {
+        responseBody.byteStream().use { input -> file.outputStream().use { output -> input.copyTo(output) } }
         kubooRemote.mainThread.execute { liveData.value = file.verifyLength(contentLength) }
         val stopTime = System.currentTimeMillis()
         val elapsedTime = stopTime - startTime

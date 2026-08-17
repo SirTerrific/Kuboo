@@ -76,10 +76,31 @@ data class Book(
     }
 
     fun getPse(maxWidth: Int, index: Int): String {
+        val pageReaderId = pageReaderId()
+        if (pageReaderId != null) return "/pagereader/$pageReaderId?page=$index&width=$maxWidth"
+
         var result = linkPse
         result = result.replace("{pageNumber}", index.toMinimumTwoDigits())
         result = result.replace("{maxWidth}", maxWidth.toString())
         return result
+    }
+
+    /**
+     * Ubooquity 3 advertises its page stream as /opds/comicreader/{id}, but that address
+     * answers with the catalogue feed instead of a page image, so reading straight from the
+     * server produced blank pages. The address its own web reader fetches does serve the
+     * image:
+     *
+     *     url = "/pagereader/" + documentId + "?page=" + p + "&width=" + IMAGE_MAX_NATIVE_WIDTH
+     *
+     * Only the /opds/comicreader/ shape is rewritten, which is the unified tree Ubooquity 3
+     * introduced; an Ubooquity 2 link is left exactly as the feed gave it.
+     */
+    private fun pageReaderId(): String? {
+        if (!linkPse.contains("/opds/comicreader/")) return null
+
+        val id = linkPse.substringAfter("/opds/comicreader/").substringBefore("?").trim('/')
+        return id.ifEmpty { null }
     }
 
     fun setTimeAccessed() {

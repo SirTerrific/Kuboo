@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.22">
+        <changelogtext>read comics page by page from an Ubooquity 3 server, without downloading them</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.21">
         <changelogtext>write downloads straight to storage instead of holding the whole file in memory</changelogtext>
         <changelogtext>wait longer for a slow server before giving up</changelogtext>

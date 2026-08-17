@@ -115,11 +115,26 @@ class HandlerOpdsTest {
                 book.getAcquisitionUrl())
     }
 
+    /**
+     * The feed advertises /opds/comicreader/, which Ubooquity 3 answers with the catalogue
+     * feed rather than a page image. The page url therefore has to point at /pagereader/,
+     * which is what the server's own web reader fetches.
+     */
     @Test
-    fun `page urls substitute the placeholders and resolve to the server root`() {
+    fun `page urls point at the endpoint that serves the image`() {
         val book = parse(acquisitionFeed).single()
         assertEquals(
-                "http://10.0.2.2:2202/opds/comicreader/7?page=01&width=1080",
+                "http://10.0.2.2:2202/pagereader/7?page=1&width=1080",
+                book.server.resolveLink(book.getPse(1080, 1)))
+    }
+
+    @Test
+    fun `an ubooquity 2 page link is left as the feed gave it`() {
+        val book = parse(acquisitionFeed).single().apply {
+            linkPse = "/opds-comics/comicreader/7?page={pageNumber}&width={maxWidth}"
+        }
+        assertEquals(
+                "http://10.0.2.2:2202/opds-comics/comicreader/7?page=01&width=1080",
                 book.server.resolveLink(book.getPse(1080, 1)))
     }
 }

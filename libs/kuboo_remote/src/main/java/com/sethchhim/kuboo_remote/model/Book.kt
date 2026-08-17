@@ -64,13 +64,18 @@ data class Book(
     }
 
     /**
-     * A comic cover is page 0 of the page stream, rendered at the width it is shown at. The
-     * server's own cover link is a thumbnail sized for its web ui, so using it left previews
-     * and recently viewed looking soft; it is only the fallback now that getPse points at an
-     * address the server actually serves.
+     * A cover is page 0 of the page stream, rendered at the width it is shown at. The server's
+     * own cover link is a thumbnail sized for its web ui, so using it leaves previews and
+     * recently viewed looking soft; it is the fallback for anything the feed offers no page
+     * stream for.
+     *
+     * Whether the feed offers one is the only thing worth asking. Keying this off isComic()
+     * instead left pdf covers on the small thumbnail, since that test goes by file extension
+     * and a pdf is not a comic archive -- yet Ubooquity streams pdf pages just as happily,
+     * and advertises them with the same pse:count.
      */
     fun getPseCover(maxWidth: Int) = when {
-        isComic() && linkPse.isNotEmpty() -> getPse(maxWidth, 0)
+        linkPse.isNotEmpty() -> getPse(maxWidth, 0)
         else -> linkThumbnail
     }
 

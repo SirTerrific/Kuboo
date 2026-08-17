@@ -3,8 +3,12 @@
     <string name="about_answer1">The Ubooquity server MUST enable OPDS feed.
     \n \nThe Ubooquity server MUST open the appropriate network port.
     \n \nThe Ubooquity server MUST be allowed through any firewalls.
-    \n \nYou MUST use the following format:\n Example: \"http://192.168.0.1:2202/opds-comics/\"</string>
-    <string name="about_answer2">Bookmarking is a hybrid system, leveraging both remote and local databases. First the system uses a local bookmark and then searches for a remote bookmark if available. If a remote bookmark is found, it is given preference. This is to support \"legacy\" apps that have not upgraded to Ubooquity 2.0.+ yet.
+    \n \nYou MUST use one of the following formats:
+    \n \nUbooquity 3: \"http://192.168.0.1:2202/opds/\"
+    \nUbooquity 2: \"http://192.168.0.1:2202/opds-comics/\"
+    \nUbooquity 2: \"http://192.168.0.1:2202/opds-books/\"</string>
+    <string name="about_answer2">Bookmarking is a hybrid system, leveraging both remote and local databases. First the system uses a local bookmark and then searches for a remote bookmark if available. If a remote bookmark is found, it is given preference.
+    \n\nUbooquity 3 stores the mark on its own: the page number for a comic, a position for a book. It has no field for whether a title is finished, so that is kept on this device only.
     \n\nEpub files do not support server side bookmarking.</string>
     <string name="about_answer3">Dual pane forces landscape mode and splits the screen for two pages.
     \n\nIf dual pane is enabled and you see a single page it is because of these reasons:
@@ -12,13 +16,16 @@
     \n- The image is considered WIDE.
     \n- The NEXT image is considered WIDE, requiring an entire page for itself.
     \n\nImage is considered WIDE if the width is greater or equal to the length.</string>
-    <string name="about_answer4">You can change the thumbnail size in the Ubooquity server software.</string>
-    <string name="about_app_disclaimer">\"Kuboo\" is an independent third party application not affiliated with Ubooquity in any manner.\n
-    \n\"Kuboo\" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.
+    <string name="about_answer4">Covers are the first page, asked of the server at the size they are shown at, so they should look sharp.
+    \n \nA title the server offers no page stream for falls back to the server\'s own thumbnail, and you can change that size in the Ubooquity server software.</string>
+    <string name="about_app_disclaimer">\"Kuboo3\" is an independent third party application not affiliated with Ubooquity in any manner.\n
+    \n\"Kuboo3\" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.
     \n \n</string>
     <string name="about_develop_message">I have developed this project for my own personal use. My goal is to share it and contribute to a niche reading community.
     \n \nThank you everyone for the feedback and support.
-    \n \nSpecial thanks to Tom for creating Ubooquity.</string>
+    \n \nSpecial thanks to Tom for creating Ubooquity.
+    \n \n— Seth Chhim, who wrote Kuboo and stopped working on it in 2019.
+    \n \nThis build is Kuboo3, a fork carried on by someone else. Report anything wrong with it on the fork\'s own page rather than to the original author.</string>
     <string name="about_developer_email">sethchhim@gmail.com</string>
     <string name="about_developer_name">Seth Chhim</string>
     <string name="about_faq">FAQ</string>
@@ -26,7 +33,8 @@
     <string name="about_info">• Powered by the love of reading.
     \n \n• Free and open source.
     \n \n• No Ads, No Special Permissions.
-    \n \n• Designed and tested for Ubooquity %1$s.</string>
+    \n \n• Designed and tested for Ubooquity %1$s.
+    \n \n• Kuboo3 is a fork of Kuboo, whose own development ended in 2019.</string>
     <string name="about_library">Library</string>
     <string name="about_license">License</string>
     <string name="about_question1">Why can\'t I connect to a Ubooquity server?</string>

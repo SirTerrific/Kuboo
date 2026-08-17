@@ -306,7 +306,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
         }
 
         private fun handleFirstBook(holder: BrowserHolder, book: Book, result: Book) {
-            val stringUrl = result.server + result.linkThumbnail
+            val stringUrl = result.getPreviewUrl()
             val requestOptions = RequestOptions()
                     .format(DecodeFormat.PREFER_RGB_565)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -354,7 +354,7 @@ class BrowserContentAdapter(val browserFragment: BrowserBaseFragmentImpl2_Conten
                 transitionName = item.book.getPreviewUrl(Settings.THUMBNAIL_SIZE_RECENT)
                 setMediaColorState(holder, book)
 
-                val stringUrl = book.server + book.linkThumbnail
+                val stringUrl = book.getPreviewUrl()
                 val requestOptions = RequestOptions()
                         .format(DecodeFormat.PREFER_RGB_565)
                         .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

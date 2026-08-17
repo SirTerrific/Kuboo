@@ -6,6 +6,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import android.os.Parcelable
 import com.sethchhim.kuboo_remote.model.BookData
+import com.sethchhim.kuboo_remote.util.resolveLink
 import kotlinx.parcelize.Parcelize
 
 @Entity
@@ -33,6 +34,11 @@ data class Download(
         override var isFinished: Boolean = false,
         override var timeAccessed: Int = 0,
         @Ignore var ignored: String? = null) : BookData(), Parcelable {
+
+    // Matches how the download was queued, which resolves the link against the server address
+    // rather than pasting the two together: an Ubooquity 3 address ends in /opds/ and pasting
+    // produced /opds//opds/..., so no download ever matched its entry here.
+    fun getAcquisitionUrl() = server.resolveLink(linkAcquisition)
 
     fun getXmlId(): Int {
         val withoutQuery = this.linkXmlPath.substringBefore("?")

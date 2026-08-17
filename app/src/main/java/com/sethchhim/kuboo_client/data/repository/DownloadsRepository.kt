@@ -19,7 +19,7 @@ class DownloadsRepository {
     }
 
     internal fun addDownloads(list: List<Book>, savePath: String) = list.forEach {
-        val stringUrl = it.server + it.linkAcquisition
+        val stringUrl = it.getAcquisitionUrl()
         val fileName = URL(stringUrl).guessFileName()
         it.filePath = "$savePath${File.separator}$fileName"
         addDownload(it)

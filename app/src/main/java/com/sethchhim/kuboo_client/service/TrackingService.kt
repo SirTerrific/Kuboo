@@ -100,7 +100,7 @@ class TrackingService {
 
     private fun getRemainingSeriesNeighbors(login: Login, seriesNeighbors: MutableList<Book>, book: Book, startTime: Long) {
         val remainingCount = Settings.DOWNLOAD_TRACKING_LIMIT - seriesNeighbors.size
-        val url = book.server + book.linkNext
+        val url = book.server.resolveLink(book.linkNext)
         viewModel.getSeriesNeighborsNextPageRemote(login, url, seriesLimit = remainingCount).observeForever {
             when (it == null) {
                 true -> Timber.e("Tracking of book failed to getSeriesNeighborsNextPageRemote: title[${book.title}]")

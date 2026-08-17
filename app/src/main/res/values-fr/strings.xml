@@ -9,11 +9,16 @@ Le serveur Ubooquity DOIT ouvrir le bon port réseau
 Le serveur Ubooquity DOIT être autorisé pour tous les firewalls.
 
 
-Il FAUT utiliser ce format d'adresse :
-Exemple : \"http://192.168.0.1:2202/opds-comics/\""</string>
-    <string name="about_answer2">"Le système de signet est hybride, utilisant les bases de données locale et distante. Premièrement le système cherche un signet local puis cherche un signet à distance. Si le signet distant est trouvé, il sera retenu. Ce système permet le support \"legacy\" pour les clients n'ayant pas encore mis à jour vers Ubooquity 2.0+
+Il FAUT utiliser l'un de ces formats d'adresse :
 
-Les fichier EPUB ne sont pas compatibles avec le signets sur le serveur"</string>
+Ubooquity 3 : \"http://192.168.0.1:2202/opds/\"
+Ubooquity 2 : \"http://192.168.0.1:2202/opds-comics/\"
+Ubooquity 2 : \"http://192.168.0.1:2202/opds-books/\""</string>
+    <string name="about_answer2">"Le système de signet est hybride, utilisant les bases de données locale et distante. Premièrement le système cherche un signet local puis cherche un signet à distance. Si le signet distant est trouvé, il sera retenu.
+
+Ubooquity 3 enregistre la marque telle quelle : le numéro de page pour une bande dessinée, une position pour un livre. Il n'a aucun champ indiquant qu'un titre est terminé, cette information reste donc sur cet appareil.
+
+Les fichiers EPUB ne sont pas compatibles avec les signets sur le serveur"</string>
     <string name="about_answer3">"Le mode \"double volet\" impose l'orientation paysage de l'écran et le coupe en deux pour afficher deux pages à la fois.
 
 Si le mode \"double volet\" est activé mais qu'une seule page apparaît à l'écran, ceci est dû à l'une des 3 raisons suivantes :
@@ -25,18 +30,26 @@ Si le mode \"double volet\" est activé mais qu'une seule page apparaît à l'é
 - L'image suivante est considérée comme LARGE et requiert donc une page entière pour elle.
 
 Les images sont considérées comme LARGE si la largeur est supérieure à la longueur."</string>
-    <string name="about_answer4">"Vous pouvez changer la taille des vignettes dans le serveur Ubooquity."</string>
-    <string name="about_app_disclaimer">"\"Kuboo\" est une application tierce et indépendante qui n'a aucun lien avec Ubooquity.
+    <string name="about_answer4">"Les couvertures sont la première page, demandée au serveur à la taille d'affichage : elles doivent donc être nettes.
+
+Un titre pour lequel le serveur ne propose pas de flux de pages retombe sur la vignette du serveur, dont la taille se règle dans Ubooquity."</string>
+    <string name="about_app_disclaimer">"\"Kuboo3\" est une application tierce et indépendante qui n'a aucun lien avec Ubooquity.
 
 
-\"Kuboo\" permet un accès non limité à Internet et ne saurait être tenu responsable de la disponibilité ou du contenu de ces sources extérieures."</string>
+\"Kuboo3\" permet un accès non limité à Internet et ne saurait être tenu responsable de la disponibilité ou du contenu de ces sources extérieures."</string>
     <string name="about_develop_message">"J'ai développé ce projet pour mon usage personnel. Mon objectif est de le partager et de contribuer à une communauté de lecteurs.
     
  
 Merci à tous pour vos commentaires et votre soutien.
     
  
-Un merci spécial à Tom pour avoir créé Ubooquity."</string>
+Un merci spécial à Tom pour avoir créé Ubooquity.
+
+
+— Seth Chhim, auteur de Kuboo, dont le développement s'est arrêté en 2019.
+
+
+Cette version est Kuboo3, un fork repris par quelqu'un d'autre. Signalez ce qui ne va pas sur la page du fork plutôt qu'à l'auteur d'origine."</string>
     <string name="about_developer_email">"sethchhim@gmail.com"</string>
     <string name="about_developer_name">"Seth Chhim"</string>
     <string name="about_faq">"FAQ"</string>
@@ -50,7 +63,10 @@ Un merci spécial à Tom pour avoir créé Ubooquity."</string>
 • Aucune publicité, aucune autorisation spéciale.
     
  
-• Conçu et testé pour Ubooquity %1$s."</string>
+• Conçu et testé pour Ubooquity %1$s.
+
+
+• Kuboo3 est un fork de Kuboo, dont le développement s'est arrêté en 2019."</string>
     <string name="about_library">"Bibliotheque"</string>
     <string name="about_license">"license"</string>
     <string name="about_question1">"Pourquoi je n'arrive pas à me connecter au serveur d'Ubooquity"</string>

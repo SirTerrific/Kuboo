@@ -30,6 +30,55 @@ When adding a server address you must follow one of these formats:
 
 > This fork carries the Ubooquity 3 support and build modernisation described in the
 > [releases](../../releases). Upstream development of Kuboo stopped in 2019.
+
+## What this fork fixes
+
+Everything here was found against a real Ubooquity 3.1.0 server and verified on Android 9
+and Android 15.
+
+**Reading without downloading.** Ubooquity 3 advertises its page stream at
+`/opds/comicreader/{id}`, but that address answers with the catalogue feed instead of a page
+image, which is why comics would not stream. The address its own web reader uses does serve
+the image, and Kuboo3 uses it:
+
+```
+/pagereader/{id}?page={n}&width={w}
+```
+
+This works for PDFs too — Ubooquity streams their pages and advertises them the same way — so
+covers and pages come from the page stream for both.
+
+**Signing in.** That page endpoint ignores the HTTP basic authentication header entirely and
+checks for a session cookie instead. Without one it answers an "Authentication error" image
+with a 200 status, so on any server with user management enabled every page and cover came back
+as that image and nothing looked like a failure. Kuboo3 now signs in the way the web login form
+does — `hmac_sha256(hmac_sha256(password, serversalt), servertime)` — and keeps the session.
+
+**Reading position.** Ubooquity 3's `user-api/bookmark` takes a plain text body, not the JSON
+that Ubooquity 2 returned: a page number for comics, `spineIndex#percentage` for books. Sending
+a form content type makes the servlet consume the body and fail.
+
+**Android.** Runtime receivers are registered with an explicit export flag (Android 14),
+pending intents are immutable (Android 12), the reader opts out of forced edge-to-edge
+(Android 15), and the build ships arm64 so it installs on 64-bit-only devices such as a Pixel 8.
+
+**Downloads** stream to disk rather than being held in memory, and the read timeout allows for
+a slow server.
+
+## Notes on the server
+
+* A long list is paginated by the server. Raising **Items per page** in the Ubooquity admin
+  page (up to 300) means fewer pages to walk through.
+* Cover sharpness is not a server setting any more: covers are requested from the page stream at
+  the size they are displayed at. The thumbnail size in the admin page only matters for titles
+  with no page stream.
+
+## Building
+
+Debug and release builds both need JDK 21 — the JDK bundled with Android Studio works. Release
+APKs on the releases page are signed with the standard Android **debug** key, not a private
+release key, so Android will warn about an unknown source.
+
 <br/><br/>
 
 <img src="https://user-images.githubusercontent.com/11790350/41467653-4868170e-7075-11e8-9a12-205d9d2cf52b.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467654-48780fd8-7075-11e8-83d2-7a54edcada93.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467655-4887809e-7075-11e8-803f-85fa851ecac5.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467656-48987084-7075-11e8-8fbf-b6490a5ffce1.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467657-48a58512-7075-11e8-94f1-4d5756bb8c49.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467658-48b35db8-7075-11e8-9681-99b165cad5cc.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467659-48bef16e-7075-11e8-86f7-d45efda7e5f4.png" width="25%">

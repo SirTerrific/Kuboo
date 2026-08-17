@@ -13,7 +13,7 @@ class Task_DownloadFindByDownload(download: Download) : Task_LocalBase() {
         executors.diskIO.execute {
             try {
                 appDatabaseDao.getAllBookDownload().forEach {
-                    val isMatch = it.server + it.linkAcquisition == download.url
+                    val isMatch = it.getAcquisitionUrl() == download.url
                     if (isMatch) {
                         Timber.d("Found download: title[${it.title}] url[${download.url}]")
                         it.filePath = download.file

@@ -89,10 +89,8 @@ open class PreviewActivityImpl1_Content : PreviewActivityImpl0_View() {
                 .format(DecodeFormat.PREFER_RGB_565)
 
         val requestLowRes = getLowResRequest(loginItem, requestOptions)
-        val stringUrlHigh = when (currentBook.isComic()) {
-            true -> currentBook.getPreviewUrl(loginItem, Settings.THUMBNAIL_SIZE_RECENT)
-            false -> loginItem.server + currentBook.linkThumbnail
-        }
+        //getPseCover already falls back to the server's own thumbnail when there is no page stream
+        val stringUrlHigh = currentBook.getPreviewUrl(loginItem, Settings.THUMBNAIL_SIZE_RECENT)
         val glideUrlHigh = stringUrlHigh.toGlideUrl(loginItem)
         Glide.with(this)
                 .load(glideUrlHigh)

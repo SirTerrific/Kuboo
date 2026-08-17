@@ -3,6 +3,15 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.26">
+        <changelogtext>sign in to Ubooquity so pages and covers load on a server that asks for a password</changelogtext>
+        <changelogtext>show pdf covers from the page stream, like comics</changelogtext>
+        <changelogtext>ask for covers at the size they are shown at instead of always 500 pixels wide</changelogtext>
+        <changelogtext>fix thumbnails and download matching on a server address ending in /opds/</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.25">
         <changelogtext>record what the download queue is doing so a stuck download can be explained</changelogtext>
     </changelogversion>

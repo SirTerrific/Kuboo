@@ -39,6 +39,7 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
     override fun interceptors(): MutableList<Interceptor> {
         val interceptorList = mutableListOf<Interceptor>()
         interceptorList.add(sslHandshakeInterceptor)
+        interceptorList.add(UbooquitySessionInterceptor(cookieJar) { this })
 
         if (isHttpLoggingEnabled) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -71,28 +72,25 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
         return super.sslSocketFactory()
     }
 
+    /**
+     * Cookies are kept per host, which is what a server session needs.
+     *
+     * Keying them by the full url instead meant a session was only ever sent back to the exact
+     * address that set it: Ubooquity hands out its session when the opds feed is fetched, and
+     * that session is what /pagereader/ checks -- it ignores the basic authentication header
+     * entirely and answers an "Authentication error" image without one. Page and cover requests
+     * therefore came back as that error image on any server with user management enabled.
+     */
     private val cookieJar: CookieJar
         get() = object : CookieJar {
             override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-//                Timber.i("[AUTHENTICATE] Saving cookie: $url ${cookies.size}")
-                cookieStore[url] = cookies
+                cookieStore[url.host()] = cookies
             }
 
-            override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
-                cookieStore.forEach {
-                    if (url.toString().contains(it.key.toString())) {
-//                        Timber.i("[AUTHENTICATE] Loading domain cookie: ${it.key} ${it.value.size}")
-                        return it.value
-                    }
-                }
-
-                val cookies = cookieStore[url]
-//                Timber.i("[AUTHENTICATE] Loading cookie: $url ${cookies?.size}")
-                return cookies ?: ArrayList()
-            }
+            override fun loadForRequest(url: HttpUrl) = cookieStore[url.host()] ?: mutableListOf()
         }
 
-    private val cookieStore = HashMap<HttpUrl, MutableList<Cookie>>()
+    private val cookieStore = HashMap<String, MutableList<Cookie>>()
 
     private val trustManagerArray: Array<TrustManager>
         get() = arrayOf(x509TrustManager)

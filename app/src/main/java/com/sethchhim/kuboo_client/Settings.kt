@@ -1,5 +1,6 @@
 package com.sethchhim.kuboo_client
 
+import android.content.res.Resources
 import com.sethchhim.kuboo_client.data.enum.AppTheme
 import com.sethchhim.kuboo_client.data.enum.HomeLayout
 import com.sethchhim.kuboo_client.data.enum.ScaleType
@@ -76,7 +77,10 @@ object Settings {
     var PIP_MODE = false
     var RTL = false
     var SCALE_TYPE = DEFAULT_SCALE_TYPE
-    var THUMBNAIL_SIZE_RECENT = 500 //auto generated in recentAdapter
+    // Covers are asked for at this width. A recently viewed card is as wide as the screen, so a
+    // fixed 500 pixels was stretched to fit and looked soft; nothing ever changed it, despite the
+    // comment that used to claim the recent adapter did.
+    var THUMBNAIL_SIZE_RECENT = Resources.getSystem().displayMetrics.widthPixels.coerceIn(500, DEFAULT_MAX_PAGE_WIDTH)
     var VOLUME_PAGE_TURN = DEFAULT_VOLUME_PAGE_TURN
     var READER_SCROLL_OFFSET = DEFAULT_READER_SCROLL_OFFSET
 

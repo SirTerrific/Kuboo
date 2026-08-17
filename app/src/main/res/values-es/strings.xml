@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="about_answer1">"El servidor Ubooquity debe tener habilitada la característica de transmisión por OPDS.
-
-El servidor Ubooquity debe tener abierto el puerto de red apropiado.
-
-El servidor Ubooquity deber tener abierto el acceso a través de cualquier cortafuegos (firewall)
-
-Se debe usar el siguiente formato:
-Ejemplo: \"http://192.168.0.1:2202/opds-comics/\""</string>
-    <string name="about_answer2">"Bookmarking (marcadores) es un sistema híbrido que permite hacer uso de bases de datos locales y remotas. En primer lugar el sistema utiliza un marcador local y a continuación busca si hay disponible un marcador remoto. Si encuentra un marcador remoto entonces se le da prioridad a este. Esto es para soportar aplicaciones \"heredadas\" que aún no se han actualizado a Ubooquity 2.0.+
-
-Los archivos epub no son compatibles con marcadores de servidor, es decir remotos.
-"</string>
     <string name="about_answer3">"El panel doble fuerza el modo horizontal y divide la pantalla en dos páginas.
 
 Si el panel dual está habilitado y se ve una sola página, es por alguna de estas razones:
@@ -23,7 +11,6 @@ Si el panel dual está habilitado y se ve una sola página, es por alguna de est
 - La imagen siguiente se considera ANCHA, requiriendo una página entera para sí misma.  
 
 La imagen se considera ANCHA si el ancho es mayor o igual a la longitud."</string>
-    <string name="about_answer4">"Puede cambiar el tamaño de la miniatura en el módulo de administración del servidor Ubooquity."</string>
     <string name="about_app_disclaimer">"\"Kuboo\" es una aplicación de terceros independiente, no afiliada o asociada con Ubooquity de ninguna manera.
     
 \"Kuboo\" proporciona acceso sin restricciones a Internet y no es responsable de la disponibilidad o el contenido de estas fuentes externas."</string>

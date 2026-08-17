@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.23">
+        <changelogtext>show sharp comic covers instead of the server thumbnail</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.22">
         <changelogtext>read comics page by page from an Ubooquity 3 server, without downloading them</changelogtext>
     </changelogversion>

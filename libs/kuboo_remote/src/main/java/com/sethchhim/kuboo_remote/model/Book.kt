@@ -63,16 +63,15 @@ data class Book(
         Timber.i("======================================")
     }
 
-    // Comic covers used to be derived from page 0 of the page streaming link, which gives
-    // a cover sized to the screen. Ubooquity 3 advertises that link but does not serve it,
-    // leaving every comic thumbnail blank, so the cover link wins whenever there is one.
-    fun getPseCover(maxWidth: Int): String {
-        if (linkThumbnail.isNotEmpty()) return linkThumbnail
-        if (!isComic()) return linkThumbnail
-
-        return linkPse
-                .replace("{pageNumber}", "00")
-                .replace("{maxWidth}", maxWidth.toString())
+    /**
+     * A comic cover is page 0 of the page stream, rendered at the width it is shown at. The
+     * server's own cover link is a thumbnail sized for its web ui, so using it left previews
+     * and recently viewed looking soft; it is only the fallback now that getPse points at an
+     * address the server actually serves.
+     */
+    fun getPseCover(maxWidth: Int) = when {
+        isComic() && linkPse.isNotEmpty() -> getPse(maxWidth, 0)
+        else -> linkThumbnail
     }
 
     fun getPse(maxWidth: Int, index: Int): String {

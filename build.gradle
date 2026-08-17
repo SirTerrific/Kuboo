@@ -8,7 +8,6 @@ buildscript {
         google()
         // JCenter was shut down; this read-only mirror still serves the 2019-era artifacts
         // that were never republished to Maven Central. See README for the affected deps.
-        maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.13.2'
@@ -24,7 +23,6 @@ allprojects {
         // mupdf (PDF rendering) is published here only; plain http no longer answers
         maven { url 'https://maven.ghostscript.com/' }
         google()
-        maven { url "https://maven.aliyun.com/repository/jcenter" }
     }
 }
 task clean(type: Delete) {

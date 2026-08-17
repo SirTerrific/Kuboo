@@ -122,11 +122,15 @@ dependencies {
 
     //fetch
     final fetch_version = "2.3.6"
-    implementation "com.tonyodev.fetch2:fetch2:$fetch_version"
-    implementation "com.tonyodev.fetch2okhttp:fetch2okhttp:$fetch_version"
+    implementation "com.github.tonyofrancis.Fetch:fetch2:$fetch_version"
+    implementation "com.github.tonyofrancis.Fetch:fetch2okhttp:$fetch_version"
 
     implementation 'com.artifex.mupdf:fitz:1.13.0'
-    implementation 'com.booking:rtlviewpager:1.0.1'
+    // vendored: com.booking:rtlviewpager was only ever published to JCenter, which shut
+    // down in 2021. Keeping the aar in the repo removes the need for a third-party mirror.
+    // sha256 dbb045aeb74bb9be98d1c83784ef259a20f127c8367be8384667b9ba5ad1fbd3
+    implementation files('libs/rtlviewpager-1.0.1.aar')
+    implementation 'androidx.viewpager:viewpager:1.1.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     implementation 'com.github.gabrielemariotti.changeloglib:changelog:2.1.0'
     implementation 'com.github.matrixxun:MaterialBadgeTextView:c5a27e8'

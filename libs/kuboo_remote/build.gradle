@@ -67,8 +67,8 @@ dependencies {
 
     //fetch
     final fetch_version = "2.3.6"
-    implementation "com.tonyodev.fetch2:fetch2:$fetch_version"
-    implementation "com.tonyodev.fetch2okhttp:fetch2okhttp:$fetch_version"
+    implementation "com.github.tonyofrancis.Fetch:fetch2:$fetch_version"
+    implementation "com.github.tonyofrancis.Fetch:fetch2okhttp:$fetch_version"
 
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     implementation 'com.github.pawel-schmidt:okhttp-delay-interceptor:0.0.1'

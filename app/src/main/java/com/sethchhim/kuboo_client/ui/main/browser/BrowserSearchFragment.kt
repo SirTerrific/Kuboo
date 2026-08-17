@@ -15,8 +15,8 @@ class BrowserSearchFragment : BrowserBaseFragment() {
 
     private lateinit var stringQuery: String
 
-    override fun onButterKnifeBind(view: View) {
-        super.onButterKnifeBind(view)
+    override fun onBindViews(view: View) {
+        super.onBindViews(view)
         contentSwipeRefreshLayout.setOnRefreshListener { onSwipeRefresh() }
         contentAdapter = BrowserContentAdapter(this, viewModel)
         contentRecyclerView.adapter = contentAdapter

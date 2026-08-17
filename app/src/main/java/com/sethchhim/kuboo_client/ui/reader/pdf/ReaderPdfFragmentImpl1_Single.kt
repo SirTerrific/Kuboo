@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.reader.pdf
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -9,8 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -33,15 +33,14 @@ import timber.log.Timber
 
 class ReaderPdfFragmentImpl1_Single : ReaderPdfFragment() {
 
-    @BindView(R.id.reader_item_comic_single_panel1_readerPageImageView) lateinit var imageView: ReaderPageImageView
-    @BindView(R.id.reader_item_comic_single_panel1_spinKitView) lateinit var spinKitView: SpinKitView
-    @BindView(R.id.reader_item_fail_swipeRefreshLayout1) lateinit var swipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    @BindView(R.id.reader_item_fail_constraintLayout1) lateinit var failConstraintLayout: ConstraintLayout
-    @BindView(R.id.reader_item_fail_textView1) lateinit var failTextView: TextView
+    val imageView: ReaderPageImageView by bindView(R.id.reader_item_comic_single_panel1_readerPageImageView)
+    val spinKitView: SpinKitView by bindView(R.id.reader_item_comic_single_panel1_spinKitView)
+    val swipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout by bindView(R.id.reader_item_fail_swipeRefreshLayout1)
+    val failConstraintLayout: ConstraintLayout by bindView(R.id.reader_item_fail_constraintLayout1)
+    val failTextView: TextView by bindView(R.id.reader_item_fail_textView1)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.reader_layout_comic_single_content, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

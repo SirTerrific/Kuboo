@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.reader.base
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.annotation.SuppressLint
 import android.app.PictureInPictureParams
 import android.os.Build
@@ -9,7 +11,6 @@ import androidx.appcompat.widget.Toolbar
 import android.util.Rational
 import android.view.View
 import android.widget.*
-import butterknife.BindView
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.data.model.ReadData
@@ -26,21 +27,21 @@ import timber.log.Timber
 @SuppressLint("Registered")
 open class ReaderBaseActivityImpl0_View : BaseActivity() {
 
-    @BindView(R.id.reader_layout_base_constraintLayout) lateinit var constraintLayout: ConstraintLayout
-    @BindView(R.id.reader_layout_base_content_progressBar) lateinit var progressBar: ProgressBar
-    @BindView(R.id.reader_layout_base_content_frameLayout) lateinit var contentFrameLayout: FrameLayout
-    @BindView(R.id.reader_layout_base_overlay_constraintLayout) lateinit var overlayLayout: ConstraintLayout
-    @BindView(R.id.reader_layout_base_overlay_guideLine1) lateinit var guidelineHorizontal: Guideline
-    @BindView(R.id.reader_layout_comic_dual_content_guideLine) lateinit var guidelineVertical: Guideline
-    @BindView(R.id.reader_layout_base_overlay_imageView) lateinit var overlayImageView: ImageView
-    @BindView(R.id.reader_layout_base_overlay_button) lateinit var overlayChapterButton: Button
-    @BindView(R.id.reader_layout_base_overlay_linearLayout) lateinit var overlayTextLayout: LinearLayout
-    @BindView(R.id.reader_layout_base_overlay_seekBar) lateinit var overlaySeekBar: SeekBar
-    @BindView(R.id.reader_layout_base_overlay_textView1) lateinit var overlayTextView1: TextView
-    @BindView(R.id.reader_layout_base_overlay_textView3) lateinit var overlayPageNumberTextView: TextView
-    @BindView(R.id.reader_layout_base_overlay_textView5) lateinit var overlayTotalPagesTextView: TextView
-    @BindView(R.id.reader_layout_base_preview_readerPreviewImageView) lateinit var previewImageView: ReaderPreviewImageView
-    @BindView(R.id.reader_layout_base_toolBar) lateinit var toolbar: Toolbar
+    val constraintLayout: ConstraintLayout by bindView(R.id.reader_layout_base_constraintLayout)
+    val progressBar: ProgressBar by bindView(R.id.reader_layout_base_content_progressBar)
+    val contentFrameLayout: FrameLayout by bindView(R.id.reader_layout_base_content_frameLayout)
+    val overlayLayout: ConstraintLayout by bindView(R.id.reader_layout_base_overlay_constraintLayout)
+    val guidelineHorizontal: Guideline by bindView(R.id.reader_layout_base_overlay_guideLine1)
+    val guidelineVertical: Guideline by bindView(R.id.reader_layout_comic_dual_content_guideLine)
+    val overlayImageView: ImageView by bindView(R.id.reader_layout_base_overlay_imageView)
+    val overlayChapterButton: Button by bindView(R.id.reader_layout_base_overlay_button)
+    val overlayTextLayout: LinearLayout by bindView(R.id.reader_layout_base_overlay_linearLayout)
+    val overlaySeekBar: SeekBar by bindView(R.id.reader_layout_base_overlay_seekBar)
+    val overlayTextView1: TextView by bindView(R.id.reader_layout_base_overlay_textView1)
+    val overlayPageNumberTextView: TextView by bindView(R.id.reader_layout_base_overlay_textView3)
+    val overlayTotalPagesTextView: TextView by bindView(R.id.reader_layout_base_overlay_textView5)
+    val previewImageView: ReaderPreviewImageView by bindView(R.id.reader_layout_base_preview_readerPreviewImageView)
+    val toolbar: Toolbar by bindView(R.id.reader_layout_base_toolBar)
 
     internal var isLocal = false
     internal var isInPipMode = false

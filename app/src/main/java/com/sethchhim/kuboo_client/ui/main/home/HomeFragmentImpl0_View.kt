@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.home
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -10,8 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.Extensions.fadeVisible
 import com.sethchhim.kuboo_client.Extensions.gone
 import com.sethchhim.kuboo_client.R
@@ -29,9 +29,9 @@ open class HomeFragmentImpl0_View : DaggerFragment() {
     @Inject lateinit var systemUtil: SystemUtil
     @Inject lateinit var viewModel: ViewModel
 
-    @BindView(R.id.home_layout_recent_textView2) lateinit var recentMoreTextView: TextView
-    @BindView(R.id.home_layout_recent_textView3) lateinit var recentEmptyTextView: TextView
-    @BindView(R.id.home_layout_recent_recyclerView) lateinit var recentRecyclerView: RecentRecyclerView
+    val recentMoreTextView: TextView by bindView(R.id.home_layout_recent_textView2)
+    val recentEmptyTextView: TextView by bindView(R.id.home_layout_recent_textView3)
+    val recentRecyclerView: RecentRecyclerView by bindView(R.id.home_layout_recent_recyclerView)
 
     lateinit var constraintLayout: ConstraintLayout
     lateinit var guideline: Guideline
@@ -46,7 +46,6 @@ open class HomeFragmentImpl0_View : DaggerFragment() {
             else -> R.layout.home_layout_base0
         }
         val view = inflater.inflate(layout, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

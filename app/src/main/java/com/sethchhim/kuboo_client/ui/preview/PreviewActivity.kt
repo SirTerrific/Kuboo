@@ -1,7 +1,6 @@
 package com.sethchhim.kuboo_client.ui.preview
 
 import android.os.Bundle
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.Extensions.fadeVisible
 import com.sethchhim.kuboo_client.Extensions.showDelayed
 import com.sethchhim.kuboo_client.R
@@ -17,7 +16,6 @@ open class PreviewActivity : PreviewActivityImpl1_Content() {
         supportPostponeEnterTransition()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.preview_layout_base)
-        ButterKnife.bind(this)
 
         title = currentBook.title
         imageView.transitionName = transitionUrl

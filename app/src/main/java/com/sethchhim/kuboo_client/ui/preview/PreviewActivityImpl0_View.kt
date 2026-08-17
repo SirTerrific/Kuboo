@@ -1,9 +1,10 @@
 package com.sethchhim.kuboo_client.ui.preview
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.data.enum.Source
@@ -18,9 +19,9 @@ import kotlinx.coroutines.launch
 @SuppressLint("Registered")
 open class PreviewActivityImpl0_View : BaseActivity(), OnLoadCallback {
 
-    @BindView(R.id.preview_layout_base_floatingActionButton) lateinit var fab: FloatingActionButton
-    @BindView(R.id.preview_layout_base_imageView) lateinit var imageView: ImageView
-    @BindView(R.id.preview_layout_base_textView) lateinit var textView: TextView
+    val fab: FloatingActionButton by bindView(R.id.preview_layout_base_floatingActionButton)
+    val imageView: ImageView by bindView(R.id.preview_layout_base_imageView)
+    val textView: TextView by bindView(R.id.preview_layout_base_textView)
 
     override fun onFinishLoad() = fab.show()
 

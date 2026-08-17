@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.state
 
+import com.sethchhim.kuboo_client.bindView
+
 import com.sethchhim.kuboo_client.synthetic.*
 
 import android.os.Bundle
@@ -8,8 +10,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings.UBOOQUITY_VERSION
 import com.sethchhim.kuboo_client.data.ViewModel
@@ -26,7 +26,7 @@ class WelcomeFragment : DaggerFragment() {
     @Inject lateinit var systemUtil: SystemUtil
     @Inject lateinit var viewModel: ViewModel
 
-    @BindView(R.id.home_layout_welcome_floatingActionButton) lateinit var fab: FloatingActionButton
+    val fab: FloatingActionButton by bindView(R.id.home_layout_welcome_floatingActionButton)
 
     val ABOUT_INFO = "• Powered by the love of reading. " +
             "\n \n• Free, No Ads, No Special Permissions." +
@@ -39,7 +39,6 @@ class WelcomeFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout_welcome, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

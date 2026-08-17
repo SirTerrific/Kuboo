@@ -14,7 +14,6 @@ class HomeFragment : HomeFragmentImpl1_Content() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
-        recentAdapter = RecentAdapter(this, viewModel)
         if (isHomeRequireLatest()) {
             view?.let {
                 guideline = view.findViewById(R.id.home_layout_base1_guideline)
@@ -26,17 +25,20 @@ class HomeFragment : HomeFragmentImpl1_Content() {
                 latestEmptyTextView = view.findViewById(R.id.home_layout_latest_textView3)
                 latestRecyclerView.layoutManager = LatestLinearLayoutManager(activity!!)
                 latestRecyclerView.setHasFixedSize(true)
-                latestAdapter = LatestAdapter(this, viewModel)
             }
         }
         return view
     }
 
+    // The adapters read views from this fragment, so they are built here rather than in
+    // onCreateView: at that point the fragment has no view yet and the lookup would fail.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recentAdapter = RecentAdapter(this, viewModel)
         recentMoreTextView.setOnClickListener { onClickRecentMoreTextView() }
         recentRecyclerView.adapter = recentAdapter
         if (isHomeRequireLatest()) {
+            latestAdapter = LatestAdapter(this, viewModel)
             latestMoreTextView.setOnClickListener { onClickLatestMoreTextView() }
             latestRecyclerView.adapter = latestAdapter
         }

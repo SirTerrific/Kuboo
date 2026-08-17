@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.ui.main.MainActivity
@@ -19,7 +18,6 @@ open class ReaderBaseActivity : ReaderBaseActivityImpl7_Hardware() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reader_layout_base)
         setKeepScreenOn()
-        ButterKnife.bind(this)
         setSupportActionBar(toolbar)
 
         hideReaderToolbar()

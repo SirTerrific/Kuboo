@@ -1,12 +1,12 @@
 package com.sethchhim.kuboo_client.ui.state
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.Constants.ARG_RESPONSE
 import com.sethchhim.kuboo_client.Extensions.visible
 import com.sethchhim.kuboo_client.R
@@ -22,8 +22,8 @@ class FailFragment : DaggerFragment() {
     @Inject lateinit var dialogUtil: DialogUtil
     @Inject lateinit var mainActivity: MainActivity
 
-    @BindView(R.id.home_layout_fail_textView2) lateinit var reasonTextView: TextView
-    @BindView(R.id.home_layout_fail_textView3) lateinit var retryTextView: TextView
+    val reasonTextView: TextView by bindView(R.id.home_layout_fail_textView2)
+    val retryTextView: TextView by bindView(R.id.home_layout_fail_textView3)
 
     private var response: Response? = null
 
@@ -36,7 +36,6 @@ class FailFragment : DaggerFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout_fail, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

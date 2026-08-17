@@ -1,27 +1,26 @@
 package com.sethchhim.kuboo_client.ui.log
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.CheckBox
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.ui.base.BaseActivity
 
 @SuppressLint("Registered")
 open class LogActivityImpl0_View : BaseActivity() {
 
-    @BindView(R.id.log_layout_base_recyclerView) lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
-    @BindView(R.id.log_layout_base_textView) lateinit var textView: TextView
-    @BindView(R.id.log_layout_base_checkBox1) lateinit var checkBoxUi: CheckBox
-    @BindView(R.id.log_layout_base_checkBox2) lateinit var checkBoxLocal: CheckBox
-    @BindView(R.id.log_layout_base_checkBox3) lateinit var checkBoxNetwork: CheckBox
-    @BindView(R.id.log_layout_base_checkBox4) lateinit var checkBoxError: CheckBox
+    val recyclerView: androidx.recyclerview.widget.RecyclerView by bindView(R.id.log_layout_base_recyclerView)
+    val textView: TextView by bindView(R.id.log_layout_base_textView)
+    val checkBoxUi: CheckBox by bindView(R.id.log_layout_base_checkBox1)
+    val checkBoxLocal: CheckBox by bindView(R.id.log_layout_base_checkBox2)
+    val checkBoxNetwork: CheckBox by bindView(R.id.log_layout_base_checkBox3)
+    val checkBoxError: CheckBox by bindView(R.id.log_layout_base_checkBox4)
 
     protected fun initUi() {
         setContentView(R.layout.log_layout_base)
-        ButterKnife.bind(this)
 
         checkBoxUi.isChecked = true
         checkBoxLocal.isChecked = true

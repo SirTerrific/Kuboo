@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.reader.comic
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -8,8 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -32,21 +32,20 @@ import com.sethchhim.kuboo_remote.model.Book
 
 class ReaderComicFragmentImpl2_Dual : ReaderComicFragment() {
 
-    @BindView(R.id.reader_item_comic_single_panel1_readerPageImageView) lateinit var imageView1: ReaderPageImageView
-    @BindView(R.id.reader_item_comic_single_panel1_spinKitView) lateinit var spinKitView1: SpinKitView
-    @BindView(R.id.reader_item_fail_swipeRefreshLayout1) lateinit var swipeRefreshLayout1: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    @BindView(R.id.reader_item_fail_constraintLayout1) lateinit var failConstraintLayout1: ConstraintLayout
-    @BindView(R.id.reader_item_fail_textView1) lateinit var failTextView1: TextView
+    val imageView1: ReaderPageImageView by bindView(R.id.reader_item_comic_single_panel1_readerPageImageView)
+    val spinKitView1: SpinKitView by bindView(R.id.reader_item_comic_single_panel1_spinKitView)
+    val swipeRefreshLayout1: androidx.swiperefreshlayout.widget.SwipeRefreshLayout by bindView(R.id.reader_item_fail_swipeRefreshLayout1)
+    val failConstraintLayout1: ConstraintLayout by bindView(R.id.reader_item_fail_constraintLayout1)
+    val failTextView1: TextView by bindView(R.id.reader_item_fail_textView1)
 
-    @BindView(R.id.reader_item_comic_dual_panel2_readerPageImageView) lateinit var imageView2: ReaderPageImageView
-    @BindView(R.id.reader_item_comic_dual_panel2_spinKitView) lateinit var spinKitView2: SpinKitView
-    @BindView(R.id.reader_item_fail_swipeRefreshLayout2) lateinit var swipeRefreshLayout2: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    @BindView(R.id.reader_item_fail_constraintLayout2) lateinit var failConstraintLayout2: ConstraintLayout
-    @BindView(R.id.reader_item_fail_textView2) lateinit var failTextView2: TextView
+    val imageView2: ReaderPageImageView by bindView(R.id.reader_item_comic_dual_panel2_readerPageImageView)
+    val spinKitView2: SpinKitView by bindView(R.id.reader_item_comic_dual_panel2_spinKitView)
+    val swipeRefreshLayout2: androidx.swiperefreshlayout.widget.SwipeRefreshLayout by bindView(R.id.reader_item_fail_swipeRefreshLayout2)
+    val failConstraintLayout2: ConstraintLayout by bindView(R.id.reader_item_fail_constraintLayout2)
+    val failTextView2: TextView by bindView(R.id.reader_item_fail_textView2)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.reader_layout_comic_dual_content, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

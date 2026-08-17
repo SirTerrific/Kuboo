@@ -109,11 +109,6 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-    //butterknife
-    final butterknife_version = "10.2.3"
-    implementation "com.jakewharton:butterknife:$butterknife_version"
-    kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
-
     //glide
     final glide_version = "4.16.0"
     kapt "com.github.bumptech.glide:compiler:$glide_version"

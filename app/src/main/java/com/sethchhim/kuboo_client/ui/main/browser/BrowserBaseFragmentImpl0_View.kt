@@ -1,11 +1,12 @@
 package com.sethchhim.kuboo_client.ui.main.browser
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.content.res.Configuration
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.HorizontalScrollView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
-import butterknife.BindView
 import com.daimajia.numberprogressbar.NumberProgressBar
 import com.sethchhim.kuboo_client.Extensions.dismissDelayed
 import com.sethchhim.kuboo_client.Extensions.fadeVisible
@@ -37,15 +38,15 @@ open class BrowserBaseFragmentImpl0_View : DaggerFragment() {
     @Inject lateinit var systemUtil: SystemUtil
     @Inject lateinit var viewModel: ViewModel
 
-    @BindView(R.id.browser_layout_pagination_linearLayout) lateinit var paginationLayout: LinearLayout
-    @BindView(R.id.browser_layout_content_spinKitView) lateinit var contentLoading: ProgressBar
-    @BindView(R.id.browser_layout_content_browserContentRecyclerView) lateinit var contentRecyclerView: BrowserContentRecyclerView
-    @BindView(R.id.browser_layout_content_swipeRefreshLayout) lateinit var contentSwipeRefreshLayout: BrowserContentSwipeRefreshLayout
-    @BindView(R.id.browser_layout_download_numberProgressBar) lateinit var downloadsNumberProgressBar: NumberProgressBar
-    @BindView(R.id.browser_layout_downloads_tabLayout) lateinit var downloadsTabLayout: DownloadsTabLayout
-    @BindView(R.id.browser_layout_path_recyclerView) lateinit var pathRecyclerView: BrowserPathRecyclerView
-    @BindView(R.id.state_empty_constraintLayout) lateinit var emptyLayout: ConstraintLayout
-    @BindView(R.id.state_error_constraintLayout) lateinit var errorLayout: ConstraintLayout
+    val paginationLayout: LinearLayout by bindView(R.id.browser_layout_pagination_linearLayout)
+    val contentLoading: ProgressBar by bindView(R.id.browser_layout_content_spinKitView)
+    val contentRecyclerView: BrowserContentRecyclerView by bindView(R.id.browser_layout_content_browserContentRecyclerView)
+    val contentSwipeRefreshLayout: BrowserContentSwipeRefreshLayout by bindView(R.id.browser_layout_content_swipeRefreshLayout)
+    val downloadsNumberProgressBar: NumberProgressBar by bindView(R.id.browser_layout_download_numberProgressBar)
+    val downloadsTabLayout: DownloadsTabLayout by bindView(R.id.browser_layout_downloads_tabLayout)
+    val pathRecyclerView: BrowserPathRecyclerView by bindView(R.id.browser_layout_path_recyclerView)
+    val emptyLayout: ConstraintLayout by bindView(R.id.state_empty_constraintLayout)
+    val errorLayout: ConstraintLayout by bindView(R.id.state_error_constraintLayout)
 
     protected fun resetRecyclerView() {
         viewModel.clearContentList()

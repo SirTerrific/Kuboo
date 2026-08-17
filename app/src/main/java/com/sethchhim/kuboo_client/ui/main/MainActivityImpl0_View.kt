@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -9,7 +11,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
 import android.widget.FrameLayout
-import butterknife.BindView
 import com.sethchhim.kuboo_client.Constants.ARG_REQUEST_DOWNLOAD_FRAGMENT
 import com.sethchhim.kuboo_client.Constants.ARG_REQUEST_REMOTE_BROWSER_FRAGMENT
 import com.sethchhim.kuboo_client.Constants.ARG_REQUEST_REMOTE_BROWSER_FRAGMENT_PAYLOAD
@@ -56,9 +57,9 @@ open class MainActivityImpl0_View : BaseActivity() {
     @Inject lateinit var loadingFragment: LoadingFragment
     @Inject lateinit var welcomeFragment: WelcomeFragment
 
-    @BindView(R.id.main_layout_base_bottomNavigationView) lateinit var bottomNav: BottomNavigationView
-    @BindView(R.id.main_layout_base_toolBar) lateinit var toolbar: Toolbar
-    @BindView(R.id.main_layout_base_frameLayout) lateinit var frameLayout: FrameLayout
+    val bottomNav: BottomNavigationView by bindView(R.id.main_layout_base_bottomNavigationView)
+    val toolbar: Toolbar by bindView(R.id.main_layout_base_toolBar)
+    val frameLayout: FrameLayout by bindView(R.id.main_layout_base_frameLayout)
 
     internal lateinit var aboutMenuItem: MenuItem
     internal lateinit var browserLayoutMenuItem: MenuItem

@@ -20,8 +20,8 @@ class DownloadsFragment : DownloadsFragmentImpl1_Content() {
         kubooRemote.addFetchListener(fetchListener)
     }
 
-    override fun onButterKnifeBind(view: View) {
-        super.onButterKnifeBind(view)
+    override fun onBindViews(view: View) {
+        super.onBindViews(view)
         contentSwipeRefreshLayout.setConstraintBottomToTopOf(downloadsTabLayout)
         contentSwipeRefreshLayout.setOnRefreshListener { populateDownloads() }
         contentRecyclerView.adapter = DownloadListAdapter(this)

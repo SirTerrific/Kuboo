@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import butterknife.ButterKnife
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sethchhim.kuboo_client.Extensions.getVisibleFragment
 import com.sethchhim.kuboo_client.Extensions.removeAllObservers
@@ -29,7 +28,6 @@ open class MainActivity : MainActivityImpl2_Selection(), BottomNavigationView.On
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout_base)
-        ButterKnife.bind(this)
         setSupportActionBar(toolbar)
 
         bottomNav.setOnNavigationItemSelectedListener(this)

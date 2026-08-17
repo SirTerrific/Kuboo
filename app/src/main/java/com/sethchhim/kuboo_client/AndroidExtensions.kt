@@ -1,5 +1,6 @@
 package com.sethchhim.kuboo_client
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
@@ -35,6 +36,18 @@ fun Fragment.toast(@StringRes messageId: Int): Toast? =
 
 val Context.layoutInflater: LayoutInflater
     get() = LayoutInflater.from(this)
+
+/**
+ * Replacements for Butterknife's @BindView, which was discontinued in 2020 and forced the
+ * build to keep resource ids non-final.
+ *
+ * Lazy rather than eager so the lookup happens on first use, by which point the activity has
+ * a content view and the fragment has a view — the same point at which the generated binding
+ * code used to run.
+ */
+fun <T : View> Activity.bindView(id: Int): Lazy<T> = lazy { findViewById<T>(id) }
+
+fun <T : View> Fragment.bindView(id: Int): Lazy<T> = lazy { requireView().findViewById<T>(id) }
 
 val Context.defaultSharedPreferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)

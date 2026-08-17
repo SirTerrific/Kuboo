@@ -1,5 +1,7 @@
 package com.sethchhim.kuboo_client.ui.main.login.edit
 
+import com.sethchhim.kuboo_client.bindView
+
 import android.os.Bundle
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -10,8 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.sethchhim.kuboo_client.Constants
 import com.sethchhim.kuboo_client.Extensions.gone
 import com.sethchhim.kuboo_client.Extensions.visible
@@ -29,19 +29,18 @@ open class LoginEditFragment : DaggerFragment() {
     @Inject lateinit var mainActivity: MainActivity
     @Inject lateinit var viewModel: ViewModel
 
-    @BindView(R.id.login_layout_edit_textInputEditText1) lateinit var editTextNickName: TextInputEditText
-    @BindView(R.id.login_layout_edit_textInputEditText2) lateinit var editTextServerAddress: TextInputEditText
-    @BindView(R.id.login_layout_edit_textInputEditText3) lateinit var editTextUsername: TextInputEditText
-    @BindView(R.id.login_layout_edit_textInputEditText4) lateinit var editTextPassword: TextInputEditText
-    @BindView(R.id.login_layout_edit_textInputLayout2) lateinit var textInputLayoutServer: TextInputLayout
-    @BindView(R.id.login_layout_edit_button2) lateinit var addServerButton: Button
-    @BindView(R.id.login_layout_edit_button1) lateinit var deleteServerButton: Button
+    val editTextNickName: TextInputEditText by bindView(R.id.login_layout_edit_textInputEditText1)
+    val editTextServerAddress: TextInputEditText by bindView(R.id.login_layout_edit_textInputEditText2)
+    val editTextUsername: TextInputEditText by bindView(R.id.login_layout_edit_textInputEditText3)
+    val editTextPassword: TextInputEditText by bindView(R.id.login_layout_edit_textInputEditText4)
+    val textInputLayoutServer: TextInputLayout by bindView(R.id.login_layout_edit_textInputLayout2)
+    val addServerButton: Button by bindView(R.id.login_layout_edit_button2)
+    val deleteServerButton: Button by bindView(R.id.login_layout_edit_button1)
 
     private var login: Login? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.login_layout_edit, container, false)
-        ButterKnife.bind(this, view)
         return view
     }
 

@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.25">
+        <changelogtext>record what the download queue is doing so a stuck download can be explained</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.24">
         <changelogtext>fix lists staying empty after leaving a screen and coming back</changelogtext>
         <changelogtext>stop waiting forever when a server check is cancelled</changelogtext>

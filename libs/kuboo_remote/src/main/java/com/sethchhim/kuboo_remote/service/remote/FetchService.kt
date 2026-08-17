@@ -31,6 +31,11 @@ class FetchService(val context: Context, okHttpClient: OkHttpClient, val mainThr
             .setDownloadConcurrentLimit(CONCURRENT_LIMIT)
             .setProgressReportingInterval(REPORTING_INTERVAL)
             .setNamespace(if (BuildConfig.DEBUG) NAMESPACE_DEBUG else NAMESPACE)
+            // Fetch says nothing by default, so a download stuck in the queue gave no reason
+            // for it. Its own log is the only place that explains why the queue does not
+            // advance.
+            .enableLogging(true)
+            .setLogger(FetchTimberLogger())
             .build()
 
     private val fetch = Fetch.getInstance(fetchConfiguration)

@@ -82,9 +82,10 @@ release key, so Android will warn about an unknown source.
 
 ## Screenshots
 
-Taken from this build, against a Ubooquity 3.1.0 server holding a handful of test files.
+From this build, against a Ubooquity 3.1.0 server. The reader is a test file; the rest is a
+real library.
 
-<img src="docs/screenshots/home.png" width="24%"> <img src="docs/screenshots/browse.png" width="24%"> <img src="docs/screenshots/reader.png" width="24%"> <img src="docs/screenshots/settings.png" width="24%">
+<img src="docs/screenshots/browse.png" width="24%"> <img src="docs/screenshots/reader.png" width="24%"> <img src="docs/screenshots/settings.png" width="24%">
 
 <img src="docs/screenshots/about.png" width="24%"> <img src="docs/screenshots/developer.png" width="24%">
 

@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.30">
+        <changelogtext>the launcher icon reads Kuboo3</changelogtext>
+        <changelogtext>a buy me a coffee link on the developer page</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.29">
         <changelogtext>the about page is titled Kuboo3</changelogtext>
         <changelogtext>the maintainer\'s avatar on the developer page</changelogtext>

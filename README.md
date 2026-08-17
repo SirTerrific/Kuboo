@@ -7,6 +7,9 @@ back to current Android tooling.
 It is a separate application: it installs alongside the original rather than replacing
 it, and is not published on Google Play. Builds are on the [releases page](../../releases).
 
+Free, with no ads and no tracking. If it is useful to you,
+[buy me a coffee](https://www.buymeacoffee.com/menelikIII) — entirely optional.
+
 This lightweight Android application can load books for the [Ubooquity](https://vaemendis.net/ubooquity/) server software.
  * Powered by the love of reading.
  * Free and open source.

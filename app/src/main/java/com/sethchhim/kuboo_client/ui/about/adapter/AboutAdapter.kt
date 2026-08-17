@@ -172,6 +172,15 @@ class AboutPagerAdapter(val context: Context) : androidx.viewpager.widget.PagerA
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DEV_URL)))
         }
 
+        val textDonate = itemView.findViewById<TextView>(R.id.about_developer_textView4)!!
+        textDonate.typeface = systemUtil.robotoCondensedBold
+        textDonate.paintFlags = textDonate.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        textDonate.setTextSize(TypedValue.COMPLEX_UNIT_PX, when (systemUtil.isOrientationPortrait()) {
+            true -> (width / 25).toFloat()
+            false -> (width / 45).toFloat()
+        })
+        textDonate.setOnClickListener { systemUtil.openLink(Constants.DONATE_URL) }
+
         val textAboutDeveloperMessage1 = itemView.findViewById<TextView>(R.id.about_developer_textView3)!!
         textAboutDeveloperMessage1.typeface = systemUtil.robotoCondensedRegular
         textAboutDeveloperMessage1.text = context.getString(R.string.about_develop_message)

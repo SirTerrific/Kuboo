@@ -4,7 +4,8 @@ object Constants {
 
     internal const val TAG = "com.sethchhim.kuboo"
     internal const val DEV_URL = "https://github.com/SirTerrific"
-    internal const val GITHUB_URL = "https://github.com/SirTerrific/Kuboo"
+    internal const val DONATE_URL = "https://www.buymeacoffee.com/menelikIII"
+    internal const val GITHUB_URL = "https://github.com/SirTerrific/Kuboo3"
 
     internal const val TAG_ROOT_BOOK = "TAG_ROOT_BOOK"
     internal const val TAG_TRACKING_SERVICE = "TAG_TRACKING_SERVICE"

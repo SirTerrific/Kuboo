@@ -47,6 +47,18 @@
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@android:color/white"/>
 
+        <TextView
+            android:id="@+id/about_developer_textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about_developer_textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:padding="8dp"
+            android:text="@string/about_donate"
+            android:textColor="@android:color/white"/>
+
     </RelativeLayout>
 
 </ScrollView>

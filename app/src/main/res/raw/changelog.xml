@@ -2,6 +2,20 @@
 <changelog bulletedList="true">
 
     <changelogversion
+        changeDate="Aug 17, 2026"
+        versionName="1.2.16">
+        <changelogtext>support Ubooquity 3, which serves everything from /opds/</changelogtext>
+        <changelogtext>fix crash when opening the browser against Ubooquity 3</changelogtext>
+        <changelogtext>fix crash in the breadcrumb after a search</changelogtext>
+        <changelogtext>accept a server address ending in /opds/</changelogtext>
+        <changelogtext>encrypt stored server passwords</changelogtext>
+        <changelogtext>exclude saved servers from backups</changelogtext>
+        <changelogtext>require Android 6.0, up from Android 5.0</changelogtext>
+        <changelogtext>update the build to Gradle 8, Kotlin 2 and Android 15</changelogtext>
+        <changelogtext>update dependencies and drop the discontinued Anko library</changelogtext>
+    </changelogversion>
+
+    <changelogversion
         changeDate="Mar 25, 2019"
         versionName="1.2.15">
         <changelogtext>end of active development (again)</changelogtext>

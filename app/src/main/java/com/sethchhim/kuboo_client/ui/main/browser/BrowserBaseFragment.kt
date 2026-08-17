@@ -12,10 +12,15 @@ open class BrowserBaseFragment : BrowserBaseFragmentImpl3_Path() {
 
     protected var isCustomImplementation = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.browser_layout_base, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.browser_layout_base, container, false)
+
+    // onBindViews reaches the fragment's views, which only exist once onCreateView has
+    // returned. Butterknife could run inside onCreateView because it was handed the
+    // inflated view directly; a lookup through the fragment cannot.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         onBindViews(view)
-        return view
     }
 
     override fun onPause() {

@@ -3,6 +3,14 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.17">
+        <changelogtext>replace the discontinued Butterknife library</changelogtext>
+        <changelogtext>build and test automatically on every change</changelogtext>
+        <changelogtext>fix line endings that broke builds on Linux</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.16">
         <changelogtext>support Ubooquity 3, which serves everything from /opds/</changelogtext>
         <changelogtext>fix crash when opening the browser against Ubooquity 3</changelogtext>

@@ -80,21 +80,18 @@ Debug and release builds both need JDK 21 — the JDK bundled with Android Studi
 APKs on the releases page are signed with the standard Android **debug** key, not a private
 release key, so Android will warn about an unknown source.
 
-Screenshots below are from the original Kuboo and still show its name and layout; the
-screens have changed since.
+## Screenshots
 
-<br/><br/>
+Taken from this build, against a Ubooquity 3.1.0 server holding a handful of test files.
 
-<img src="https://user-images.githubusercontent.com/11790350/41467653-4868170e-7075-11e8-9a12-205d9d2cf52b.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467654-48780fd8-7075-11e8-83d2-7a54edcada93.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467655-4887809e-7075-11e8-803f-85fa851ecac5.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467656-48987084-7075-11e8-8fbf-b6490a5ffce1.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467657-48a58512-7075-11e8-94f1-4d5756bb8c49.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467658-48b35db8-7075-11e8-9681-99b165cad5cc.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467659-48bef16e-7075-11e8-86f7-d45efda7e5f4.png" width="25%">
+<img src="docs/screenshots/home.png" width="24%"> <img src="docs/screenshots/browse.png" width="24%"> <img src="docs/screenshots/reader.png" width="24%"> <img src="docs/screenshots/settings.png" width="24%">
 
-<br/><br/>
+<img src="docs/screenshots/about.png" width="24%"> <img src="docs/screenshots/developer.png" width="24%">
 
-The original Kuboo, which this fork is based on, is on
-[Google Play](https://play.google.com/store/apps/details?id=com.sethchhim.kuboo).
-That listing is Seth Chhim's app, not this fork — Kuboo3 is not published there.
+<br/>
 
 *"Kuboo3" is an independent third party application not affiliated with Ubooquity in any manner.*
 
 *"Kuboo3" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.*
 
-*Licensed under Apache 2.0, as the original. Google Play is a trademark of Google Inc.*
+*Licensed under Apache 2.0, as the original.*

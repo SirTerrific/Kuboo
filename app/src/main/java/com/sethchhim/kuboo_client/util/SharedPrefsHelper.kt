@@ -144,8 +144,12 @@ class SharedPrefsHelper(val context: Context) {
     }
 
     fun getServerList(): MutableList<Login> {
-        val json = sharedPreferences.getString(KEY_LOGIN_LIST, null)
-        return json?.fromJson() ?: mutableListOf()
+        val stored = sharedPreferences.getString(KEY_LOGIN_LIST, null) ?: return mutableListOf()
+        val json = CredentialCipher.decrypt(stored)
+        return when (json.isEmpty()) {
+            true -> mutableListOf()
+            false -> json.fromJson() ?: mutableListOf()
+        }
     }
 
     fun getLoginLastAccessed(): Login? {
@@ -271,7 +275,9 @@ class SharedPrefsHelper(val context: Context) {
 
     fun saveServerList(serverList: MutableList<Login>) {
         if (isDebugSharedPreferencesHelper) Timber.i("Saving SERVER_LIST: size[${serverList.size}]")
-        sharedPreferences.edit().putString(KEY_LOGIN_LIST, serverList.toJson()).apply()
+        // the list carries the Basic auth password, so it is encrypted at rest
+        val encrypted = CredentialCipher.encrypt(serverList.toJson())
+        sharedPreferences.edit().putString(KEY_LOGIN_LIST, encrypted).apply()
     }
 
     fun saveFinishedNotification() {

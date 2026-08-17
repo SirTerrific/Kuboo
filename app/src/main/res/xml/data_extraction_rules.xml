@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backup and device-transfer rules for Android 12 and later
+    (android:dataExtractionRules).
+
+    Same reasoning as backup_rules.xml: the Room database holds server credentials and
+    must not leave the device, neither through a cloud backup nor a device-to-device
+    transfer.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="database" path="ROOM_DATABASE"/>
+        <exclude domain="database" path="ROOM_DATABASE-shm"/>
+        <exclude domain="database" path="ROOM_DATABASE-wal"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG-shm"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG-wal"/>
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" path="ROOM_DATABASE"/>
+        <exclude domain="database" path="ROOM_DATABASE-shm"/>
+        <exclude domain="database" path="ROOM_DATABASE-wal"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG-shm"/>
+        <exclude domain="database" path="ROOM_DATABASE_DEBUG-wal"/>
+    </device-transfer>
+</data-extraction-rules>

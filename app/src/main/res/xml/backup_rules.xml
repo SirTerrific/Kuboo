@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backup rules for Android 6.0 to 11 (android:fullBackupContent).
+
+    The server list is encrypted with a key held in the AndroidKeyStore, which is never
+    backed up, so a restored copy cannot be decrypted anyway. Excluding the database is
+    defence in depth: it declares a Login entity too, and neither copy of the credentials
+    has any reason to leave the device.
+
+    Reading history, downloads and preferences are still backed up.
+-->
+<full-backup-content>
+    <exclude domain="database" path="ROOM_DATABASE"/>
+    <exclude domain="database" path="ROOM_DATABASE-shm"/>
+    <exclude domain="database" path="ROOM_DATABASE-wal"/>
+    <exclude domain="database" path="ROOM_DATABASE_DEBUG"/>
+    <exclude domain="database" path="ROOM_DATABASE_DEBUG-shm"/>
+    <exclude domain="database" path="ROOM_DATABASE_DEBUG-wal"/>
+</full-backup-content>

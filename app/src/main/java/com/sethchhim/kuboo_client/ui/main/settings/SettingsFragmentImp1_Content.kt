@@ -5,6 +5,7 @@ import android.widget.TextView
 import com.sethchhim.kuboo_client.R
 import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_client.util.DialogUtil
+import com.sethchhim.kuboo_remote.util.Settings as RemoteSettings
 
 open class SettingsFragmentImp1_Content : SettingsFragmentImp0_View() {
 
@@ -31,6 +32,7 @@ open class SettingsFragmentImp1_Content : SettingsFragmentImp0_View() {
         setSystemThemePreference()
         setSystemOrientationPreference()
         setSystemDisableCellularPreference()
+        setSystemAllowSelfSignedPreference()
         setSystemStartTab()
 
         setAdvancedPreference()
@@ -318,6 +320,15 @@ open class SettingsFragmentImp1_Content : SettingsFragmentImp0_View() {
         setOnPreferenceClickListener {
             Settings.DISABLE_CELLULAR = !Settings.DISABLE_CELLULAR
             sharedPrefsHelper.saveDisableCellular()
+            return@setOnPreferenceClickListener true
+        }
+    }
+
+    private fun setSystemAllowSelfSignedPreference() = systemAllowSelfSignedPreference.apply {
+        isChecked = RemoteSettings.ALLOW_SELF_SIGNED_CERTIFICATES
+        setOnPreferenceClickListener {
+            RemoteSettings.ALLOW_SELF_SIGNED_CERTIFICATES = !RemoteSettings.ALLOW_SELF_SIGNED_CERTIFICATES
+            sharedPrefsHelper.saveAllowSelfSignedCertificates()
             return@setOnPreferenceClickListener true
         }
     }

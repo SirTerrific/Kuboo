@@ -45,6 +45,7 @@ open class SettingsFragmentImp0_View : PreferenceFragmentCompat() {
     protected lateinit var systemThemePreference: Preference
     protected lateinit var systemVolumePageTurnPreference: SwitchPreferenceCompat
     protected lateinit var systemDisableCellularPreference: SwitchPreferenceCompat
+    protected lateinit var systemAllowSelfSignedPreference: SwitchPreferenceCompat
     protected lateinit var systemKeepScreenOn: SwitchPreferenceCompat
     protected lateinit var systemStartTab: Preference
     protected lateinit var advancedPreference: Preference
@@ -66,6 +67,7 @@ open class SettingsFragmentImp0_View : PreferenceFragmentCompat() {
         systemKeepScreenOn = findPreference<SwitchPreferenceCompat>("settings_keep_screen_on")!!
         systemVolumePageTurnPreference = findPreference<SwitchPreferenceCompat>("settings_volume_page_turn")!!
         systemDisableCellularPreference = findPreference<SwitchPreferenceCompat>("settings_disable_cellular")!!
+        systemAllowSelfSignedPreference = findPreference<SwitchPreferenceCompat>("settings_allow_self_signed")!!
         systemStartTab = findPreference<Preference>("settings_start_tab")!!
         advancedPreference = findPreference<Preference>("settings_advanced")!!
     }

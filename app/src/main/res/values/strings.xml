@@ -282,6 +282,8 @@
     <string name="settings_version">Version</string>
     <string name="settings_volume_buttons_will_turn_page">Volume buttons will turn the page</string>
     <string name="settings_volume_page_turn">Volume Page Turn</string>
+    <string name="settings_allow_self_signed">Accept self-signed certificates</string>
+    <string name="settings_allow_self_signed_summary">Only for an https server whose certificate you signed yourself. While this is on, nothing tells your server apart from someone answering in its place.</string>
     <string name="settings_disable_cellular">Disable Cellular</string>
     <string name="settings_shared_element_transition">Shared Element Transition</string>
     <string name="settings_show_transition_animations">Show transition animations</string>

@@ -304,12 +304,29 @@ object Extensions {
         return URLUtil.guessFileName(this, null, fileExtension)
     }
 
+    /**
+     * The server's credentials go to the server, and nowhere else.
+     *
+     * Every image the app loads went through here, and the header was attached whatever the
+     * address: a feed that points a cover at some other site would have been handed the
+     * Ubooquity password.
+     */
     internal fun String.toGlideUrl(login: Login): GlideUrl {
+        if (!isSameHostAs(login.server)) return GlideUrl(this)
+
         val authName = "Authorization"
         val authValue = "Basic " + Base64.encodeToString(("${login.username}:${login.password}").toByteArray(), Base64.NO_WRAP)
         return GlideUrl(this, LazyHeaders.Builder()
                 .addHeader(authName, authValue)
                 .build())
+    }
+
+    internal fun String.isSameHostAs(server: String) = try {
+        val host = URL(this).host
+        host.isNotEmpty() && host.equals(URL(server).host, ignoreCase = true)
+    } catch (e: Exception) {
+        Timber.e("Failed to compare hosts of [$this] and [$server]: ${e.message}")
+        false
     }
 
     internal fun androidx.swiperefreshlayout.widget.SwipeRefreshLayout.disable() {

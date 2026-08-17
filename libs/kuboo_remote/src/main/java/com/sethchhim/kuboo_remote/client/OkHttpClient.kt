@@ -1,12 +1,14 @@
 package com.sethchhim.kuboo_remote.client
 
 import android.content.Context
+import com.sethchhim.kuboo_remote.util.Settings.ALLOW_SELF_SIGNED_CERTIFICATES
 import com.sethchhim.kuboo_remote.util.Settings.CACHE_SIZE
 import com.sethchhim.kuboo_remote.util.Settings.CONNECTION_TIMEOUT
 import com.sethchhim.kuboo_remote.util.Settings.READ_TIMEOUT
 import okhttp3.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import timber.log.Timber
 import java.io.File
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
@@ -31,7 +33,18 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
 
     override fun connectTimeoutMillis() = CONNECTION_TIMEOUT
 
-    override fun hostnameVerifier() = HostnameVerifier { _, _ -> true }
+    /**
+     * The name on the certificate has to be the server being talked to, unless the user has
+     * accepted certificates that do not validate.
+     *
+     * This used to return true for every host, which together with the trust manager below meant
+     * an https connection verified nothing at all: any machine on the path could answer as the
+     * server and be handed the password.
+     */
+    override fun hostnameVerifier(): HostnameVerifier = when (ALLOW_SELF_SIGNED_CERTIFICATES) {
+        true -> HostnameVerifier { _, _ -> true }
+        false -> defaultHostnameVerifier
+    }
 
     override fun interceptors(): MutableList<Interceptor> {
         val interceptorList = mutableListOf<Interceptor>()
@@ -51,18 +64,29 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
 
     override fun readTimeoutMillis() = READ_TIMEOUT
 
+    /**
+     * The platform's own certificate validation, unless the user has chosen to accept
+     * certificates that do not validate -- a Ubooquity at home usually presents one it signed
+     * itself, and that choice is theirs to make knowingly.
+     */
     override fun sslSocketFactory(): SSLSocketFactory {
+        if (!ALLOW_SELF_SIGNED_CERTIFICATES) return defaultSslSocketFactory
+
         try {
             val sslContext = SSLContext.getInstance("TLS")
             sslContext.init(null, trustManagerArray, java.security.SecureRandom())
             return sslContext.socketFactory
         } catch (e: KeyManagementException) {
-            e.printStackTrace()
+            Timber.e("Failed to build an ssl context: ${e.message}")
         } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
+            Timber.e("Failed to build an ssl context: ${e.message}")
         }
-        return super.sslSocketFactory()
+        return defaultSslSocketFactory
     }
+
+    private val defaultSslSocketFactory: SSLSocketFactory by lazy { SSLContext.getDefault().socketFactory }
+
+    private val defaultHostnameVerifier: HostnameVerifier by lazy { HttpsURLConnection.getDefaultHostnameVerifier() }
 
     /**
      * Cookies are kept per host, which is what a server session needs.

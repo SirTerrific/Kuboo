@@ -308,6 +308,8 @@ HTTP NON TROUVÉ
     <string name="settings_version">"Version"</string>
     <string name="settings_volume_buttons_will_turn_page">"Les boutons de volume tourneront la page"</string>
     <string name="settings_volume_page_turn">"Tourner la page avec boutons de volume"</string>
+    <string name="settings_allow_self_signed">"Accepter les certificats auto-signés"</string>
+    <string name="settings_allow_self_signed_summary">"Uniquement pour un serveur https dont vous avez signé le certificat vous-même. Tant que ceci est actif, rien ne distingue votre serveur de quelqu\'un qui répond à sa place."</string>
     <string name="settings_disable_cellular">Désactiver cellulaire</string>
 
     <string name="title_browse">"Parcourir"</string>

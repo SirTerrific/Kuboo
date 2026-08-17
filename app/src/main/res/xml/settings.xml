@@ -109,6 +109,11 @@
             android:layout="@layout/settings_item_preference_normal"
             android:summary="@string/settings_protect_your_mobile_data_limit"
             android:title="@string/settings_disable_cellular"/>
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="settings_allow_self_signed"
+            android:layout="@layout/settings_item_preference_normal"
+            android:summary="@string/settings_allow_self_signed_summary"
+            android:title="@string/settings_allow_self_signed"/>
     </androidx.preference.PreferenceCategory>
 
     <!-- ADVANCED -->

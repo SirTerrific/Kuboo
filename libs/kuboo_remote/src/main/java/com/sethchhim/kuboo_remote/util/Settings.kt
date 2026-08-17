@@ -17,4 +17,14 @@ object Settings {
 
     internal const val MAX_PAGE_WIDTH_DEFAULT = 500
 
+    /**
+     * Whether to accept an https certificate that does not validate.
+     *
+     * Off is the honest default: with it on, nothing distinguishes your server from anyone on
+     * the network answering in its place, and the password goes to whoever answers. It exists
+     * because a Ubooquity at home is usually behind a certificate it signed itself, and turning
+     * this on knowingly is a different thing from having it always on without being told.
+     */
+    var ALLOW_SELF_SIGNED_CERTIFICATES = false
+
 }

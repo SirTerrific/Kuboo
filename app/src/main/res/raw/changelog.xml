@@ -3,6 +3,14 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.33">
+        <changelogtext>check the certificate of an https server instead of accepting any</changelogtext>
+        <changelogtext>a setting to accept a certificate you signed yourself, off by default</changelogtext>
+        <changelogtext>send the server password to that server only, never to another site</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.32">
         <changelogtext>fix pages failing to load in a long pdf</changelogtext>
         <changelogtext>release each rendered page instead of holding its memory</changelogtext>

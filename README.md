@@ -7,8 +7,6 @@ back to current Android tooling.
 It is a separate application: it installs alongside the original rather than replacing
 it, and is not published on Google Play. Builds are on the [releases page](../../releases).
 
-![kuboo-feature-graphic-stars](https://user-images.githubusercontent.com/11790350/41466763-9e5a1a80-7071-11e8-9063-a69718340853.png)
-
 This lightweight Android application can load books for the [Ubooquity](https://vaemendis.net/ubooquity/) server software.
  * Powered by the love of reading.
  * Free and open source.
@@ -78,6 +76,9 @@ a slow server.
 Debug and release builds both need JDK 21 — the JDK bundled with Android Studio works. Release
 APKs on the releases page are signed with the standard Android **debug** key, not a private
 release key, so Android will warn about an unknown source.
+
+Screenshots below are from the original Kuboo and still show its name and layout; the
+screens have changed since.
 
 <br/><br/>
 

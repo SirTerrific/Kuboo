@@ -1,0 +1,23 @@
+# Normalise line endings so a checkout on Windows cannot commit CRLF into files
+# that must stay LF. The Gradle wrapper and any shell script are read by /bin/sh on
+# Linux build machines, where a CRLF shebang fails with:
+#   /usr/bin/env: 'sh\r': No such file or directory
+* text=auto
+
+gradlew text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+gradlew.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.jar binary
+*.aar binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.ttf binary
+*.cbz binary
+*.apk binary
+*.keystore binary

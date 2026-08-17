@@ -49,16 +49,19 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
     //google
-    implementation 'androidx.annotation:annotation:1.0.2'
+    implementation 'androidx.annotation:annotation:1.9.1'
 
-    implementation "androidx.room:room-runtime:2.1.0-alpha06"
-    kapt "androidx.room:room-compiler:2.0.0"
+    implementation "androidx.room:room-runtime:2.8.4"
+    kapt "androidx.room:room-compiler:2.8.4"
 
-    implementation "androidx.lifecycle:lifecycle-livedata:2.1.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.11.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    final okhttp_version = "3.14.0"
+    // OkHttp 4 turned the client into a final class configured through its Builder;
+    // this module still subclasses OkHttpClient and overrides cache(), cookieJar() and
+    // interceptors(). Moving to 4.x means rewriting that client, not bumping a version.
+    final okhttp_version = "3.14.9"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
@@ -69,9 +72,9 @@ dependencies {
 
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     implementation 'com.github.pawel-schmidt:okhttp-delay-interceptor:0.0.1'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'commons-codec:commons-codec:1.11'
-    implementation 'commons-io:commons-io:2.6'
-    implementation 'org.apache.commons:commons-text:1.6'
-    implementation 'org.jsoup:jsoup:1.11.3'
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    implementation 'commons-codec:commons-codec:1.22.1'
+    implementation 'commons-io:commons-io:2.22.0'
+    implementation 'org.apache.commons:commons-text:1.15.0'
+    implementation 'org.jsoup:jsoup:1.23.1'
 }

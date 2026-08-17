@@ -2,7 +2,6 @@ package com.sethchhim.kuboo_local.service.local
 
 import com.github.junrar.Archive
 import com.github.junrar.exception.RarException
-import com.github.junrar.impl.FileVolumeManager
 import com.github.junrar.rarfile.FileHeader
 import java.io.File
 import java.io.IOException
@@ -19,7 +18,7 @@ class ParserRar : ParserBase(), Parser {
     @Throws(IOException::class)
     override fun parse(file: File) {
         try {
-            mArchive = Archive(FileVolumeManager(file))
+            mArchive = Archive(file)
         } catch (e: RarException) {
             throw IOException("unable to open archive")
         }
@@ -39,9 +38,8 @@ class ParserRar : ParserBase(), Parser {
         mHeaders.sortBy { getName(it) }
     }
 
-    private fun getName(header: FileHeader): String {
-        return if (header.isUnicode) header.fileNameW else header.fileNameString
-    }
+    /** junrar 7+ resolves the unicode and non-unicode header names behind a single accessor. */
+    private fun getName(header: FileHeader): String = header.fileName
 
     override fun numPages() = mHeaders.size
 

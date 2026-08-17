@@ -26,7 +26,7 @@ class Task_Authenticate(val kubooRemote: KubooRemote, login: Login) {
                 val loginCall = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = loginCall.execute()
                 val inputStream = response?.body()?.byteStream()
-                val inputAsString = inputStream?.bufferedReader().use { it?.readText() }
+                val inputAsString = inputStream?.bufferedReader().use { it?.readText() }.orEmpty()
                 val doc = Jsoup.parse(inputAsString)
                 val serverSalt = doc.select("#serversalt").`val`()
                 val serverTime = doc.select("#servertime").`val`()

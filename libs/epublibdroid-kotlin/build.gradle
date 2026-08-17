@@ -33,18 +33,19 @@ android {
     }
 }
 dependencies {
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.7.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // the bundled slf4j-android binding dates from 2011 and collides with the slf4j-api 2.x
+    // that junrar now pulls in; epublib only needs the API, so leave the old binding out
+    implementation fileTree(dir: 'libs', include: ['*.jar'], exclude: ['slf4j-android-*.jar'])
     implementation files('libs/epublib-core-latest.jar')
-    implementation files('libs/slf4j-android-1.6.1-RC1.jar')
 
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
 
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'androidx.appcompat:appcompat:1.8.0'
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 }

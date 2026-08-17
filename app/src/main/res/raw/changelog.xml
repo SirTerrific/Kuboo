@@ -3,8 +3,16 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.32">
+        <changelogtext>fix pages failing to load in a long pdf</changelogtext>
+        <changelogtext>release each rendered page instead of holding its memory</changelogtext>
+        <changelogtext>take the page count from the pdf itself rather than from the feed</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.31">
-        <changelogtext>signed with the maintainer\'s own key instead of the android debug key</changelogtext>
+        <changelogtext>signed with the maintainer’s own key instead of the android debug key</changelogtext>
         <changelogtext>uninstall the previous version once before installing this one</changelogtext>
     </changelogversion>
 
@@ -19,7 +27,7 @@
         changeDate="Aug 17, 2026"
         versionName="1.2.29">
         <changelogtext>the about page is titled Kuboo3</changelogtext>
-        <changelogtext>the maintainer\'s avatar on the developer page</changelogtext>
+        <changelogtext>the maintainer’s avatar on the developer page</changelogtext>
     </changelogversion>
 
     <changelogversion

@@ -16,7 +16,9 @@ class PdfRepository {
         return document
     }
 
-    internal fun getPdfPageCount() = document.countPages()
+    //same lock as the page rendering: asking a mupdf document its page count while a page is
+    //being drawn on it is the same unsafe concurrent access
+    internal fun getPdfPageCount() = synchronized(document) { document.countPages() }
 
     internal fun getPdfImageInputStream(glidePdf: GlidePdf) = Task_GetPdfImageInputStream(document, glidePdf).liveData
 

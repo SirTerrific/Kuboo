@@ -187,7 +187,9 @@ open class ReaderPdfActivityImpl4_Content : ReaderPdfActivityImpl3_Menu() {
     private fun onLoadDocumentSuccess() {
         viewPager.adapter = ReaderPdfAdapter(this)
         viewPager.currentItem = currentBook.currentPage
-        setOverlay(currentBook.currentPage, currentBook.totalPages)
+        //the document's own count rather than the one from the feed, which is what the server
+        //advertises and need not agree with the file being read
+        setOverlay(currentBook.currentPage, viewModel.getPdfPageCount())
     }
 
     private fun onLoadDocumentFail() {

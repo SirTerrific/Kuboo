@@ -18,7 +18,8 @@ open class Task_GetPdfOutline(private val document: Document) : Task_LocalBase()
         executors.diskIO.execute {
             try {
                 val flatOutline = ArrayList<OutlineItem>()
-                val outline = document.loadOutline()
+                //the same document is drawing pages on another thread; mupdf tolerates neither
+                val outline = synchronized(document) { document.loadOutline() }
                 if (outline != null) {
                     flattenOutline(outline, "", flatOutline)
                     flatOutline.sortWith(Comparator { o1, o2 -> o1.currentPage - o2.currentPage })
@@ -42,7 +43,7 @@ open class Task_GetPdfOutline(private val document: Document) : Task_LocalBase()
     }
 
     private fun Outline.pageNumber() = try {
-        document.pageNumberFromLocation(document.resolveLink(this))
+        synchronized(document) { document.pageNumberFromLocation(document.resolveLink(this)) }
     } catch (e: Exception) {
         Timber.e(e)
         0

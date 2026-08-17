@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.28">
+        <changelogtext>the developer page names who maintains this fork</changelogtext>
+        <changelogtext>the licence list matches what the app actually ships</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.27">
         <changelogtext>close a book with the back gesture, every time</changelogtext>
         <changelogtext>a back arrow in the reader toolbar</changelogtext>

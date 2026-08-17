@@ -21,13 +21,10 @@
     <string name="about_app_disclaimer">\"Kuboo3\" is an independent third party application not affiliated with Ubooquity in any manner.\n
     \n\"Kuboo3\" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.
     \n \n</string>
-    <string name="about_develop_message">I have developed this project for my own personal use. My goal is to share it and contribute to a niche reading community.
-    \n \nThank you everyone for the feedback and support.
-    \n \nSpecial thanks to Tom for creating Ubooquity.
-    \n \n— Seth Chhim, who wrote Kuboo and stopped working on it in 2019.
-    \n \nThis build is Kuboo3, a fork carried on by someone else. Report anything wrong with it on the fork\'s own page rather than to the original author.</string>
-    <string name="about_developer_email">sethchhim@gmail.com</string>
-    <string name="about_developer_name">Seth Chhim</string>
+    <string name="about_develop_message">Kuboo3 is maintained by SirTerrific, working with Claude, Anthropic\'s coding assistant. Every change is tested against a real Ubooquity 3 server before it ships.
+    \n \nKuboo, which this is a fork of, was written by Seth Chhim for his own use and shared with a niche reading community. Its development stopped in 2019 — please report anything wrong with this build on the fork\'s own page rather than to him.
+    \n \nSpecial thanks to Tom for creating Ubooquity.</string>
+    <string name="about_developer_name">SirTerrific</string>
     <string name="about_faq">FAQ</string>
     <string name="about_google_disclaimer">• Google Play and the Google Play logo are trademarks of Google Inc.</string>
     <string name="about_info">• Powered by the love of reading.

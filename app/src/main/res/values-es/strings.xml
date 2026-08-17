@@ -14,13 +14,6 @@ La imagen se considera ANCHA si el ancho es mayor o igual a la longitud."</strin
     <string name="about_app_disclaimer">"\"Kuboo\" es una aplicación de terceros independiente, no afiliada o asociada con Ubooquity de ninguna manera.
     
 \"Kuboo\" proporciona acceso sin restricciones a Internet y no es responsable de la disponibilidad o el contenido de estas fuentes externas."</string>
-    <string name="about_develop_message">"Yo he desarrollado este proyecto para mi uso personal. Mi objetivo es compartirlo y contribuir a una comunidad de lectura de nicho.   
- 
-Gracias a todos por los comentarios y el apoyo.
- 
-Un agradecimiento especial a Tom por crear Ubooquity."</string>
-    <string name="about_developer_email">"sethchhim@gmail.com"</string>
-    <string name="about_developer_name">"Seth Chhim"</string>
     <string name="about_faq">"Preguntas más frecuentes"</string>
     <string name="about_google_disclaimer">"• Google Play y el logotipo de Google Play son marcas comerciales de Google Inc."</string>
     <string name="about_info">"• Impulsado por el amor a la lectura. 

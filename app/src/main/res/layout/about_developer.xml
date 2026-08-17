@@ -34,7 +34,6 @@
             android:layout_below="@id/about_developer_textView1"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
-            android:text="@string/about_developer_email"
             android:textColor="@android:color/white"
             android:textColorLink="@color/md_blue_900"
             android:textSize="12sp"/>

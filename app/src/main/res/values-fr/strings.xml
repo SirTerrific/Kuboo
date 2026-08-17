@@ -37,21 +37,14 @@ Un titre pour lequel le serveur ne propose pas de flux de pages retombe sur la v
 
 
 \"Kuboo3\" permet un accès non limité à Internet et ne saurait être tenu responsable de la disponibilité ou du contenu de ces sources extérieures."</string>
-    <string name="about_develop_message">"J'ai développé ce projet pour mon usage personnel. Mon objectif est de le partager et de contribuer à une communauté de lecteurs.
-    
- 
-Merci à tous pour vos commentaires et votre soutien.
-    
- 
-Un merci spécial à Tom pour avoir créé Ubooquity.
+    <string name="about_develop_message">"Kuboo3 est maintenu par SirTerrific, avec Claude, l'assistant de développement d'Anthropic. Chaque changement est testé contre un vrai serveur Ubooquity 3 avant d'être publié.
 
 
-— Seth Chhim, auteur de Kuboo, dont le développement s'est arrêté en 2019.
+Kuboo, dont ceci est un fork, a été écrit par Seth Chhim pour son usage personnel et partagé avec une communauté de lecteurs. Son développement s'est arrêté en 2019 : signalez ce qui ne va pas dans cette version sur la page du fork plutôt qu'à lui.
 
 
-Cette version est Kuboo3, un fork repris par quelqu'un d'autre. Signalez ce qui ne va pas sur la page du fork plutôt qu'à l'auteur d'origine."</string>
-    <string name="about_developer_email">"sethchhim@gmail.com"</string>
-    <string name="about_developer_name">"Seth Chhim"</string>
+Un merci spécial à Tom pour avoir créé Ubooquity."</string>
+    <string name="about_developer_name">"SirTerrific"</string>
     <string name="about_faq">"FAQ"</string>
     <string name="about_google_disclaimer">"• Google Play et le logo Google Play sont des marques de commerce de Google Inc."</string>
     <string name="about_info">"• Pour l'amour de la lecture.

@@ -4,7 +4,6 @@ import android.content.Context
 import com.sethchhim.kuboo_remote.util.Settings.CACHE_SIZE
 import com.sethchhim.kuboo_remote.util.Settings.CONNECTION_TIMEOUT
 import com.sethchhim.kuboo_remote.util.Settings.READ_TIMEOUT
-import com.simplemented.okdelay.DelayInterceptor
 import okhttp3.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +13,6 @@ import java.security.NoSuchAlgorithmException
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.net.ssl.*
 
 class OkHttpClient(private val context: Context) : OkHttpClient() {
@@ -22,7 +20,6 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
     internal val sslHandshakeInterceptor = SSLHandshakeInterceptor()
 
     private val isHttpLoggingEnabled = false
-    private val isSimulateLag = false
 
     override fun cache(): Cache {
         val cacheFile = File("${context.cacheDir}okhttp_cache")
@@ -45,11 +42,6 @@ class OkHttpClient(private val context: Context) : OkHttpClient() {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             interceptorList.add(httpLoggingInterceptor)
-        }
-
-        if (isSimulateLag) {
-            val delayInterceptor = DelayInterceptor(2000L, TimeUnit.MILLISECONDS)
-            interceptorList.add(delayInterceptor)
         }
 
         return interceptorList

@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sethchhim.kuboo_client.*
+import com.sethchhim.kuboo_client.Extensions.gone
 import com.sethchhim.kuboo_client.Settings.UBOOQUITY_VERSION
 import com.sethchhim.kuboo_client.data.model.License
 import com.sethchhim.kuboo_client.util.SystemUtil
@@ -128,10 +129,9 @@ class AboutPagerAdapter(val context: Context) : androidx.viewpager.widget.PagerA
     private fun getPage3(container: ViewGroup): View {
         val itemView = context.layoutInflater.inflate(R.layout.about_developer, container, false)
 
-        val imageDeveloper = itemView.findViewById<ImageView>(R.id.about_developer_imageView)!!
-        Glide.with(context)
-                .load(R.drawable.developer_icon)
-                .into(imageDeveloper)
+        //what sat here was a drawn portrait of Kuboo's author, which is the one thing this page
+        //must not show any more; the page reads fine starting on the name
+        itemView.findViewById<ImageView>(R.id.about_developer_imageView)!!.gone()
 
         val textAboutDeveloperName = itemView.findViewById<TextView>(R.id.about_developer_textView1)!!
         textAboutDeveloperName.setText(R.string.about_developer_name)
@@ -176,25 +176,35 @@ class AboutPagerAdapter(val context: Context) : androidx.viewpager.widget.PagerA
         return itemView
     }
 
+    // What the app actually ships. Butterknife, anko and bubble were listed here long after they
+    // stopped being used, and the http stack, the archive readers and the two bundled fonts were
+    // never listed at all.
     private fun getLicenseList(): List<License> = mutableListOf<License>().apply {
+        add(License("apache/commons-codec", licenses.APACHE_V2))
+        add(License("apache/commons-compress", licenses.APACHE_V2))
+        add(License("apache/commons-io", licenses.APACHE_V2))
         add(License("ArtifexSoftware/mupdf", licenses.MUPDF))
+        add(License("cyrealtype/Lora", licenses.OFL_V1_1))
         add(License("CymChad/BaseRecyclerViewAdapterHelper", licenses.APACHE_V2))
         add(License("bumptech/glide", licenses.GLIDE))
         add(License("daimajia/NumberProgressBar", licenses.NUMBER_PROGRESS_BAR))
         add(License("diego-gomez-olvera/RtlViewPager", licenses.APACHE_V2))
         add(License("edmund-wagner/junrar", licenses.JUNRAR))
+        add(License("franmontiel/PersistentCookieJar", licenses.APACHE_V2))
         add(License("gabrielemariotti/changeloglib", licenses.APACHE_V2))
         add(License("google/dagger", licenses.APACHE_V2))
         add(License("google/gson", licenses.APACHE_V2))
         add(License("google/opensans", licenses.APACHE_V2))
-        add(License("JakeWharton/butterknife", licenses.APACHE_V2))
+        add(License("google/roboto", licenses.APACHE_V2))
         add(License("JakeWharton/timber", licenses.APACHE_V2))
-        add(License("Kotlin/anko", licenses.APACHE_V2))
+        add(License("JetBrains/kotlinx.coroutines", licenses.APACHE_V2))
+        add(License("material-components/material-components-android", licenses.APACHE_V2))
         add(License("matrixxun/MaterialBadgeTextView", licenses.APACHE_V2))
-        add(License("nkanaev/bubble", licenses.BUBBLE))
         add(License("ongakuer/CircleIndicator", licenses.APACHE_V2))
         add(License("psiegman/epublib", licenses.EPUBLIB))
+        add(License("square/okhttp", licenses.APACHE_V2))
         add(License("tonyofrancis/Fetch", licenses.APACHE_V2))
+        add(License("tukaani/xz-java", licenses.PUBLIC_DOMAIN))
         add(License("varunest/SparkButton", licenses.APACHE_V2))
         add(License("wasabeef/recyclerview-animators", licenses.APACHE_V2))
         add(License("ybq/Android-SpinKit", licenses.ANDROID_SPINKIT))

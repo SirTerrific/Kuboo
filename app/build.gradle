@@ -26,13 +26,31 @@ android {
         applicationId "io.github.sirterrific.kuboo3"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 65
-        versionName "1.2.30"
+        versionCode 66
+        versionName "1.2.31"
         buildConfigField 'long', 'TIMESTAMP', System.currentTimeMillis() + 'L'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    // Signing comes from keystore.properties, which is never committed: it holds the keystore
+    // passwords in clear text. Without that file the release build is simply left unsigned, the
+    // way it was before, so a checkout of this repository still builds for anyone.
+    signingConfigs {
+        release {
+            def propertiesFile = rootProject.file("keystore.properties")
+            if (propertiesFile.exists() && propertiesFile.length() > 0) {
+                def properties = new Properties()
+                propertiesFile.withInputStream { properties.load(it) }
+                storeFile file(properties['storeFile'])
+                storePassword properties['storePassword']
+                keyAlias properties['keyAlias']
+                keyPassword properties['keyPassword']
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (signingConfigs.release.storeFile != null) signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [applicationLabel: APP_LABEL]

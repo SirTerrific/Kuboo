@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.31">
+        <changelogtext>signed with the maintainer\'s own key instead of the android debug key</changelogtext>
+        <changelogtext>uninstall the previous version once before installing this one</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.30">
         <changelogtext>the launcher icon reads Kuboo3</changelogtext>
         <changelogtext>a buy me a coffee link on the developer page</changelogtext>

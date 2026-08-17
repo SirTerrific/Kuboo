@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.34">
+        <changelogtext>render pdf pages without compressing and decoding them on the way</changelogtext>
+        <changelogtext>build the http client the supported way, which unblocks updating it</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.33">
         <changelogtext>check the certificate of an https server instead of accepting any</changelogtext>
         <changelogtext>a setting to accept a certificate you signed yourself, off by default</changelogtext>

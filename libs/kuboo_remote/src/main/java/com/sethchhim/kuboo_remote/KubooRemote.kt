@@ -2,7 +2,7 @@ package com.sethchhim.kuboo_remote
 
 import androidx.lifecycle.MutableLiveData
 import android.content.Context
-import com.sethchhim.kuboo_remote.client.OkHttpClient
+import com.sethchhim.kuboo_remote.client.OkHttpClientFactory
 import com.sethchhim.kuboo_remote.client.OkHttpHelper
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Login
@@ -15,18 +15,14 @@ import java.util.concurrent.Executor
 
 class KubooRemote(context: Context, val networkIO: Executor, val mainThread: Executor) {
 
-    private var okHttpClient = OkHttpClient(context)
+    private val okHttpClientFactory = OkHttpClientFactory(context)
 
-    internal val okHttpHelper = OkHttpHelper(okHttpClient)
-    private val fetchService = FetchService(context, okHttpClient, mainThread)
+    internal val okHttpHelper = OkHttpHelper(okHttpClientFactory)
+    private val fetchService = FetchService(context, okHttpClientFactory, mainThread)
 
-    fun getOkHttpClient() = okHttpClient
+    fun getOkHttpClient() = okHttpClientFactory.client()
 
     fun getOkHttpHelper() = okHttpHelper
-
-    fun setOkHttpClient(customClient: okhttp3.OkHttpClient) {
-        okHttpClient = customClient as OkHttpClient
-    }
 
     fun pingServer(login: Login, stringUrl: String) = Task_Ping(this, login, stringUrl).liveData
 

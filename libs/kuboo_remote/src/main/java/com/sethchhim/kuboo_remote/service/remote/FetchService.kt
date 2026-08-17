@@ -5,7 +5,7 @@ import android.content.Context
 import android.webkit.MimeTypeMap
 import android.webkit.URLUtil
 import com.sethchhim.kuboo_remote.BuildConfig
-import com.sethchhim.kuboo_remote.client.OkHttpClient
+import com.sethchhim.kuboo_remote.client.OkHttpClientFactory
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Login
 import com.sethchhim.kuboo_remote.util.Authentication
@@ -19,7 +19,7 @@ import java.net.URL
 import java.util.concurrent.Executor
 
 
-class FetchService(val context: Context, okHttpClient: OkHttpClient, val mainThread: Executor) {
+class FetchService(val context: Context, okHttpClientFactory: OkHttpClientFactory, val mainThread: Executor) {
 
     private val CONCURRENT_LIMIT = 1
     private val NAMESPACE = "kuboo_fetch"
@@ -27,7 +27,7 @@ class FetchService(val context: Context, okHttpClient: OkHttpClient, val mainThr
     private val REPORTING_INTERVAL = 800L
 
     private val fetchConfiguration = FetchConfiguration.Builder(ReceiverFlagContext(context))
-            .setHttpDownloader(OkHttpDownloader(okHttpClient))
+            .setHttpDownloader(OkHttpDownloader(okHttpClientFactory.client()))
             .setDownloadConcurrentLimit(CONCURRENT_LIMIT)
             .setProgressReportingInterval(REPORTING_INTERVAL)
             .setNamespace(if (BuildConfig.DEBUG) NAMESPACE_DEBUG else NAMESPACE)

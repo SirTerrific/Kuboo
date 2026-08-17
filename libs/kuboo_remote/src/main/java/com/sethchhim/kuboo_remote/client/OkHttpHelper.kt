@@ -12,7 +12,7 @@ import timber.log.Timber
 import java.net.MalformedURLException
 import java.net.URL
 
-class OkHttpHelper(private val okHttpClient: OkHttpClient) {
+class OkHttpHelper(private val okHttpClientFactory: OkHttpClientFactory) {
 
     internal val parseService = ParseService()
 
@@ -34,7 +34,7 @@ class OkHttpHelper(private val okHttpClient: OkHttpClient) {
                     .tag(tag)
                     .build()
         }
-        return okHttpClient.newCall(request)
+        return okHttpClientFactory.client().newCall(request)
     }
 
     @Throws(NetworkErrorException::class, MalformedURLException::class)
@@ -45,7 +45,7 @@ class OkHttpHelper(private val okHttpClient: OkHttpClient) {
                 .header(Authentication.getAuthorizationHeaderName(), Authentication.getAuthorizationHeaderValue(login))
                 .put(requestBody)
                 .build()
-        return okHttpClient.newCall(request)
+        return okHttpClientFactory.client().newCall(request)
     }
 
     @Throws(NetworkErrorException::class, MalformedURLException::class)
@@ -56,15 +56,15 @@ class OkHttpHelper(private val okHttpClient: OkHttpClient) {
                 .header(Authentication.getAuthorizationHeaderName(), Authentication.getAuthorizationHeaderValue(login))
                 .post(requestBody)
                 .build()
-        return okHttpClient.newCall(request)
+        return okHttpClientFactory.client().newCall(request)
     }
 
-    fun getTlsCipherSuite() = okHttpClient.sslHandshakeInterceptor.tlsCipherSuite
+    fun getTlsCipherSuite() = okHttpClientFactory.sslHandshakeInterceptor.tlsCipherSuite
 
     fun cancelAllByTag(tag: String) {
         val list = mutableListOf<Call>()
-        list.addAll(okHttpClient.dispatcher().runningCalls())
-        list.addAll(okHttpClient.dispatcher().queuedCalls())
+        list.addAll(okHttpClientFactory.client().dispatcher().runningCalls())
+        list.addAll(okHttpClientFactory.client().dispatcher().queuedCalls())
         list.forEach {
             if (it.request().tag() == tag) {
                 Timber.d("cancel tag $tag")

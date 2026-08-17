@@ -60,12 +60,16 @@ open class ReaderBaseActivityImpl3_Overlay : ReaderBaseActivityImpl2_Dialog() {
         intent.putExtra(Constants.ARG_OVERLAY, false)
     }
 
-    protected fun hideOverlayHardwareNavigation() = if (isOverlayShown()) hideOverlay() else exitActivity()
-
-    protected fun hideOverlaySoftwareNavigation() {
-        if (isOverlayShown()) hideOverlay()
-        exitActivity()
-    }
+    /**
+     * One rule for going back: close the overlay if it is open, otherwise close the book.
+     *
+     * There used to be two rules, chosen by asking the system whether it had a navigation bar --
+     * through reflection on android.os.ServiceManager, which has been a blocked hidden api since
+     * Android 9. The lookup threw, the exception was swallowed as "hardware navigation", and the
+     * branch that exits on the same press as it hides the overlay became unreachable. With the
+     * overlay open, back appeared to do nothing at all.
+     */
+    protected fun onBackPressedReader() = if (isOverlayShown()) hideOverlay() else exitActivity()
 
     private fun isOverlayShown() = overlayLayout.isShown
 
@@ -110,6 +114,8 @@ open class ReaderBaseActivityImpl3_Overlay : ReaderBaseActivityImpl2_Dialog() {
         } else {
             overlayTextView1.text = currentBook.content
             overlayTotalPagesTextView.text = (totalPages).toString()
+            //without this the overlay reads "Page  of 100" until the seek bar is dragged
+            setOverlayPageNumberText(currentPage)
             overlayTextLayout.visible()
             overlaySeekBar.setLayoutDirection()
             overlaySeekBar.max = totalPages - 1

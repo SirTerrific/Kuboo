@@ -1,6 +1,5 @@
 package com.sethchhim.kuboo_client.util
 
-import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -12,7 +11,6 @@ import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Handler
-import android.os.IBinder
 import androidx.core.content.ContextCompat
 import android.view.WindowManager
 import com.sethchhim.kuboo_client.BuildConfig
@@ -71,21 +69,6 @@ class SystemUtil(private val context: Context) {
     internal fun isOrientationPortrait() = getOrientation() == Configuration.ORIENTATION_PORTRAIT
 
     private fun getOrientation() = context.resources.configuration.orientation
-
-    @SuppressLint("PrivateApi")
-    private fun isSoftwareNavigation() = try {
-        val serviceManager = Class.forName("android.os.ServiceManager")
-        val serviceBinder = serviceManager.getMethod("getService", String::class.java).invoke(serviceManager, "window") as IBinder
-        val stub = Class.forName("android.view.IWindowManager\$Stub")
-        val windowManagerService = stub.getMethod("asInterface", IBinder::class.java).invoke(stub, serviceBinder)
-        val hasNavigationBar = windowManagerService.javaClass.getMethod("hasNavigationBar")
-        hasNavigationBar.invoke(windowManagerService) as Boolean
-    } catch (e: Exception) {
-        Timber.e("message[${e.message}]")
-        false
-    }
-
-    internal fun isHardwareNavigation() = !isSoftwareNavigation()
 
     internal fun isNetworkAllowed() = !Settings.DISABLE_CELLULAR || Settings.DISABLE_CELLULAR && !isActiveNetworkCellular()
 

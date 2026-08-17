@@ -3,6 +3,15 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.27">
+        <changelogtext>close a book with the back gesture, every time</changelogtext>
+        <changelogtext>a back arrow in the reader toolbar</changelogtext>
+        <changelogtext>show the current page number as soon as the overlay opens</changelogtext>
+        <changelogtext>leave the reader without waiting a second for an animation</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.26">
         <changelogtext>sign in to Ubooquity so pages and covers load on a server that asks for a password</changelogtext>
         <changelogtext>show pdf covers from the page stream, like comics</changelogtext>

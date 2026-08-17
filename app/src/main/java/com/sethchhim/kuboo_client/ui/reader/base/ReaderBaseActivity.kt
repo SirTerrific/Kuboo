@@ -20,6 +20,9 @@ open class ReaderBaseActivity : ReaderBaseActivityImpl7_Hardware() {
         setKeepScreenOn()
         setSupportActionBar(toolbar)
 
+        //a way out that can be seen and tapped: the toolbar was title and menu only
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         hideReaderToolbar()
         hideStatusBar()
 
@@ -60,14 +63,13 @@ open class ReaderBaseActivity : ReaderBaseActivityImpl7_Hardware() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.reader_info -> showDialogInfo(currentBook)
+            //the arrow means leave the book, not just dismiss the overlay it is drawn on
+            android.R.id.home -> exitActivity()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() = when (systemUtil.isHardwareNavigation()) {
-        true -> hideOverlayHardwareNavigation()
-        false -> hideOverlaySoftwareNavigation()
-    }
+    override fun onBackPressed() = onBackPressedReader()
 
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()

@@ -43,6 +43,9 @@ open class ReaderBaseActivityImpl0_View : BaseActivity() {
     val previewImageView: ReaderPreviewImageView by bindView(R.id.reader_layout_base_preview_readerPreviewImageView)
     val toolbar: Toolbar by bindView(R.id.reader_layout_base_toolBar)
 
+    //long enough for slide_in_right to land, and no longer
+    private val EXIT_TRANSITION_DURATION = 300L
+
     internal var isLocal = false
     internal var isInPipMode = false
     protected var isBackStackLost = false
@@ -81,20 +84,30 @@ open class ReaderBaseActivityImpl0_View : BaseActivity() {
         }
     }
 
+    /**
+     * Leaving is never refused and never made to wait long.
+     *
+     * This used to sit out 300ms, slide the preview in, then sit out another 800ms before
+     * finishing -- and if a transition was already running it returned without doing anything at
+     * all, so the press that asked to leave was simply dropped. A book that would not close on
+     * the first or second press is that.
+     */
     private fun showExitTransition() {
-        if (!previewImageView.isAnimatingTransition) {
-            GlobalScope.launch(Dispatchers.Main) {
-                try {
-                    previewImageView.isAnimatingTransition = true
-                    showStatusBar()
-                    delay(300)
-                    previewImageView.slideIn()
-                    delay(800)
-                    super.onBackPressed()
-                } catch (e: Exception) {
-                    Timber.e(e)
-                }
+        if (previewImageView.isAnimatingTransition) {
+            super.onBackPressed()
+            return
+        }
+
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                previewImageView.isAnimatingTransition = true
+                showStatusBar()
+                previewImageView.slideIn()
+                delay(EXIT_TRANSITION_DURATION)
+            } catch (e: Exception) {
+                Timber.e(e)
             }
+            super@ReaderBaseActivityImpl0_View.onBackPressed()
         }
     }
 

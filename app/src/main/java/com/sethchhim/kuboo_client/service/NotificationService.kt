@@ -17,6 +17,11 @@ import com.sethchhim.kuboo_client.Settings
 import com.sethchhim.kuboo_remote.KubooRemote
 import com.tonyodev.fetch2.Download
 
+// Since Android 12 a PendingIntent must state whether it is mutable, or the constructor
+// throws. None of these are filled in later, so they are immutable. Kept out of the class
+// because the constructor builds intents before its own properties are initialised.
+private val PENDING_INTENT_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+
 class NotificationService(val context: Context, val kubooRemote: KubooRemote) {
 
     private val NOTIFICATION_CHANNEL = "NOTIFICATION_CHANNEL"
@@ -151,37 +156,37 @@ class NotificationService(val context: Context, val kubooRemote: KubooRemote) {
             true -> IntentService.DOWNLOAD_FRAGMENT_ACTION_AND_CANCEL_COMPLETED
             false -> IntentService.DOWNLOAD_FRAGMENT_ACTION
         }
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
     private fun getCancelFetchIntent(): PendingIntent {
         val intent = Intent(context, IntentService::class.java)
         intent.action = IntentService.CANCEL_ACTION
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
     private fun getPauseFetchIntent(): PendingIntent {
         val intent = Intent(context, IntentService::class.java)
         intent.action = IntentService.PAUSE_ACTION
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
     private fun getResumeFetchIntent(): PendingIntent {
         val intent = Intent(context, IntentService::class.java)
         intent.action = IntentService.RESUME_ACTION
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
     private fun getResetCompletedCountIntent(): PendingIntent {
         val intent = Intent(context, IntentService::class.java)
         intent.action = IntentService.RESET_COMPLETED_COUNT_ACTION
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
     private fun getDismissCompletedIntent(): PendingIntent {
         val intent = Intent(context, IntentService::class.java)
         intent.action = IntentService.DISMISS_COMPLETED_ACTION
-        return PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getService(context, 0, intent, PENDING_INTENT_FLAGS)
     }
 
 }

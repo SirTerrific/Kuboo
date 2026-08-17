@@ -26,8 +26,8 @@ android {
         applicationId "io.github.sirterrific.kuboo3"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 52
-        versionName "1.2.17"
+        versionCode 53
+        versionName "1.2.18"
         buildConfigField 'long', 'TIMESTAMP', System.currentTimeMillis() + 'L'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -120,7 +120,9 @@ dependencies {
     implementation "com.github.tonyofrancis.Fetch:fetch2:$fetch_version"
     implementation "com.github.tonyofrancis.Fetch:fetch2okhttp:$fetch_version"
 
-    implementation 'com.artifex.mupdf:fitz:1.13.0'
+    // 1.13.0 only shipped armeabi-v7a and x86 native libraries, so the apk would not
+    // install at all on 64-bit-only devices. 1.28.0 ships arm64-v8a and x86_64 too.
+    implementation 'com.artifex.mupdf:fitz:1.28.0'
     // vendored: com.booking:rtlviewpager was only ever published to JCenter, which shut
     // down in 2021. Keeping the aar in the repo removes the need for a third-party mirror.
     // sha256 dbb045aeb74bb9be98d1c83784ef259a20f127c8367be8384667b9ba5ad1fbd3

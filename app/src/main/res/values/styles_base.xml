@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+    <!-- SplashThemeBase and BaseThemeBase carry the actual styling. The themes the
+         manifest points at are thin wrappers so that values-v35 can add the
+         edge-to-edge opt-out without repeating every item. -->
+    <style name="SplashThemeBase" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/app_splash_background</item>
     </style>
 
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplashTheme" parent="SplashThemeBase" />
+
+    <style name="BaseThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:buttonStyle">@style/OpenSansButtonStyle</item>
         <item name="android:textViewStyle">@style/OpenSansTextViewStyle</item>
         <item name="android:windowContentTransitions">true</item>
@@ -13,6 +18,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="BaseTheme" parent="BaseThemeBase" />
 
     <style name="PreferenceTheme" parent="PreferenceThemeOverlay">
         <item name="android:textViewStyle">@style/OpenSansTextViewStyle</item>

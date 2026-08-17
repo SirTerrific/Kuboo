@@ -26,7 +26,7 @@ class FetchService(val context: Context, okHttpClient: OkHttpClient, val mainThr
     private val NAMESPACE_DEBUG = "kuboo_fetch_debug"
     private val REPORTING_INTERVAL = 800L
 
-    private val fetchConfiguration = FetchConfiguration.Builder(context)
+    private val fetchConfiguration = FetchConfiguration.Builder(ReceiverFlagContext(context))
             .setHttpDownloader(OkHttpDownloader(okHttpClient))
             .setDownloadConcurrentLimit(CONCURRENT_LIMIT)
             .setProgressReportingInterval(REPORTING_INTERVAL)

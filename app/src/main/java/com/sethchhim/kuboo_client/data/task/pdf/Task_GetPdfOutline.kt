@@ -32,11 +32,20 @@ open class Task_GetPdfOutline(private val document: Document) : Task_LocalBase()
         }
     }
 
+    // Outline entries carry a link uri rather than a page number; the document turns
+    // that into a page. Entries that point outside the document resolve to -1.
     private fun flattenOutline(outline: Array<Outline>, indent: String, flatOutline: ArrayList<OutlineItem>) {
         for (node in outline) {
-            if (node.title != null) flatOutline.add(OutlineItem(indent + node.title, node.page, 1))
+            if (node.title != null) flatOutline.add(OutlineItem(indent + node.title, node.pageNumber(), 1))
             if (node.down != null) flattenOutline(node.down, "$indent    ", flatOutline)
         }
+    }
+
+    private fun Outline.pageNumber() = try {
+        document.pageNumberFromLocation(document.resolveLink(this))
+    } catch (e: Exception) {
+        Timber.e(e)
+        0
     }
 
     private fun loadOutlineTotal(flatOutline: ArrayList<OutlineItem>) {

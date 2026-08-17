@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Android 15 forces edge-to-edge on apps targeting sdk 35, which puts the app's
+         own toolbar underneath the status bar because none of the layouts consume
+         window insets. Opt out until the layouts handle insets themselves: the
+         attribute stops being honoured once the app targets sdk 36.
+         ponytail: platform opt-out, apply insets to the layouts before targeting 36. -->
+    <style name="SplashTheme" parent="SplashThemeBase">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+    <style name="BaseTheme" parent="BaseThemeBase">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+</resources>

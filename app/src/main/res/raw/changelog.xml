@@ -3,6 +3,14 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.18">
+        <changelogtext>install on 64-bit only devices such as the Pixel 8</changelogtext>
+        <changelogtext>fix crash on launch on Android 14 and later</changelogtext>
+        <changelogtext>update the pdf engine from mupdf 1.13 to 1.28</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.17">
         <changelogtext>rename to Kuboo3, which installs alongside the original Kuboo</changelogtext>
         <changelogtext>fix crash on first launch when no server is configured yet</changelogtext>

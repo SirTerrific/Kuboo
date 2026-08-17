@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.29">
+        <changelogtext>the about page is titled Kuboo3</changelogtext>
+        <changelogtext>the maintainer\'s avatar on the developer page</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.28">
         <changelogtext>the developer page names who maintains this fork</changelogtext>
         <changelogtext>the licence list matches what the app actually ships</changelogtext>

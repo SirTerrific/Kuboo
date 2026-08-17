@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sethchhim.kuboo_client.*
 import com.sethchhim.kuboo_client.Extensions.gone
 import com.sethchhim.kuboo_client.Settings.UBOOQUITY_VERSION
@@ -76,10 +77,21 @@ class AboutPagerAdapter(val context: Context) : androidx.viewpager.widget.PagerA
             textBuildDate.setTextSize(TypedValue.COMPLEX_UNIT_PX, (width / 70).toFloat())
         }
 
-        val imageLogo = itemView.findViewById<ImageView>(R.id.image_logo)!!
-        Glide.with(context)
-                .load(R.drawable.app_feature_graphic)
-                .into(imageLogo)
+        //set as text rather than the old wordmark image, which spells the name of the app this is
+        //a fork of and cannot be corrected without redrawing it
+        val textTitle = itemView.findViewById<TextView>(R.id.textAboutTitle)!!
+        textTitle.typeface = systemUtil.robotoCondensedBold
+        textTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, when (systemUtil.isOrientationPortrait()) {
+            true -> (width / 6).toFloat()
+            false -> (width / 14).toFloat()
+        })
+
+        val textSubtitle = itemView.findViewById<TextView>(R.id.textAboutSubtitle)!!
+        textSubtitle.typeface = systemUtil.robotoCondensedBold
+        textSubtitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, when (systemUtil.isOrientationPortrait()) {
+            true -> (width / 25).toFloat()
+            false -> (width / 45).toFloat()
+        })
 
         val textInfo = itemView.findViewById<TextView>(R.id.textAboutInfo)!!
         textInfo.typeface = systemUtil.robotoCondensedRegular
@@ -129,9 +141,14 @@ class AboutPagerAdapter(val context: Context) : androidx.viewpager.widget.PagerA
     private fun getPage3(container: ViewGroup): View {
         val itemView = context.layoutInflater.inflate(R.layout.about_developer, container, false)
 
-        //what sat here was a drawn portrait of Kuboo's author, which is the one thing this page
-        //must not show any more; the page reads fine starting on the name
-        itemView.findViewById<ImageView>(R.id.about_developer_imageView)!!.gone()
+        //the maintainer's own github avatar, kept in the app rather than fetched: every remote
+        //image goes through the loader that attaches the server credentials, and those have no
+        //business being sent to github
+        val imageDeveloper = itemView.findViewById<ImageView>(R.id.about_developer_imageView)!!
+        Glide.with(context)
+                .load(R.drawable.developer_avatar)
+                .apply(RequestOptions.circleCropTransform())
+                .into(imageDeveloper)
 
         val textAboutDeveloperName = itemView.findViewById<TextView>(R.id.about_developer_textView1)!!
         textAboutDeveloperName.setText(R.string.about_developer_name)

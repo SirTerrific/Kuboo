@@ -29,13 +29,23 @@
             android:textColor="@color/md_white_1000"
             android:textSize="8sp"/>
 
-        <ImageView
-            android:id="@+id/image_logo"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+        <TextView
+            android:id="@+id/textAboutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="-40dp"
-            android:layout_marginTop="-40dp"/>
+            android:layout_marginTop="24dp"
+            android:text="@string/app_label"
+            android:textColor="@color/md_white_1000"/>
+
+        <TextView
+            android:id="@+id/textAboutSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:text="@string/about_subtitle"
+            android:textColor="@color/md_white_1000"/>
 
         <TextView
             android:id="@+id/textAboutInfo"

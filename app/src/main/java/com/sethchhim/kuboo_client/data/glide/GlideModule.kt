@@ -1,6 +1,7 @@
 package com.sethchhim.kuboo_client.data.glide
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
@@ -47,8 +48,10 @@ class GlideModule : AppGlideModule() {
         val epubFactory = GlideEpubLoader.Factory()
         registry.replace(GlideEpub::class.java, InputStream::class.java, epubFactory)
 
-        val pdfFactory = GlidePdfLoader.Factory()
-        registry.replace(GlidePdf::class.java, InputStream::class.java, pdfFactory)
+        // A pdf page arrives as the bitmap mupdf drew, not as encoded bytes: no compression on
+        // the way out and no decoding on the way in.
+        registry.prepend(GlidePdf::class.java, Bitmap::class.java, GlidePdfLoader.Factory())
+        registry.append(Bitmap::class.java, Bitmap::class.java, GlidePdfBitmapDecoder(glide.bitmapPool))
 
         val remoteFactory = GlideRemoteLoader.Factory(kubooRemote.getOkHttpClient())
         registry.replace(GlideUrl::class.java, InputStream::class.java, remoteFactory)

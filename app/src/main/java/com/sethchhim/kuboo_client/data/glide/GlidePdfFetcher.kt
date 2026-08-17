@@ -1,5 +1,6 @@
 package com.sethchhim.kuboo_client.data.glide
 
+import android.graphics.Bitmap
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.data.DataFetcher
@@ -9,10 +10,9 @@ import com.sethchhim.kuboo_client.data.model.GlidePdf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.InputStream
 import javax.inject.Inject
 
-class GlidePdfFetcher internal constructor(private val glidePdf: GlidePdf) : DataFetcher<InputStream> {
+class GlidePdfFetcher internal constructor(private val glidePdf: GlidePdf) : DataFetcher<Bitmap> {
 
     init {
         BaseApplication.appComponent.inject(this)
@@ -21,55 +21,43 @@ class GlidePdfFetcher internal constructor(private val glidePdf: GlidePdf) : Dat
     @Inject
     lateinit var viewModel: ViewModel
 
-    lateinit var inputStream: InputStream
-
-    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
+    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in Bitmap>) {
         when (glidePdf.singleInstance) {
             true -> loadSingleInstance(callback)
             false -> loadMultiInstance(callback)
         }
     }
 
-    private fun loadSingleInstance(callback: DataFetcher.DataCallback<in InputStream>) {
+    private fun loadSingleInstance(callback: DataFetcher.DataCallback<in Bitmap>) {
         GlobalScope.launch(Dispatchers.Main) {
-            viewModel.getPdfImageInputStreamSingleInstance(glidePdf).observeForever { result ->
+            viewModel.getPdfImageSingleInstance(glidePdf).observeForever { result ->
                 handleResult(callback, result)
             }
         }
     }
 
-    private fun loadMultiInstance(callback: DataFetcher.DataCallback<in InputStream>) {
+    private fun loadMultiInstance(callback: DataFetcher.DataCallback<in Bitmap>) {
         GlobalScope.launch(Dispatchers.Main) {
-            viewModel.getPdfImageInputStream(glidePdf).observeForever { result ->
+            viewModel.getPdfImage(glidePdf).observeForever { result ->
                 handleResult(callback, result)
             }
         }
     }
 
-    private fun handleResult(callback: DataFetcher.DataCallback<in InputStream>, result: InputStream?) {
-        if (result != null) {
-            inputStream = result
-            callback.onDataReady(inputStream)
-        } else {
-            callback.onLoadFailed(Exception("Failed to load!"))
+    private fun handleResult(callback: DataFetcher.DataCallback<in Bitmap>, result: Bitmap?) {
+        when (result) {
+            null -> callback.onLoadFailed(Exception("Failed to render page ${glidePdf.position}"))
+            else -> callback.onDataReady(result)
         }
     }
 
-    override fun cleanup() {
-        try {
-            inputStream.close()
-        } catch (e: Exception) {
-        }
-    }
+    // The bitmap belongs to Glide once it is handed over: it goes into the bitmap pool through
+    // BitmapResource, and recycling it here would pull it out from under whatever is drawing it.
+    override fun cleanup() {}
 
-    override fun cancel() {
-        try {
-            inputStream.close()
-        } catch (e: Exception) {
-        }
-    }
+    override fun cancel() {}
 
-    override fun getDataClass() = InputStream::class.java
+    override fun getDataClass() = Bitmap::class.java
 
     override fun getDataSource() = DataSource.LOCAL
 

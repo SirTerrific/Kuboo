@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -56,6 +57,11 @@ class ReaderPdfFragmentImpl1_Single : ReaderPdfFragment() {
         val height = readerPdfActivity.systemUtil.getSystemHeight()
         Glide.with(this)
                 .load(GlidePdf(book, position, width, height))
+                // The pager already keeps the neighbouring pages alive in their own fragments,
+                // so a second copy of each in Glide's cache is memory spent twice -- and a page
+                // of a magazine at screen size is around 10MB.
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
                         onLoadImageFail(e?.message)

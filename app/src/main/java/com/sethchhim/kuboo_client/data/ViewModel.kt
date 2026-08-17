@@ -298,9 +298,9 @@ class ViewModel(internal val browserRepository: BrowserRepository,
 
     internal fun getPdfDocument() = pdfRepository.document
 
-    internal fun getPdfImageInputStream(glidePdf: GlidePdf) = pdfRepository.getPdfImageInputStream(glidePdf)
+    internal fun getPdfImage(glidePdf: GlidePdf) = pdfRepository.getPdfImage(glidePdf)
 
-    internal fun getPdfImageInputStreamSingleInstance(glidePdf: GlidePdf) = pdfRepository.getPdfImageInputStreamSingleInstance(glidePdf)
+    internal fun getPdfImageSingleInstance(glidePdf: GlidePdf) = pdfRepository.getPdfImageSingleInstance(glidePdf)
 
     internal fun getPdfOutline() = pdfRepository.getPdfOutline()
 

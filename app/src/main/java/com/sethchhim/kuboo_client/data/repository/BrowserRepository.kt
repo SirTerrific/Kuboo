@@ -54,12 +54,13 @@ class BrowserRepository {
 
     internal fun getPathSize() = pathList.size
 
-    internal fun getPathItemId(position: Int) = try {
-        pathList[position].id.toLong()
-    } catch (e: Exception) {
-        Timber.e("Failed to find path item id!")
-        0L
-    }
+    /**
+     * The path list is a breadcrumb stack, so a position identifies a level uniquely.
+     * Book ids cannot be used here: Ubooquity 3 navigation entries carry non-numeric ids
+     * ("ComicsByFolder", "ComicsLatest") that all parse to 0, and RecyclerView aborts with
+     * "Two different ViewHolders have the same stable ID" as soon as two levels collide.
+     */
+    internal fun getPathItemId(position: Int) = position.toLong()
 
     internal fun getCurrentBook() = if (pathList.isNotEmpty()) pathList[pathPosition - 1] else null
 

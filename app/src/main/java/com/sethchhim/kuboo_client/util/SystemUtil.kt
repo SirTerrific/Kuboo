@@ -140,20 +140,6 @@ class SystemUtil(private val context: Context) {
         }
     }
 
-    internal fun launchPlayStore() {
-        val appPackageName = context.packageName
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName"))
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            val playStoreUrl = "https://play.google.com/store/apps/details?id="
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(playStoreUrl + appPackageName))
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-            context.startActivity(intent)
-        }
-    }
-
     internal fun openLink(url: String) {
         val uriUrl = Uri.parse(url)
         val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl).apply {

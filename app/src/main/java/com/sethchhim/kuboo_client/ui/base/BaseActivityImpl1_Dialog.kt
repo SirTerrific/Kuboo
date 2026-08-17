@@ -21,9 +21,10 @@ open class BaseActivityImpl1_Dialog : BaseActivityImpl0_View() {
     protected var isLoadingCancelled = false
     protected var isLoadingRequired = true
 
+    // No "rate" button: this fork is not published on Google Play, so the link would
+    // open a store page that does not exist.
     internal fun showChangeLog() = dialogUtil.getDialogChangeLog(this).apply {
         setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.dialog_dismiss)) { dialogInterface, _ -> dialogInterface.dismiss() }
-        setButton(AlertDialog.BUTTON_NEUTRAL, context.getString(R.string.dialog_rate)) { _, _ -> systemUtil.launchPlayStore() }
         show()
         window?.attributes = WindowManager.LayoutParams().apply {
             val systemWidth = systemUtil.getSystemWidth()

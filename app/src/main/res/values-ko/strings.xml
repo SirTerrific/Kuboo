@@ -56,8 +56,8 @@ Epub 파일형식의 경우 원격(서버) 책갈피 기능을 지원하지 않�
     <string name="about_question3">"두장보기 모드는 어떻게 동작하나요?"</string>
     <string name="about_question4">"왜 썸네일 이미지가 깨지거나 흐릿해 보이나요?"</string>
 
-    <string name="app_label">"Kuboo"</string>
-    <string name="app_label_debug">"Kuboo 디버그"</string>
+    <string name="app_label">"Kuboo3"</string>
+    <string name="app_label_debug">"Kuboo3 디버그"</string>
 
     <string name="browser_favorite">"즐겨찾기"</string>
     <string name="browser_folder">"폴더"</string>

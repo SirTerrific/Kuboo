@@ -23,7 +23,7 @@ android {
         buildConfig true
     }
     defaultConfig {
-        applicationId "com.sethchhim.kuboo"
+        applicationId "io.github.sirterrific.kuboo3"
         minSdkVersion 23
         targetSdkVersion 35
         versionCode 52

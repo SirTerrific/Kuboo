@@ -4,6 +4,8 @@
     <changelogversion
         changeDate="Aug 17, 2026"
         versionName="1.2.17">
+        <changelogtext>rename to Kuboo3, which installs alongside the original Kuboo</changelogtext>
+        <changelogtext>fix crash on first launch when no server is configured yet</changelogtext>
         <changelogtext>replace the discontinued Butterknife library</changelogtext>
         <changelogtext>build and test automatically on every change</changelogtext>
         <changelogtext>fix line endings that broke builds on Linux</changelogtext>

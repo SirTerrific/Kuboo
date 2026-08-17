@@ -10,10 +10,14 @@ import com.sethchhim.kuboo_client.ui.main.login.adapter.LoginAdapter
 
 class LoginBrowserFragment : LoginBrowserFragmentImpl1_Content() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            super.onCreateView(inflater, container, savedInstanceState)
+
+    // fab is looked up from the fragment, so it is only reachable once onCreateView has
+    // returned a view.
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         fab.setOnClickListener { onFabClicked() }
-        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

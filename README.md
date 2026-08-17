@@ -1,4 +1,12 @@
-# Kuboo
+# Kuboo3
+
+A maintained fork of [Kuboo](https://github.com/sethchhim/Kuboo) by Seth Chhim, whose
+development stopped in 2019. Kuboo3 adds support for Ubooquity 3 and brings the build
+back to current Android tooling.
+
+It is a separate application: it installs alongside the original rather than replacing
+it, and is not published on Google Play. Builds are on the [releases page](../../releases).
+
 ![kuboo-feature-graphic-stars](https://user-images.githubusercontent.com/11790350/41466763-9e5a1a80-7071-11e8-9063-a69718340853.png)
 
 This lightweight Android application can load books for the [Ubooquity](https://vaemendis.net/ubooquity/) server software.
@@ -27,13 +35,13 @@ When adding a server address you must follow one of these formats:
 <img src="https://user-images.githubusercontent.com/11790350/41467653-4868170e-7075-11e8-9a12-205d9d2cf52b.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467654-48780fd8-7075-11e8-83d2-7a54edcada93.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467655-4887809e-7075-11e8-803f-85fa851ecac5.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467656-48987084-7075-11e8-8fbf-b6490a5ffce1.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467657-48a58512-7075-11e8-94f1-4d5756bb8c49.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467658-48b35db8-7075-11e8-9681-99b165cad5cc.png" width="25%"> <img src="https://user-images.githubusercontent.com/11790350/41467659-48bef16e-7075-11e8-86f7-d45efda7e5f4.png" width="25%">
 
 <br/><br/>
-<a href="https://play.google.com/store/apps/details?id=com.sethchhim.kuboo">
-  <img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
-</a>
-<br/><br/>
 
-*"Kuboo" is an independent third party application not affiliated with Ubooquity in any manner.*
-  
-*"Kuboo" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.*
+The original Kuboo, which this fork is based on, is on
+[Google Play](https://play.google.com/store/apps/details?id=com.sethchhim.kuboo).
+That listing is Seth Chhim's app, not this fork — Kuboo3 is not published there.
 
-*Google Play is a trademark of Google Inc.*
+*"Kuboo3" is an independent third party application not affiliated with Ubooquity in any manner.*
+
+*"Kuboo3" provides unrestricted access to the internet and is not responsible for the availability or content of these external sources.*
+
+*Licensed under Apache 2.0, as the original. Google Play is a trademark of Google Inc.*

@@ -37,8 +37,13 @@ captures/
 *.iml
 .idea/
 
-# Keystore files
+# Signing material. None of this is ever committed: the properties file holds the
+# keystore passwords in clear text, and the keystore is the identity of the app.
 *.jks
+*.keystore
+*.p12
+*.pepk
+keystore.properties
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild

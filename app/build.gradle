@@ -26,8 +26,8 @@ android {
         applicationId "io.github.sirterrific.kuboo3"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 53
-        versionName "1.2.18"
+        versionCode 54
+        versionName "1.2.19"
         buildConfigField 'long', 'TIMESTAMP', System.currentTimeMillis() + 'L'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

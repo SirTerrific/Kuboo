@@ -3,6 +3,13 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.19">
+        <changelogtext>read comics from an Ubooquity 3 server without downloading them first</changelogtext>
+        <changelogtext>show comic covers again in recently viewed</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.18">
         <changelogtext>install on 64-bit only devices such as the Pixel 8</changelogtext>
         <changelogtext>fix crash on launch on Android 14 and later</changelogtext>

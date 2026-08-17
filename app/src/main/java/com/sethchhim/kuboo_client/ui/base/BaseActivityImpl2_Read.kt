@@ -276,10 +276,14 @@ open class BaseActivityImpl2_Read : BaseActivityImpl1_Dialog() {
         } ?: onPreloadFailure()
     })
 
+    // Ubooquity 3 advertises a page streaming link in its feed that it does not actually
+    // serve, so preloading pages fails there. Fall back to fetching the file and reading
+    // it locally, which is how books are read anyway: preloadBook sets filePath, and the
+    // reader switches to local on that alone.
     private fun preloadComic(readData: ReadData) = glideUtil.preload(this, readData.book).observe(this, Observer { result ->
         when (result) {
             true -> onPreloadSuccess(readData)
-            false -> onPreloadFailure()
+            false -> preloadBook(readData)
         }
     })
 

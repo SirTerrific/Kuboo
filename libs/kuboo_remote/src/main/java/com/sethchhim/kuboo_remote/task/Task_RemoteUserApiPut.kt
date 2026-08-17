@@ -7,7 +7,6 @@ import com.sethchhim.kuboo_remote.model.Login
 import okhttp3.Call
 import okhttp3.MediaType
 import okhttp3.RequestBody
-import org.json.JSONObject
 import timber.log.Timber
 
 class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) : Task_RemoteUserApiBase(kubooRemote, login, book) {
@@ -62,23 +61,26 @@ class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) 
         }
     }
 
+    /**
+     * Ubooquity 3 takes the bookmark as the plain request body and parses it itself: an
+     * integer page for comics, the reader's "spineIndex#percentage" string for a book. It
+     * rejects the json body Ubooquity 2 accepted with
+     * "NumberFormatException: For input string: {...}", and a form content type makes the
+     * servlet consume the body before the handler reads it ("IllegalStateException:
+     * STREAMED"), so the type has to be text.
+     *
+     * The call carries no finished flag any more; isFinished stays local.
+     */
     private fun getRequestBody(): RequestBody {
-        val JSON = MediaType.parse("application/json; charset=utf-8")
-        val params = HashMap<String, String>().apply {
-            val mark = when (book.isEpub()) {
-                true -> book.bookMark
-                false -> try {
-                    book.currentPage.toString()
-                } catch (e: Exception) {
-                    "0"
-                }
-            }
-            put("mark", mark)
-            put("isFinished", book.isFinished.toString())
+        val mark = when (book.isEpub()) {
+            true -> book.bookMark
+            false -> book.currentPage.toString()
         }
-        val jsonObject = JSONObject(params)
-        val parameter = jsonObject.toString()
-        return RequestBody.create(JSON, parameter)
+        return RequestBody.create(TEXT, mark)
+    }
+
+    private companion object {
+        val TEXT = MediaType.parse("text/plain; charset=utf-8")
     }
 
 }

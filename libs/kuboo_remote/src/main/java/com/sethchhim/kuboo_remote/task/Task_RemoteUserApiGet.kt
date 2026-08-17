@@ -40,10 +40,12 @@ class Task_RemoteUserApiGet(kubooRemote: KubooRemote, login: Login, book: Book) 
     }
 
     private fun handleResult(responseBody: ResponseBody) {
-        val result = responseBody.string()
+        val result = responseBody.string().trim()
         if (result.isEmpty()) {
             Timber.d("UserApiData has no data: title[${book.title}] stringUrl[$stringUrl]")
             kubooRemote.mainThread.execute { liveData.value = null }
+        } else if (!result.startsWith("{")) {
+            handlePlainResult(result)
         } else {
             try {
                 val jsonObject = JSONObject(result)
@@ -63,6 +65,20 @@ class Task_RemoteUserApiGet(kubooRemote: KubooRemote, login: Login, book: Book) 
                 kubooRemote.mainThread.execute { liveData.value = null }
             }
         }
+    }
+
+    /**
+     * Ubooquity 3 answers with the bookmark itself rather than the json object Ubooquity 2
+     * returned: the page number for a comic, "spineIndex#percentage" for a book. It carries
+     * no finished flag, so isFinished keeps whatever was stored locally.
+     */
+    private fun handlePlainResult(result: String) {
+        val page = result.substringBefore("#").toIntOrNull()
+        if (page != null) book.currentPage = page
+
+        val elapsedTime = System.currentTimeMillis() - startTime
+        Timber.d("UserApi get is successful: title[${book.title}] savedPage[${book.currentPage} of ${book.totalPages}] mark[$result] stringUrl[$stringUrl] time[$elapsedTime milliseconds]")
+        kubooRemote.mainThread.execute { liveData.value = book }
     }
 
     private fun handleAuthentication(call: Call) = kubooRemote.mainThread.execute {

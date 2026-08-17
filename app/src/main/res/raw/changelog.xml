@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.20">
+        <changelogtext>save reading position on an Ubooquity 3 server again</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.19">
         <changelogtext>read comics from an Ubooquity 3 server without downloading them first</changelogtext>
         <changelogtext>show comic covers again in recently viewed</changelogtext>

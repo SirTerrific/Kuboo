@@ -23,13 +23,14 @@ class Task_Ping(val kubooRemote: KubooRemote, val login: Login, val stringUrl: S
                 handleResponse(response)
                 response.close()
             } catch (e: Exception) {
-                val message = e.message
-                Timber.e("message[$message] url[$stringUrl]")
-                if (message?.lowercase() == "socket closed") {
-                    //call was cancelled, do nothing
-                } else {
-                    kubooRemote.mainThread.execute { liveData.value = null }
-                }
+                Timber.e("message[${e.message}] url[$stringUrl]")
+
+                // A cancelled ping used to report nothing at all. The screen that asked for it
+                // only leaves its loading state when the ping answers, so cancelling one in
+                // flight -- which happens on every tab reselect -- left the spinner up until
+                // the app was killed. Failure is reported like any other, and the caller
+                // already ignores it when the tab it belongs to is no longer selected.
+                kubooRemote.mainThread.execute { liveData.value = null }
             }
         }
     }

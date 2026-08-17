@@ -3,6 +3,14 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.24">
+        <changelogtext>fix lists staying empty after leaving a screen and coming back</changelogtext>
+        <changelogtext>stop waiting forever when a server check is cancelled</changelogtext>
+        <changelogtext>record warnings and errors so a problem can be diagnosed from a log</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.23">
         <changelogtext>show sharp comic covers instead of the server thumbnail</changelogtext>
     </changelogversion>

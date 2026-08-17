@@ -24,6 +24,11 @@ import javax.inject.Inject
 
 class GlideRemoteFetcher internal constructor(private val client: Call.Factory, private val url: GlideUrl) : DataFetcher<InputStream> {
 
+    private companion object {
+        /** Kuboo server serves image metadata here; thumbnails come back as images directly. */
+        const val KUBOO_IMAGE_META_PATH = "/cache/images/"
+    }
+
     init {
         BaseApplication.appComponent.inject(this)
     }
@@ -60,33 +65,29 @@ class GlideRemoteFetcher internal constructor(private val client: Call.Factory, 
                 override fun onResponse(call: Call, response: Response) {
                     responseBody = response.body()
                     if (response.isSuccessful && responseBody != null) {
-                        when (viewModel.isActiveServerKuboo()) {
-                            true -> onResponseKuboo()
-                            false -> onResponseUbooquity()
+                        // A Kuboo server answers its image endpoint with JSON metadata that
+                        // points at the real file, while Ubooquity returns the image itself.
+                        // Decide from the url actually requested: deriving it from the
+                        // configured server address misreads an Ubooquity 3 instance set up
+                        // with its natural "/opds/" address, and the image is then parsed
+                        // as JSON.
+                        when (url.toStringUrl().contains(KUBOO_IMAGE_META_PATH)) {
+                            true -> onResponseKubooImageMeta()
+                            false -> handleResponse()
                         }
                     }
                 }
 
-                private fun onResponseUbooquity() {
-                    handleResponse()
-                }
-
-                private fun onResponseKuboo() {
+                private fun onResponseKubooImageMeta() {
                     try {
-                        val stringUrl = url.toStringUrl()
-                        if (stringUrl.contains("/cache/thumbnails/")) {
-                            handleResponse()
-                        } else {
-                            val contentLength = responseBody!!.contentLength()
-                            val inputStream = ContentLengthInputStream.obtain(responseBody!!.byteStream(), contentLength)
-                            val inputAsString = inputStream.use {
-                                it.bufferedReader().use { it.readText() }
-                            }
-                            println("inputAsString, $inputAsString")
-                            val jsonObject = Gson().fromJson(inputAsString, ImageMeta::class.java)
-                            val kubooUrl = viewModel.getActiveServer() + jsonObject.fileName
-                            loadDataKuboo(kubooUrl)
+                        val contentLength = responseBody!!.contentLength()
+                        val inputStream = ContentLengthInputStream.obtain(responseBody!!.byteStream(), contentLength)
+                        val inputAsString = inputStream.use {
+                            it.bufferedReader().use { it.readText() }
                         }
+                        val jsonObject = Gson().fromJson(inputAsString, ImageMeta::class.java)
+                        val kubooUrl = viewModel.getActiveServer() + jsonObject.fileName
+                        loadDataKuboo(kubooUrl)
                     } catch (e: Exception) {
                         callback.onLoadFailed(e)
                     }

@@ -136,7 +136,7 @@ HTTP NON TROUVÉ
     <string name="login_active_server_removed">"Serveur actif supprimé!"</string>
     <string name="login_add_server">"Ajouter un serveur"</string>
     <string name="login_delete_server">"Supprimer le serveur"</string>
-    <string name="login_does_not_contain_opds_books_or_opds_comics">"Ne contient pas /opds-books / ou /opds-comics/"</string>
+    <string name="login_does_not_contain_opds_books_or_opds_comics">"Ne contient pas /opds/, /opds-books/ ou /opds-comics/"</string>
     <string name="login_edit_server">"Modifier le serveur"</string>
     <string name="login_example">"Exemple"</string>
     <string name="login_ip_address">"Adresse IP (obligatoire)"</string>

@@ -135,7 +135,11 @@ open class LoginEditFragment : DaggerFragment() {
         textInputLayoutServer.error = getString(R.string.login_does_not_contain_opds_books_or_opds_comics)
     }
 
-    private fun CharSequence.isValid() = contains("/opds-comics/", ignoreCase = true) || contains("/opds-books/", ignoreCase = true)
+    // Ubooquity 3 serves everything from /opds/; versions 2 and earlier used the
+    // /opds-comics/ and /opds-books/ sections. Accept all three.
+    private fun CharSequence.isValid() = contains("/opds/", ignoreCase = true)
+            || contains("/opds-comics/", ignoreCase = true)
+            || contains("/opds-books/", ignoreCase = true)
 
     companion object {
         fun newInstance(login: Login?) = LoginEditFragment().apply {

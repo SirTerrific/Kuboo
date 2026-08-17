@@ -16,10 +16,7 @@ open class HomeFragmentImpl1_Content : HomeFragmentImpl0_View() {
     //recent
     protected fun populateRecent() {
         setRecentStateLoading()
-        when (viewModel.isActiveServerKuboo()) {
-            true -> viewModel.getRecentListFromDao().observe(this, Observer { handleRecentResult(it) }) //TODO Replace
-            false -> viewModel.getRecentListFromDao().observe(this, Observer { handleRecentResult(it) })
-        }
+        viewModel.getRecentListFromDao().observe(this, Observer { handleRecentResult(it) })
     }
 
     internal fun handleRecentResult(result: List<Book>?) = when (result == null) {

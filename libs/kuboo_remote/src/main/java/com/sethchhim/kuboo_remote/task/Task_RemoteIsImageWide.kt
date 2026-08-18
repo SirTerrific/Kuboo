@@ -19,14 +19,14 @@ class Task_RemoteIsImageWide(kubooRemote: KubooRemote, login: Login, stringUrl: 
                 login.setTimeAccessed()
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val isWide = isBitmapWide(inputStream)
                     inputStream.close()
                     response.close()
                     kubooRemote.mainThread.execute { liveData.value = isWide }
                 } else {
-                    Timber.w("code[${response.code()}] message[${response.message()}] url[$stringUrl]")
+                    Timber.w("code[${response.code}] message[${response.message}] url[$stringUrl]")
                     kubooRemote.mainThread.execute { liveData.value = false }
                 }
             } catch (e: Exception) {

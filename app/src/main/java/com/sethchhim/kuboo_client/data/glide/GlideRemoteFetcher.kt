@@ -63,7 +63,7 @@ class GlideRemoteFetcher internal constructor(private val client: Call.Factory, 
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
-                    responseBody = response.body()
+                    responseBody = response.body
                     if (response.isSuccessful && responseBody != null) {
                         // A Kuboo server answers its image endpoint with JSON metadata that
                         // points at the real file, while Ubooquity returns the image itself.
@@ -108,7 +108,7 @@ class GlideRemoteFetcher internal constructor(private val client: Call.Factory, 
 
                         @Throws(IOException::class)
                         override fun onResponse(call: Call, response: Response) {
-                            responseBody = response.body()
+                            responseBody = response.body
                             if (response.isSuccessful && responseBody != null) {
                                 handleResponse()
                             }

@@ -36,9 +36,9 @@ class Task_Ping(val kubooRemote: KubooRemote, val login: Login, val stringUrl: S
     }
 
     private fun handleResponse(response: okhttp3.Response) {
-        val responseString = "${response.code()} ${response.message()}"
+        val responseString = "${response.code} ${response.message}"
         Timber.d("response[$responseString] url[$stringUrl]")
-        kubooRemote.mainThread.execute { liveData.value = Response(response.code(), response.message(), response.isSuccessful) }
+        kubooRemote.mainThread.execute { liveData.value = Response(response.code, response.message, response.isSuccessful) }
     }
 
     private fun handleAuthentication() {

@@ -38,22 +38,22 @@ internal class UbooquitySessionInterceptor(private val cookieJar: CookieJar,
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         if (request.isPageReader()) synchronized(this) {
-            if (!hasSession(request.url())) login(request)
+            if (!hasSession(request.url)) login(request)
         }
         return chain.proceed(request)
     }
 
-    private fun Request.isPageReader() = url().encodedPath().startsWith(PATH_PAGE_READER)
+    private fun Request.isPageReader() = url.encodedPath.startsWith(PATH_PAGE_READER)
 
-    private fun hasSession(url: HttpUrl) = cookieJar.loadForRequest(url).any { it.name() == COOKIE_SESSION }
+    private fun hasSession(url: HttpUrl) = cookieJar.loadForRequest(url).any { it.name == COOKIE_SESSION }
 
     private fun login(request: Request) {
         val credentials = request.credentials() ?: return
-        val loginUrl = request.url().newBuilder().encodedPath("/").query(null).build()
+        val loginUrl = request.url.newBuilder().encodedPath("/").query(null).build()
 
         try {
             val form = callFactory().newCall(Request.Builder().url(loginUrl).build()).execute().use {
-                it.body()?.string() ?: ""
+                it.body?.string() ?: ""
             }
             val salt = SALT.find(form)?.groupValues?.get(1)
             val time = TIME.find(form)?.groupValues?.get(1)
@@ -69,7 +69,7 @@ internal class UbooquitySessionInterceptor(private val cookieJar: CookieJar,
                     .build()
             callFactory().newCall(Request.Builder().url(loginUrl).post(body).build()).execute().close()
 
-            if (!hasSession(request.url())) Timber.w("Ubooquity did not grant a session to [${credentials.first}]")
+            if (!hasSession(request.url)) Timber.w("Ubooquity did not grant a session to [${credentials.first}]")
         } catch (e: Exception) {
             Timber.e("Failed to open a Ubooquity session: ${e.message}")
         }

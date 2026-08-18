@@ -26,8 +26,8 @@ android {
         applicationId "io.github.sirterrific.kuboo3"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 69
-        versionName "1.2.34"
+        versionCode 70
+        versionName "1.2.35"
         buildConfigField 'long', 'TIMESTAMP', System.currentTimeMillis() + 'L'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -134,7 +134,7 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version"
 
     //fetch
-    final fetch_version = "2.3.6"
+    final fetch_version = "3.4.1"
     implementation "com.github.tonyofrancis.Fetch:fetch2:$fetch_version"
     implementation "com.github.tonyofrancis.Fetch:fetch2okhttp:$fetch_version"
 

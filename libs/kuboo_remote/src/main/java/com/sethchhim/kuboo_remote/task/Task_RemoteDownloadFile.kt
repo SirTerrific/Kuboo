@@ -23,7 +23,7 @@ class Task_RemoteDownloadFile(val kubooRemote: KubooRemote, val login: Login, va
                 val startTime = System.currentTimeMillis()
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = call.execute()
-                val responseBody = response.body()
+                val responseBody = response.body
                 if (responseBody != null) {
                     val contentLength = responseBody.contentLength()
                     val fileName = URL(stringUrl).guessFileName()

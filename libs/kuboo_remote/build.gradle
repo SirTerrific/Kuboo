@@ -61,12 +61,12 @@ dependencies {
     // OkHttp 4 turned the client into a final class configured through its Builder;
     // this module still subclasses OkHttpClient and overrides cache(), cookieJar() and
     // interceptors(). Moving to 4.x means rewriting that client, not bumping a version.
-    final okhttp_version = "3.14.9"
+    final okhttp_version = "4.12.0"
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //fetch
-    final fetch_version = "2.3.6"
+    final fetch_version = "3.4.1"
     implementation "com.github.tonyofrancis.Fetch:fetch2:$fetch_version"
     implementation "com.github.tonyofrancis.Fetch:fetch2okhttp:$fetch_version"
 

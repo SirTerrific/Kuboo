@@ -23,7 +23,7 @@ class Task_RemoteSeriesNeighbors(kubooRemote: KubooRemote, login: Login, book: B
             try {
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName, CacheControl.FORCE_NETWORK)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val inputAsString = inputStream.bufferedReader().use { it.readText() }
                     val result = parseService.parseSeriesNeighbors(login, book, inputAsString, seriesLimit)

@@ -19,14 +19,14 @@ class Task_RemoteUserApiGet(kubooRemote: KubooRemote, login: Login, book: Book) 
             try {
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = call.execute()
-                val responseBody = response.body()
+                val responseBody = response.body
                 if (response.isSuccessful && responseBody != null) {
                     handleResult(responseBody)
                 } else {
-                    when (response.code()) {
+                    when (response.code) {
                         401 -> handleAuthentication(call)
                         else -> {
-                            Timber.e("code[${response.code()}] message[${response.message()}] title[${book.title}] stringUrl[$stringUrl]")
+                            Timber.e("code[${response.code}] message[${response.message}] title[${book.title}] stringUrl[$stringUrl]")
                             kubooRemote.mainThread.execute { liveData.value = null }
                         }
                     }
@@ -93,11 +93,11 @@ class Task_RemoteUserApiGet(kubooRemote: KubooRemote, login: Login, book: Book) 
     private fun Call.retry() = kubooRemote.networkIO.execute {
         try {
             val secondResponse = execute()
-            val secondResponseBody = secondResponse.body()
+            val secondResponseBody = secondResponse.body
             if (secondResponse.isSuccessful && secondResponseBody != null) {
                 handleResult(secondResponseBody)
             } else {
-                Timber.e("code[${secondResponse.code()}] message[${secondResponse.message()}] title[${book.title}] stringUrl[$stringUrl] secondAttempt[true]")
+                Timber.e("code[${secondResponse.code}] message[${secondResponse.message}] title[${book.title}] stringUrl[$stringUrl] secondAttempt[true]")
                 kubooRemote.mainThread.execute { liveData.value = null }
             }
         } catch (e: Exception) {

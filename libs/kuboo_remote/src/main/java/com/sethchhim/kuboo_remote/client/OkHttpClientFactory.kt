@@ -108,13 +108,13 @@ class OkHttpClientFactory(private val context: Context) {
      * entirely and answers an "Authentication error" image without one.
      */
     private val cookieJar = object : CookieJar {
-        private val cookieStore = HashMap<String, MutableList<Cookie>>()
+        private val cookieStore = HashMap<String, List<Cookie>>()
 
-        override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-            cookieStore[url.host()] = cookies
+        override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+            cookieStore[url.host] = cookies
         }
 
-        override fun loadForRequest(url: HttpUrl): MutableList<Cookie> = cookieStore[url.host()] ?: mutableListOf()
+        override fun loadForRequest(url: HttpUrl): List<Cookie> = cookieStore[url.host] ?: mutableListOf()
     }
 
     private val trustAllManager = object : X509TrustManager {

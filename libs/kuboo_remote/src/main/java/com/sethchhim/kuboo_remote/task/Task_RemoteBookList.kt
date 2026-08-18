@@ -22,7 +22,7 @@ class Task_RemoteBookList(kubooRemote: KubooRemote, val login: Login, val string
             try {
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName, cacheControl = CacheControl.FORCE_NETWORK)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val inputAsString = inputStream.bufferedReader().use { it.readText() }
                     val result = parseService.parseOpds(login, inputAsString)

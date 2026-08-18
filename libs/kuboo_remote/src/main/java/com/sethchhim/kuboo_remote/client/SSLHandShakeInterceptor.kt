@@ -15,9 +15,9 @@ class SSLHandshakeInterceptor : Interceptor {
 
     private fun setTlsAndCipherSuiteInfo(response: Response?) {
         if (response != null) {
-            val handshake = response.handshake()
+            val handshake = response.handshake
             if (handshake != null) {
-                tlsCipherSuite = " ${handshake.tlsVersion()}\n ${handshake.cipherSuite()}\n"
+                tlsCipherSuite = " ${handshake.tlsVersion}\n ${handshake.cipherSuite}\n"
                 tlsCipherSuite = tlsCipherSuite.replace("_", " ")
             } else {
                 tlsCipherSuite = ""

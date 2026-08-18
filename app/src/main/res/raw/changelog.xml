@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.35">
+        <changelogtext>update the network and download libraries, both six years old</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.34">
         <changelogtext>render pdf pages without compressing and decoding them on the way</changelogtext>
         <changelogtext>build the http client the supported way, which unblocks updating it</changelogtext>

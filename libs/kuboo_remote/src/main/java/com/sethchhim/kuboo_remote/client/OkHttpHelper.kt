@@ -63,8 +63,8 @@ class OkHttpHelper(private val okHttpClientFactory: OkHttpClientFactory) {
 
     fun cancelAllByTag(tag: String) {
         val list = mutableListOf<Call>()
-        list.addAll(okHttpClientFactory.client().dispatcher().runningCalls())
-        list.addAll(okHttpClientFactory.client().dispatcher().queuedCalls())
+        list.addAll(okHttpClientFactory.client().dispatcher.runningCalls())
+        list.addAll(okHttpClientFactory.client().dispatcher.queuedCalls())
         list.forEach {
             if (it.request().tag() == tag) {
                 Timber.d("cancel tag $tag")

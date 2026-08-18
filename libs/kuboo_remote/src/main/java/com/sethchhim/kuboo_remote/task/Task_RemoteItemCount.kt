@@ -21,7 +21,7 @@ class Task_RemoteItemCount(kubooRemote: KubooRemote, login: Login, stringUrl: St
             try {
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val boundInputStream = BoundedInputStream(inputStream, 4 * 1024)
                     val inputAsString = boundInputStream.bufferedReader().use { it.readText() }

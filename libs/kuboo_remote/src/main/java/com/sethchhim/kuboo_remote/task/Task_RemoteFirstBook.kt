@@ -22,7 +22,7 @@ class Task_RemoteFirstBook(val kubooRemote: KubooRemote, val login: Login, val b
                 val tag = "${javaClass.simpleName}.${book.id}"
                 val call = okHttpHelper.getCall(login, stringUrl, tag)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val boundInputStream = BoundedInputStream(inputStream, 50 * 1024)
                     val inputAsString = boundInputStream.bufferedReader().use { it.readText() }

@@ -5,8 +5,9 @@ import com.sethchhim.kuboo_remote.KubooRemote
 import com.sethchhim.kuboo_remote.model.Book
 import com.sethchhim.kuboo_remote.model.Login
 import okhttp3.Call
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import timber.log.Timber
 
 class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) : Task_RemoteUserApiBase(kubooRemote, login, book) {
@@ -22,10 +23,10 @@ class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) 
                     Timber.d("UserApi put is successful. title[${book.title}] page[${book.currentPage} of ${book.totalPages}] bookMark[${book.bookMark}] isFinished[${book.isFinished}] stringUrl[$stringUrl]")
                     kubooRemote.mainThread.execute { liveData.value = true }
                 } else {
-                    when (response.code()) {
+                    when (response.code) {
                         401 -> handleAuthentication(call)
                         else -> {
-                            Timber.e("code[${response.code()}] message[${response.message()}] title[${book.title}] stringUrl[$stringUrl]")
+                            Timber.e("code[${response.code}] message[${response.message}] title[${book.title}] stringUrl[$stringUrl]")
                             kubooRemote.mainThread.execute { liveData.value = false }
                         }
                     }
@@ -53,7 +54,7 @@ class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) 
             if (secondResponse.isSuccessful) {
                 Timber.i("UserApi put is successful. title[${book.title}] page[${book.currentPage} of ${book.totalPages}] bookMark[${book.bookMark}] isFinished[${book.isFinished}] stringUrl[$stringUrl]")
             } else {
-                Timber.e("code[${secondResponse.code()}] message[${secondResponse.message()}] title[${book.title}] stringUrl[$stringUrl] secondAttempt[true]")
+                Timber.e("code[${secondResponse.code}] message[${secondResponse.message}] title[${book.title}] stringUrl[$stringUrl] secondAttempt[true]")
                 kubooRemote.mainThread.execute { liveData.value = null }
             }
         } catch (e: Exception) {
@@ -76,11 +77,11 @@ class Task_RemoteUserApiPut(kubooRemote: KubooRemote, login: Login, book: Book) 
             true -> book.bookMark
             false -> book.currentPage.toString()
         }
-        return RequestBody.create(TEXT, mark)
+        return mark.toRequestBody(TEXT)
     }
 
     private companion object {
-        val TEXT = MediaType.parse("text/plain; charset=utf-8")
+        val TEXT = "text/plain; charset=utf-8".toMediaTypeOrNull()
     }
 
 }

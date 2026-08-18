@@ -23,7 +23,7 @@ class Task_RemoteSearch(kubooRemote: KubooRemote, val login: Login, val stringQu
             try {
                 val call = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = call.execute()
-                val inputStream = response.body()?.byteStream()
+                val inputStream = response.body?.byteStream()
                 if (response.isSuccessful && inputStream != null) {
                     val inputAsString = inputStream.bufferedReader().use { it.readText() }
                     val result = parseService.parseOpds(login, inputAsString)

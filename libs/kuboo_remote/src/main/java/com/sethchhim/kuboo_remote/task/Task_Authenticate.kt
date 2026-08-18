@@ -25,7 +25,7 @@ class Task_Authenticate(val kubooRemote: KubooRemote, login: Login) {
             try {
                 val loginCall = okHttpHelper.getCall(login, stringUrl, javaClass.simpleName)
                 val response = loginCall.execute()
-                val inputStream = response?.body()?.byteStream()
+                val inputStream = response?.body?.byteStream()
                 val inputAsString = inputStream?.bufferedReader().use { it?.readText() }.orEmpty()
                 val doc = Jsoup.parse(inputAsString)
                 val serverSalt = doc.select("#serversalt").`val`()
@@ -46,14 +46,14 @@ class Task_Authenticate(val kubooRemote: KubooRemote, login: Login) {
                         if (isSuccess) {
                             kubooRemote.mainThread.execute { liveData.value = true }
                             if (isDebugOkHttp) {
-                                val hashInputStream = hashResponse.body()?.byteStream()
+                                val hashInputStream = hashResponse.body?.byteStream()
                                 val hashInputAsString = hashInputStream?.bufferedReader().use { it?.readText() }
                                 Timber.d("Authentication successful: $hashInputAsString $stringUrl")
                             }
                         } else {
                             kubooRemote.mainThread.execute { liveData.value = false }
                             if (isDebugOkHttp) {
-                                val reason = "${response.code()} ${response.message()}"
+                                val reason = "${response.code} ${response.message}"
                                 Timber.e("Authentication failed! $reason $stringUrl")
                             }
                         }

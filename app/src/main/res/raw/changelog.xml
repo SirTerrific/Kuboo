@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 17, 2026"
+        versionName="1.2.36">
+        <changelogtext>keep the abandoned libraries in the repository so the app can always be built</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 17, 2026"
         versionName="1.2.35">
         <changelogtext>update the network and download libraries, both six years old</changelogtext>
     </changelogversion>

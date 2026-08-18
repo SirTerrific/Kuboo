@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="Aug 18, 2026"
+        versionName="1.2.38">
+        <changelogtext>read a downloaded cbr instead of showing blank pages</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="Aug 18, 2026"
         versionName="1.2.37">
         <changelogtext>follow a link inside an epub, the table of contents included</changelogtext>
     </changelogversion>

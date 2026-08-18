@@ -195,6 +195,7 @@
     <string name="reader_pip_requires_android_oreo_or_above">Pip requires Android Oreo or above!</string>
     <string name="reader_read">READ</string>
     <string name="reader_something_went_wrong">Something went wrong!</string>
+    <string name="reader_link_not_found">This link goes nowhere in this book.</string>
     <string name="reader_swipe_down_to_refresh">Swipe down to refresh.</string>
 
     <string name="settings_about">About</string>

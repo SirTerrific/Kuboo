@@ -228,6 +228,7 @@ HTTP NON TROUVÉ
     <string name="reader_pip_requires_android_oreo_or_above">"Pip nécessite Android Oreo ou supérieur!"</string>
     <string name="reader_read">"LIRE"</string>
     <string name="reader_something_went_wrong">"Quelque chose n'a pas marché!"</string>
+    <string name="reader_link_not_found">"Ce lien ne mène nulle part dans ce livre."</string>
     <string name="reader_swipe_down_to_refresh">"Glissez vers le bas pour rafraîchir."</string>
 
     <string name="settings_about">"A propos"</string>

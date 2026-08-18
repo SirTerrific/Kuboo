@@ -11,9 +11,23 @@ class EpubReaderView @JvmOverloads constructor(context: Context, attrs: Attribut
     init {
         setWebViewSettings()
         setOnTouchListener(object : GestureListener(context) {
-            override fun onClick() {
-                super.onClick()
-                epubReaderListener.onClickEpubReaderView()
+            /**
+             * A tap is either following a link or asking for the overlay.
+             *
+             * The gesture detector consumes every touch event -- it has to, or the web view
+             * would scroll on its own and fight the paging -- so the web view never sees a tap
+             * and never followed a link. Nothing in a book was clickable: not the table of
+             * contents, not a footnote, not a cross reference. The page is asked what sits under
+             * the finger instead.
+             */
+            override fun onClick(x: Float, y: Float) {
+                super.onClick(x, y)
+                findLinkAt(x, y) { href ->
+                    when (href) {
+                        null -> epubReaderListener.onClickEpubReaderView()
+                        else -> epubReaderListener.onLinkClicked(href)
+                    }
+                }
             }
 
             override fun onLongPress() {

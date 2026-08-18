@@ -155,6 +155,67 @@ open class EpubReaderViewImpl1_Content @JvmOverloads constructor(context: Contex
         }
     }
 
+    /**
+     * Asks the page what is under a point, and answers with the link there, if any.
+     *
+     * The coordinates arrive in view pixels and css sees its own, hence the division by the
+     * device pixel ratio; the point is inside the viewport already, so the scroll position does
+     * not come into it. Walking up from the element caught allows a tap on the text inside a
+     * link, which is what a tap on a link actually is.
+     */
+    fun findLinkAt(x: Float, y: Float, onResult: (String?) -> Unit) {
+        val script = """
+            (function() {
+                var r = window.devicePixelRatio || 1;
+                var e = document.elementFromPoint($x / r, $y / r);
+                while (e) {
+                    if (e.tagName && e.tagName.toUpperCase() === 'A' && e.getAttribute('href')) return e.getAttribute('href');
+                    e = e.parentElement;
+                }
+                return null;
+            })()
+        """.trimIndent()
+
+        try {
+            evaluateJavascript(script) { value ->
+                val href = value?.trim('"')?.takeIf { it.isNotEmpty() && it != "null" }
+                onResult(href)
+            }
+        } catch (e: Exception) {
+            Log.d("EpubReader", "Failed to look for a link: ${e.message}")
+            onResult(null)
+        }
+    }
+
+    /**
+     * Follows a link inside the book, and says whether it went anywhere.
+     *
+     * A chapter is loaded into the web view on its own, so a link never resolves by itself: the
+     * view intercepts every one of them and hands it here. Each chapter knows the file it came
+     * from, so the target file is what a link is matched against -- the fragment after # is what
+     * the browser would use to scroll inside the file, and a chapter starts at its beginning
+     * anyway.
+     *
+     * Answers false for anything not in the book, a link to a website among others, which the
+     * caller is then free to open elsewhere.
+     */
+    fun goToLink(url: String): Boolean {
+        val target = url.substringBefore("#").substringBefore("?").decoded().substringAfterLast("/")
+        if (target.isEmpty()) return false
+
+        val index = chapterList.indexOfFirst { it.href.decoded().substringAfterLast("/").equals(target, ignoreCase = true) }
+        if (index == -1) return false
+
+        loadPosition(index, 0f)
+        return true
+    }
+
+    private fun String.decoded() = try {
+        java.net.URLDecoder.decode(this, "UTF-8")
+    } catch (e: Exception) {
+        this
+    }
+
     fun goToNextPage() {
         if (!isLoading) {
             val pageHeight = getPageHeight()

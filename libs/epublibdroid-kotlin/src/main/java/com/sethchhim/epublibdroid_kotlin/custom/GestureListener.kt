@@ -17,7 +17,7 @@ open class GestureListener(context: Context) : View.OnTouchListener {
 
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onSingleTapUp(e: MotionEvent): Boolean {
-            onClick()
+            onClick(e.x, e.y)
             return super.onSingleTapUp(e)
         }
 
@@ -60,7 +60,8 @@ open class GestureListener(context: Context) : View.OnTouchListener {
         }
     }
 
-    open fun onClick() {}
+    /** Where the tap landed, in view pixels: a tap on a link has to be told from a tap on text. */
+    open fun onClick(x: Float, y: Float) {}
 
     open fun onLongPress() {}
 

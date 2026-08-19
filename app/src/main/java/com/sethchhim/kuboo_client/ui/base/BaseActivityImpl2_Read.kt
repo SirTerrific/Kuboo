@@ -143,19 +143,15 @@ open class BaseActivityImpl2_Read : BaseActivityImpl1_Dialog() {
     private fun searchForLocalBookmark(readData: ReadData) {
         showLoadingDialog(loadingStage = LoadingStage.BOOKMARK)
 
-        //Bookmark Stage 1: Search for local bookmark
-        when (readData.book.isComic()) {
-            true ->
-                //search for recent item that is in the same series
-                viewModel.getRecentByXmlId(readData.book, filterByActiveServer = true).observe(this, Observer { result ->
-                    if (!isLoadingCancelled) handleLocalBookmark(readData, result)
-                })
-            false ->
-                //search for recent item that is exact book
-                viewModel.getRecentByBook(readData.book, filterByActiveServer = true).observe(this, Observer { result ->
-                    if (!isLoadingCancelled) handleLocalBookmark(readData, result)
-                })
-        }
+        // Bookmark Stage 1: the reading position of this book, and of no other.
+        //
+        // A comic used to be matched on the id of the opds folder it was found in, so that
+        // opening one issue offered to resume another issue of the same series. In a folder
+        // holding unrelated titles -- a flat library, a "misc" folder, the root itself -- that
+        // is any other book in the folder: opening a manga offered to resume a magazine.
+        viewModel.getRecentByBook(readData.book, filterByActiveServer = true).observe(this, Observer { result ->
+            if (!isLoadingCancelled) handleLocalBookmark(readData, result)
+        })
     }
 
     private fun handleLocalBookmark(readData: ReadData, localBookmark: Book?) {

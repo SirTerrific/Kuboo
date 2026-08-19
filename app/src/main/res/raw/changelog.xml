@@ -2,6 +2,12 @@
 <changelog bulletedList="true">
 
     <changelogversion
+        changeDate="Aug 19, 2026"
+        versionName="1.2.39">
+        <changelogtext>offer to resume this book, not another one from the same folder</changelogtext>
+    </changelogversion>
+
+    <changelogversion
         changeDate="Aug 18, 2026"
         versionName="1.2.38">
         <changelogtext>read a downloaded cbr instead of showing blank pages</changelogtext>

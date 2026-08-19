@@ -24,8 +24,6 @@ class RecentRepository {
 
     internal fun getRecentByBook(login: Login?, book: Book) = Task_RecentFindByBook(login, book).liveData
 
-    internal fun getRecentByXmlId(login: Login?, book: Book) = Task_RecentFindByXmlId(login, book).liveData
-
     internal fun getRecentSize() = recentList.size
 
     internal fun setRecentList(list: List<Book>) {

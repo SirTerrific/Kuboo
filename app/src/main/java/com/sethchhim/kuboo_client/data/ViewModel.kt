@@ -88,11 +88,6 @@ class ViewModel(internal val browserRepository: BrowserRepository,
 
     internal fun getRecentAt(position: Int) = recentRepository.getRecentItemAt(position)
 
-    internal fun getRecentByXmlId(book: Book, filterByActiveServer: Boolean) = when (filterByActiveServer) {
-        true -> recentRepository.getRecentByXmlId(getActiveLogin(), book)
-        false -> recentRepository.getRecentByXmlId(null, book)
-    }
-
     internal fun getRecentByBook(book: Book, filterByActiveServer: Boolean) = when (filterByActiveServer) {
         true -> recentRepository.getRecentByBook(getActiveLogin(), book)
         false -> recentRepository.getRecentByBook(null, book)

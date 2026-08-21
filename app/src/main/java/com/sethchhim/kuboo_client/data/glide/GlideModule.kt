@@ -12,6 +12,7 @@ import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory
 import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.resource.bitmap.ExifInterfaceImageHeaderParser
 import com.bumptech.glide.module.AppGlideModule
 import com.sethchhim.kuboo_client.BaseApplication
 import com.sethchhim.kuboo_client.Extensions.asMegaBytes
@@ -41,6 +42,18 @@ class GlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         super.registerComponents(context, glide, registry)
+
+        // ExifInterfaceImageHeaderParser reads a stream to its end looking for EXIF data in
+        // formats like png or webp. Glide marks the stream with a 5MB read limit for its
+        // header pass, so any page larger than that comes back with "Mark has been
+        // invalidated" instead of an image. DefaultImageHeaderParser still handles jpeg
+        // orientation; the removed parser only ever added heif/png/webp orientation, which
+        // comic pages do not carry.
+        val parsers = registry.imageHeaderParsers
+        val iterator = parsers.iterator()
+        while (iterator.hasNext()) {
+            if (iterator.next() is ExifInterfaceImageHeaderParser) iterator.remove()
+        }
 
         val passthroughFactory = GlidePassthroughLoader.Factory()
         registry.prepend(InputStream::class.java, InputStream::class.java, passthroughFactory)
